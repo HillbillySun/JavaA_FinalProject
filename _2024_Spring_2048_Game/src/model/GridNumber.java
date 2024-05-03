@@ -19,10 +19,15 @@ public class GridNumber {
     }
 
     public void initialNumbers() {
-        for (int i = 0; i < numbers.length; i++) {
-            for (int j = 0; j < numbers[i].length; j++) {
-                //todo: update generate numbers method
-                numbers[i][j] = random.nextInt(2) == 0 ? 1 : 0;
+        int count=0;
+        while (count<2)
+        {
+            int i=random.nextInt(4);
+            int j=random.nextInt(4);
+            if (numbers[i][j]==0)
+            {
+                numbers[i][j]=random.nextInt(2)==0? 2:4;
+                count++;
             }
         }
     }
@@ -34,6 +39,14 @@ public class GridNumber {
         }
     }
 
+    public void moveLeft()
+    {}
+
+    public void moveUp()
+    {}
+
+    public void moveDown()
+    {}
     public int getNumber(int i, int j) {
         return numbers[i][j];
     }

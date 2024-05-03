@@ -67,6 +67,30 @@ public class GamePanel extends ListenerPanel {
         this.updateGridsNumber();
     }
 
+    @Override
+    public void doMoveLeft() {
+        System.out.println("Click VK_Left");
+        this.afterMove();
+        this.model.moveLeft();
+        this.updateGridsNumber();
+    }
+
+    @Override
+    public void doMoveUp() {
+        System.out.println("Click VK_Up");
+        this.afterMove();
+        this.model.moveUp();
+        this.updateGridsNumber();
+    }
+
+    @Override
+    public void doMoveDown() {
+        System.out.println("Click VK_Down");
+        this.afterMove();
+        this.model.moveDown();
+        this.updateGridsNumber();
+    }
+
     public void afterMove() {
         this.steps++;
         this.stepLabel.setText(String.format("Step: %d", this.steps));
