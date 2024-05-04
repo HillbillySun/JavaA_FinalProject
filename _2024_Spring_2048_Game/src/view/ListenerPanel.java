@@ -21,6 +21,9 @@ public abstract class ListenerPanel extends JPanel {
         if (e.getID() == KeyEvent.KEY_PRESSED) {
             switch (e.getKeyCode()) {
                 case KeyEvent.VK_RIGHT -> doMoveRight();
+                case KeyEvent.VK_LEFT -> doMoveLeft();
+                case KeyEvent.VK_UP -> doMoveUp();
+                case KeyEvent.VK_DOWN -> doMoveDown();
                 //todo: complete other move event
             }
         }

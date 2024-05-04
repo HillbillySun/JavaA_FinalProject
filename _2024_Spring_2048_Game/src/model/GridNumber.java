@@ -19,34 +19,156 @@ public class GridNumber {
     }
 
     public void initialNumbers() {
-        int count=0;
-        while (count<2)
-        {
-            int i=random.nextInt(4);
-            int j=random.nextInt(4);
-            if (numbers[i][j]==0)
-            {
-                numbers[i][j]=random.nextInt(2)==0? 2:4;
+        int count = 0;
+        while (count < 2) {
+            int i = random.nextInt(numbers.length);
+            int j = random.nextInt(numbers[0].length);
+            if (numbers[i][j] == 0) {
+                numbers[i][j] = random.nextInt(2) == 0 ? 2 : 4;
                 count++;
             }
         }
     }
+
     //todo: finish the method of four direction moving.
-    public void moveRight() {
-        for (int i = 0; i < numbers.length; i++) {
-            numbers[i][1] += numbers[i][0];
-            numbers[i][0] = 0;
+
+    public void generateNumberRandomly() {
+        while (true) {
+            int row = random.nextInt(numbers.length);
+            int col = random.nextInt(numbers[0].length);
+            if (numbers[row][col] == 0) {
+                numbers[row][col] = random.nextInt(2) == 0 ? 2 : 4;
+                break;
+            }
         }
     }
 
-    public void moveLeft()
-    {}
+    public void moveRight() {
+        JustMoveRight();
+        for (int i = 0; i < numbers.length; i++) {
+            for (int j = numbers[0].length - 1; j >= 0; j--) {
+                if (j != 0 && numbers[i][j] != 0 && numbers[i][j - 1] == numbers[i][j]) {
+                    numbers[i][j] = 2 * numbers[i][j];
+                    numbers[i][j - 1] = 0;
+                }
+            }
+        }
+        JustMoveRight();
+        generateNumberRandomly();
+    }
 
-    public void moveUp()
-    {}
+    public void JustMoveRight() {
+        for (int i = 0; i < numbers.length; i++) {
+            for (int j = numbers[0].length - 1; j >= 0; j--) {
+                if (j != numbers[0].length - 1 && numbers[i][j] != 0) {
+                    int k = j + 1;
+                    /*
+                    k用于记录下一格坐标
+                    */
+                    while (k < numbers[0].length && numbers[i][k] == 0) {
+                        int temp = numbers[i][k - 1];
+                        numbers[i][k - 1] = 0;
+                        numbers[i][k] = temp;
+                        k++;
+                    }
+                }
+            }
+        }
+    }
 
-    public void moveDown()
-    {}
+    public void moveLeft() {
+        JustMoveLeft();
+        for (int i = 0; i < numbers.length; i++) {
+            for (int j = 0; j < numbers[0].length; j++) {
+                if (j != numbers[0].length - 1 && numbers[i][j] != 0 && numbers[i][j + 1] == numbers[i][j]) {
+                    numbers[i][j] = 2 * numbers[i][j];
+                    numbers[i][j + 1] = 0;
+                }
+            }
+        }
+        JustMoveLeft();
+        generateNumberRandomly();
+    }
+
+    public void JustMoveLeft() {
+        for (int i = 0; i < numbers.length; i++) {
+            for (int j = 0; j < numbers[0].length; j++) {
+                if (j != 0 && numbers[i][j] != 0) {
+                    int k = j - 1;
+                    /*
+                    k用于记录下一格坐标
+                    */
+                    while (k >= 0 && numbers[i][k] == 0) {
+                        int temp = numbers[i][k + 1];
+                        numbers[i][k + 1] = 0;
+                        numbers[i][k] = temp;
+                        k--;
+                    }
+                }
+            }
+        }
+    }
+
+    public void moveUp() {
+        JustMoveUp();
+        for (int j = 0; j < numbers[0].length; j++) {
+            for (int i = 0; i < numbers.length; i++) {
+                if (i != numbers[0].length - 1 && numbers[i][j] != 0 && numbers[i][j] == numbers[i + 1][j]) {
+                    numbers[i][j] = 2 * numbers[i][j];
+                    numbers[i + 1][j] = 0;
+                }
+            }
+        }
+        JustMoveUp();
+        generateNumberRandomly();
+    }
+
+    public void JustMoveUp() {
+        for (int j = 0; j < numbers[0].length; j++) {
+            for (int i = numbers.length - 1; i >= 0; i--) {
+                if (i != 0 && numbers[i][j] != 0) {
+                    int k = i - 1;
+                    while (k >= 0 && numbers[k][j] == 0) {
+                        int temp = numbers[k + 1][j];
+                        numbers[k + 1][j] = 0;
+                        numbers[k][j] = temp;
+                        k--;
+                    }
+                }
+            }
+        }
+    }
+
+    public void moveDown() {
+        JustMoveDown();
+        for (int j = 0; j < numbers[0].length; j++) {
+            for (int i = numbers.length-1; i >=0; i--) {
+                if (i!=0 && numbers[i][j] != 0 && numbers[i][j] == numbers[i - 1][j]) {
+                    numbers[i][j] = 2 * numbers[i][j];
+                    numbers[i - 1][j] = 0;
+                }
+            }
+        }
+        JustMoveDown();
+        generateNumberRandomly();
+    }
+
+    public void JustMoveDown() {
+        for (int j = 0; j < numbers[0].length; j++) {
+            for (int i = 0; i < numbers.length; i++) {
+                if (i != numbers.length-1 && numbers[i][j] != 0) {
+                    int k = i + 1;
+                    while (k < numbers.length && numbers[k][j] == 0) {
+                        int temp = numbers[k - 1][j];
+                        numbers[k - 1][j] = 0;
+                        numbers[k][j] = temp;
+                        k++;
+                    }
+                }
+            }
+        }
+    }
+
     public int getNumber(int i, int j) {
         return numbers[i][j];
     }
