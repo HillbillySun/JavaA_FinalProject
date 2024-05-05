@@ -21,6 +21,7 @@ public class GridNumber {
     }
 
     public void initialNumbers() {
+        numbers=new int[X_COUNT][Y_COUNT];
         int count = 0;
         while (count < 2) {
             int i = random.nextInt(numbers.length);
@@ -62,6 +63,57 @@ public class GridNumber {
             generateNumberRandomly();
     }
 
+    public void moveLeft() {
+        JustMoveLeft();
+        for (int i = 0; i < numbers.length; i++) {
+            for (int j = 0; j < numbers[0].length; j++) {
+                if (j != numbers[0].length - 1 && numbers[i][j] != 0 && numbers[i][j + 1] == numbers[i][j]) {
+                    numbers[i][j] = 2 * numbers[i][j];
+                    numbers[i][j + 1] = 0;
+                    ifGenerate=true;
+                }
+            }
+        }
+        boolean isGenerate=ifGenerate;
+        JustMoveLeft();
+        if (isGenerate)
+            generateNumberRandomly();
+    }
+
+    public void moveUp() {
+        JustMoveUp();
+        for (int j = 0; j < numbers[0].length; j++) {
+            for (int i = 0; i < numbers.length; i++) {
+                if (i != numbers[0].length - 1 && numbers[i][j] != 0 && numbers[i][j] == numbers[i + 1][j]) {
+                    numbers[i][j] = 2 * numbers[i][j];
+                    numbers[i + 1][j] = 0;
+                    ifGenerate=true;
+                }
+            }
+        }
+        boolean isGenerate=ifGenerate;
+        JustMoveUp();
+        if (isGenerate)
+            generateNumberRandomly();
+    }
+
+    public void moveDown() {
+        JustMoveDown();
+        for (int j = 0; j < numbers[0].length; j++) {
+            for (int i = numbers.length-1; i >=0; i--) {
+                if (i!=0 && numbers[i][j] != 0 && numbers[i][j] == numbers[i - 1][j]) {
+                    numbers[i][j] = 2 * numbers[i][j];
+                    numbers[i - 1][j] = 0;
+                    ifGenerate=true;
+                }
+            }
+        }
+        boolean isGenerate=ifGenerate;
+        JustMoveDown();
+        if (isGenerate)
+            generateNumberRandomly();
+    }
+
     public void JustMoveRight() {
         ifGenerate=false;
         for (int i = 0; i < numbers.length; i++) {
@@ -81,23 +133,6 @@ public class GridNumber {
                 }
             }
         }
-    }
-
-    public void moveLeft() {
-        JustMoveLeft();
-        for (int i = 0; i < numbers.length; i++) {
-            for (int j = 0; j < numbers[0].length; j++) {
-                if (j != numbers[0].length - 1 && numbers[i][j] != 0 && numbers[i][j + 1] == numbers[i][j]) {
-                    numbers[i][j] = 2 * numbers[i][j];
-                    numbers[i][j + 1] = 0;
-                    ifGenerate=true;
-                }
-            }
-        }
-        boolean isGenerate=ifGenerate;
-        JustMoveLeft();
-        if (isGenerate)
-            generateNumberRandomly();
     }
 
     public void JustMoveLeft() {
@@ -121,23 +156,6 @@ public class GridNumber {
         }
     }
 
-    public void moveUp() {
-        JustMoveUp();
-        for (int j = 0; j < numbers[0].length; j++) {
-            for (int i = 0; i < numbers.length; i++) {
-                if (i != numbers[0].length - 1 && numbers[i][j] != 0 && numbers[i][j] == numbers[i + 1][j]) {
-                    numbers[i][j] = 2 * numbers[i][j];
-                    numbers[i + 1][j] = 0;
-                    ifGenerate=true;
-                }
-            }
-        }
-        boolean isGenerate=ifGenerate;
-        JustMoveUp();
-        if (isGenerate)
-            generateNumberRandomly();
-    }
-
     public void JustMoveUp() {
         ifGenerate=false;
         for (int j = 0; j < numbers[0].length; j++) {
@@ -154,23 +172,6 @@ public class GridNumber {
                 }
             }
         }
-    }
-
-    public void moveDown() {
-        JustMoveDown();
-        for (int j = 0; j < numbers[0].length; j++) {
-            for (int i = numbers.length-1; i >=0; i--) {
-                if (i!=0 && numbers[i][j] != 0 && numbers[i][j] == numbers[i - 1][j]) {
-                    numbers[i][j] = 2 * numbers[i][j];
-                    numbers[i - 1][j] = 0;
-                    ifGenerate=true;
-                }
-            }
-        }
-        boolean isGenerate=ifGenerate;
-        JustMoveDown();
-        if (isGenerate)
-            generateNumberRandomly();
     }
 
     public void JustMoveDown() {
