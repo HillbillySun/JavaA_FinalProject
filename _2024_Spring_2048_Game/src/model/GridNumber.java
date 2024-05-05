@@ -9,6 +9,8 @@ public class GridNumber {
 
     private int[][] numbers;
 
+    private boolean ifGenerate=false;
+
     static Random random = new Random();
 
     public GridNumber(int xCount, int yCount) {
@@ -50,14 +52,18 @@ public class GridNumber {
                 if (j != 0 && numbers[i][j] != 0 && numbers[i][j - 1] == numbers[i][j]) {
                     numbers[i][j] = 2 * numbers[i][j];
                     numbers[i][j - 1] = 0;
+                    ifGenerate=true;
                 }
             }
         }
+        boolean isGenerate=ifGenerate;
         JustMoveRight();
-        generateNumberRandomly();
+        if (isGenerate)
+            generateNumberRandomly();
     }
 
     public void JustMoveRight() {
+        ifGenerate=false;
         for (int i = 0; i < numbers.length; i++) {
             for (int j = numbers[0].length - 1; j >= 0; j--) {
                 if (j != numbers[0].length - 1 && numbers[i][j] != 0) {
@@ -66,6 +72,7 @@ public class GridNumber {
                     k用于记录下一格坐标
                     */
                     while (k < numbers[0].length && numbers[i][k] == 0) {
+                        ifGenerate=true;
                         int temp = numbers[i][k - 1];
                         numbers[i][k - 1] = 0;
                         numbers[i][k] = temp;
@@ -83,14 +90,18 @@ public class GridNumber {
                 if (j != numbers[0].length - 1 && numbers[i][j] != 0 && numbers[i][j + 1] == numbers[i][j]) {
                     numbers[i][j] = 2 * numbers[i][j];
                     numbers[i][j + 1] = 0;
+                    ifGenerate=true;
                 }
             }
         }
+        boolean isGenerate=ifGenerate;
         JustMoveLeft();
-        generateNumberRandomly();
+        if (isGenerate)
+            generateNumberRandomly();
     }
 
     public void JustMoveLeft() {
+        ifGenerate=false;
         for (int i = 0; i < numbers.length; i++) {
             for (int j = 0; j < numbers[0].length; j++) {
                 if (j != 0 && numbers[i][j] != 0) {
@@ -99,6 +110,7 @@ public class GridNumber {
                     k用于记录下一格坐标
                     */
                     while (k >= 0 && numbers[i][k] == 0) {
+                        ifGenerate=true;
                         int temp = numbers[i][k + 1];
                         numbers[i][k + 1] = 0;
                         numbers[i][k] = temp;
@@ -116,16 +128,20 @@ public class GridNumber {
                 if (i != numbers[0].length - 1 && numbers[i][j] != 0 && numbers[i][j] == numbers[i + 1][j]) {
                     numbers[i][j] = 2 * numbers[i][j];
                     numbers[i + 1][j] = 0;
+                    ifGenerate=true;
                 }
             }
         }
+        boolean isGenerate=ifGenerate;
         JustMoveUp();
-        generateNumberRandomly();
+        if (isGenerate)
+            generateNumberRandomly();
     }
 
     public void JustMoveUp() {
+        ifGenerate=false;
         for (int j = 0; j < numbers[0].length; j++) {
-            for (int i = numbers.length - 1; i >= 0; i--) {
+            for (int i = 0; i < numbers.length; i++) {
                 if (i != 0 && numbers[i][j] != 0) {
                     int k = i - 1;
                     while (k >= 0 && numbers[k][j] == 0) {
@@ -133,6 +149,7 @@ public class GridNumber {
                         numbers[k + 1][j] = 0;
                         numbers[k][j] = temp;
                         k--;
+                        ifGenerate=true;
                     }
                 }
             }
@@ -146,19 +163,24 @@ public class GridNumber {
                 if (i!=0 && numbers[i][j] != 0 && numbers[i][j] == numbers[i - 1][j]) {
                     numbers[i][j] = 2 * numbers[i][j];
                     numbers[i - 1][j] = 0;
+                    ifGenerate=true;
                 }
             }
         }
+        boolean isGenerate=ifGenerate;
         JustMoveDown();
-        generateNumberRandomly();
+        if (isGenerate)
+            generateNumberRandomly();
     }
 
     public void JustMoveDown() {
+        ifGenerate=false;
         for (int j = 0; j < numbers[0].length; j++) {
-            for (int i = 0; i < numbers.length; i++) {
-                if (i != numbers.length-1 && numbers[i][j] != 0) {
+            for (int i = numbers.length-1; i >=0; i--) {
+                if (i != numbers.length - 1 && numbers[i][j] != 0) {
                     int k = i + 1;
                     while (k < numbers.length && numbers[k][j] == 0) {
+                        ifGenerate=true;
                         int temp = numbers[k - 1][j];
                         numbers[k - 1][j] = 0;
                         numbers[k][j] = temp;
