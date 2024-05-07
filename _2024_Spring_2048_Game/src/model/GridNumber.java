@@ -1,5 +1,8 @@
 package model;
 
+import view.GamePanel;
+
+import java.awt.*;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -7,6 +10,7 @@ public class GridNumber {
     private final int X_COUNT;
     private final int Y_COUNT;
 
+    private int MarkPoint;
     private int[][] numbers;
 
     private boolean ifGenerate=false;
@@ -21,7 +25,11 @@ public class GridNumber {
     }
 
     public void initialNumbers() {
-        numbers=new int[X_COUNT][Y_COUNT];
+        for (int i = 0; i < numbers.length; i++) {
+            for (int j = 0; j < numbers[0].length; j++) {
+                numbers[i][j]=0;
+            }
+        }
         int count = 0;
         while (count < 2) {
             int i = random.nextInt(numbers.length);
@@ -36,7 +44,7 @@ public class GridNumber {
     //todo: finish the method of four direction moving.
 
     public void generateNumberRandomly() {
-        while (true) {
+        while (ifGenerate) {
             int row = random.nextInt(numbers.length);
             int col = random.nextInt(numbers[0].length);
             if (numbers[row][col] == 0) {
@@ -47,71 +55,79 @@ public class GridNumber {
     }
 
     public void moveRight() {
+        MarkPoint=0;
         JustMoveRight();
         for (int i = 0; i < numbers.length; i++) {
             for (int j = numbers[0].length - 1; j >= 0; j--) {
                 if (j != 0 && numbers[i][j] != 0 && numbers[i][j - 1] == numbers[i][j]) {
                     numbers[i][j] = 2 * numbers[i][j];
                     numbers[i][j - 1] = 0;
+                    MarkPoint+=numbers[i][j];
                     ifGenerate=true;
                 }
             }
         }
-        boolean isGenerate=ifGenerate;
+        boolean temp =ifGenerate;
         JustMoveRight();
-        if (isGenerate)
-            generateNumberRandomly();
+        ifGenerate= temp;
+        generateNumberRandomly();
     }
 
     public void moveLeft() {
+        MarkPoint=0;
         JustMoveLeft();
         for (int i = 0; i < numbers.length; i++) {
             for (int j = 0; j < numbers[0].length; j++) {
                 if (j != numbers[0].length - 1 && numbers[i][j] != 0 && numbers[i][j + 1] == numbers[i][j]) {
                     numbers[i][j] = 2 * numbers[i][j];
                     numbers[i][j + 1] = 0;
+                    MarkPoint+=numbers[i][j];
                     ifGenerate=true;
                 }
             }
         }
-        boolean isGenerate=ifGenerate;
+        boolean temp =ifGenerate;
         JustMoveLeft();
-        if (isGenerate)
-            generateNumberRandomly();
+        ifGenerate= temp;
+        generateNumberRandomly();
     }
 
     public void moveUp() {
+        MarkPoint=0;
         JustMoveUp();
         for (int j = 0; j < numbers[0].length; j++) {
             for (int i = 0; i < numbers.length; i++) {
                 if (i != numbers[0].length - 1 && numbers[i][j] != 0 && numbers[i][j] == numbers[i + 1][j]) {
                     numbers[i][j] = 2 * numbers[i][j];
                     numbers[i + 1][j] = 0;
+                    MarkPoint+=numbers[i][j];
                     ifGenerate=true;
                 }
             }
         }
-        boolean isGenerate=ifGenerate;
+        boolean temp =ifGenerate;
         JustMoveUp();
-        if (isGenerate)
-            generateNumberRandomly();
+        ifGenerate= temp;
+        generateNumberRandomly();
     }
 
     public void moveDown() {
+        MarkPoint=0;
         JustMoveDown();
         for (int j = 0; j < numbers[0].length; j++) {
             for (int i = numbers.length-1; i >=0; i--) {
                 if (i!=0 && numbers[i][j] != 0 && numbers[i][j] == numbers[i - 1][j]) {
                     numbers[i][j] = 2 * numbers[i][j];
                     numbers[i - 1][j] = 0;
+                    MarkPoint+=numbers[i][j];
                     ifGenerate=true;
                 }
             }
         }
-        boolean isGenerate=ifGenerate;
+        boolean temp =ifGenerate;
         JustMoveDown();
-        if (isGenerate)
-            generateNumberRandomly();
+        ifGenerate= temp;
+        generateNumberRandomly();
     }
 
     public void JustMoveRight() {
@@ -200,5 +216,14 @@ public class GridNumber {
         for (int[] line : numbers) {
             System.out.println(Arrays.toString(line));
         }
+    }
+
+    public int getMarkPoint()
+    {
+        return MarkPoint;
+    }
+
+    public boolean getIfGenerate() {
+        return ifGenerate;
     }
 }

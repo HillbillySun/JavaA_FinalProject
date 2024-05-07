@@ -12,11 +12,15 @@ public class GameFrame extends JFrame {
     private JButton restartBtn;
     private JButton loadBtn;
 
+    private JButton mode;
+
     private JLabel stepLabel;
+
+    private JLabel pointLabel;
     private GamePanel gamePanel;
 
     public GameFrame(int width, int height) {
-        this.setTitle("2024 CS109 Project Demo");
+        this.setTitle("2048 Game");
         this.setLayout(null);
         this.setSize(width, height);
         ColorMap.InitialColorMap();
@@ -27,8 +31,11 @@ public class GameFrame extends JFrame {
         this.controller = new GameController(gamePanel, gamePanel.getModel());
         this.restartBtn = createButton("Restart", new Point(500, 150), 110, 50);
         this.loadBtn = createButton("Load", new Point(500, 220), 110, 50);
-        this.stepLabel = createLabel("Start", new Font("serif", Font.ITALIC, 22), new Point(480, 50), 180, 50);
+        this.mode=createButton("Mode",new Point(500,290),110,50);
+        this.stepLabel = createLabel("Start", new Font("Arial", Font.PLAIN, 22), new Point(500, 30), 180, 50);
+        this.pointLabel=createLabel("Point: 0",new Font("Arial", Font.PLAIN, 22),new Point(500,80),180,50);
         gamePanel.setStepLabel(stepLabel);
+        gamePanel.setPointLabel(pointLabel);
 
         this.restartBtn.addActionListener(e -> {
             controller.restartGame();

@@ -12,7 +12,9 @@ public class GamePanel extends ListenerPanel {
 
     private GridNumber model;
     private JLabel stepLabel;
+    private JLabel pointLabel;
     private int steps;
+    private int points;
     private final int GRID_SIZE;
 
     public GamePanel(int size) {
@@ -33,7 +35,6 @@ public class GamePanel extends ListenerPanel {
     }
 
     public void initialGame() {
-        this.steps = 0;
         for (int i = 0; i < grids.length; i++) {
             for (int j = 0; j < grids[i].length; j++) {
                 grids[i][j] = new GridComponent(i, j, model.getNumber(i, j), this.GRID_SIZE);
@@ -62,41 +63,78 @@ public class GamePanel extends ListenerPanel {
     @Override
     public void doMoveRight() {
         System.out.println("Click VK_RIGHT");
-        this.afterMove();
         this.model.moveRight();
+        this.afterMove();
         this.updateGridsNumber();
     }
 
     @Override
     public void doMoveLeft() {
         System.out.println("Click VK_Left");
-        this.afterMove();
         this.model.moveLeft();
+        this.afterMove();
         this.updateGridsNumber();
     }
 
     @Override
     public void doMoveUp() {
         System.out.println("Click VK_Up");
-        this.afterMove();
         this.model.moveUp();
+        this.afterMove();
         this.updateGridsNumber();
     }
 
     @Override
     public void doMoveDown() {
         System.out.println("Click VK_Down");
-        this.afterMove();
         this.model.moveDown();
+        this.afterMove();
         this.updateGridsNumber();
     }
 
     public void afterMove() {
-        this.steps++;
+        if (model.getIfGenerate())
+        {
+            this.steps++;
+        }
+        this.stepLabel.setText(String.format("Step: %d", this.steps));
+        points+=model.getMarkPoint();
+        this.pointLabel.setText(String.format("Point: %d",this.points));
+    }
+
+    public void refreshGame()
+    {
+        this.steps=0;
+        model.initialNumbers();
+        this.updateGridsNumber();
+        this.stepLabel.setText(String.format("Step: %d", this.steps));
+    }
+    public void setSteps(int steps)
+    {
+        this.steps=steps;
+    }
+
+    public void setPoints(int point)
+    {
+        this.points =point;
+    }
+    public int getPoints()
+    {
+        return this.points;
+    }
+
+
+    public void setStepLabel()
+    {
         this.stepLabel.setText(String.format("Step: %d", this.steps));
     }
 
     public void setStepLabel(JLabel stepLabel) {
         this.stepLabel = stepLabel;
+    }
+
+    public void setPointLabel(JLabel pointLabel)
+    {
+        this.pointLabel=pointLabel;
     }
 }
