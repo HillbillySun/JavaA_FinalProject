@@ -31,11 +31,13 @@ public class GridNumber {
             }
         }
         int count = 0;
+        int temp=2;
         while (count < 2) {
             int i = random.nextInt(numbers.length);
             int j = random.nextInt(numbers[0].length);
             if (numbers[i][j] == 0) {
-                numbers[i][j] = random.nextInt(2) == 0 ? 2 : 4;
+                numbers[i][j]=temp;
+                temp=temp*2;
                 count++;
             }
         }
@@ -54,7 +56,7 @@ public class GridNumber {
         }
     }
 
-    public void moveRight() {
+    public boolean moveRight() {
         MarkPoint=0;
         JustMoveRight();
         for (int i = 0; i < numbers.length; i++) {
@@ -71,9 +73,10 @@ public class GridNumber {
         JustMoveRight();
         ifGenerate= temp;
         generateNumberRandomly();
+        return ifGenerate;
     }
 
-    public void moveLeft() {
+    public boolean moveLeft() {
         MarkPoint=0;
         JustMoveLeft();
         for (int i = 0; i < numbers.length; i++) {
@@ -90,9 +93,10 @@ public class GridNumber {
         JustMoveLeft();
         ifGenerate= temp;
         generateNumberRandomly();
+        return ifGenerate;
     }
 
-    public void moveUp() {
+    public boolean moveUp() {
         MarkPoint=0;
         JustMoveUp();
         for (int j = 0; j < numbers[0].length; j++) {
@@ -109,9 +113,10 @@ public class GridNumber {
         JustMoveUp();
         ifGenerate= temp;
         generateNumberRandomly();
+        return ifGenerate;
     }
 
-    public void moveDown() {
+    public boolean moveDown() {
         MarkPoint=0;
         JustMoveDown();
         for (int j = 0; j < numbers[0].length; j++) {
@@ -128,6 +133,7 @@ public class GridNumber {
         JustMoveDown();
         ifGenerate= temp;
         generateNumberRandomly();
+        return ifGenerate;
     }
 
     public void JustMoveRight() {
@@ -210,6 +216,11 @@ public class GridNumber {
 
     public int getNumber(int i, int j) {
         return numbers[i][j];
+    }
+
+    public int[][] getNumbers()
+    {
+        return numbers;
     }
 
     public void printNumber() {

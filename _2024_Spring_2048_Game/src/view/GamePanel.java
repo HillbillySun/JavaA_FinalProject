@@ -7,9 +7,10 @@ import java.awt.*;
 
 
 public class GamePanel extends ListenerPanel {
-    private final int COUNT = 4;
+    private int COUNT = 4;
     private GridComponent[][] grids;
 
+    private int Target=2048;
     private GridNumber model;
     private JLabel stepLabel;
     private JLabel pointLabel;
@@ -27,7 +28,6 @@ public class GamePanel extends ListenerPanel {
         this.grids = new GridComponent[COUNT][COUNT];
         this.model = new GridNumber(COUNT, COUNT);
         initialGame();
-
     }
 
     public GridNumber getModel() {
@@ -92,22 +92,34 @@ public class GamePanel extends ListenerPanel {
         this.updateGridsNumber();
     }
 
-    public void afterMove() {
+    public boolean afterMove() {
+        boolean isOver=false;
         if (model.getIfGenerate())
         {
             this.steps++;
         }
         this.stepLabel.setText(String.format("Step: %d", this.steps));
         points+=model.getMarkPoint();
-        this.pointLabel.setText(String.format("Point: %d",this.points));
+        this.pointLabel.setText(String.format("Points: %d",this.points));
+        for (int i = 0; i < COUNT; i++) {
+            for (int j = 0; j < COUNT; j++) {
+                if (model.getNumber(i,j)==Target)
+                {
+                    isOver=true;
+                }
+            }
+        }
+        return isOver;
     }
 
     public void refreshGame()
     {
+        this.points=0;
         this.steps=0;
         model.initialNumbers();
         this.updateGridsNumber();
         this.stepLabel.setText(String.format("Step: %d", this.steps));
+        this.pointLabel.setText(String.format("Point: %d",this.points));
     }
     public void setSteps(int steps)
     {
@@ -136,5 +148,20 @@ public class GamePanel extends ListenerPanel {
     public void setPointLabel(JLabel pointLabel)
     {
         this.pointLabel=pointLabel;
+    }
+
+    public int getCOUNT()
+    {
+        return COUNT;
+    }
+
+    public void setCOUNT(int COUNT)
+    {
+        this.COUNT=COUNT;
+    }
+
+    public void setTarget(int target)
+    {
+        this.Target=target;
     }
 }
