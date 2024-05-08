@@ -18,15 +18,17 @@ public class GamePanel extends ListenerPanel {
     private int points;
     private final int GRID_SIZE;
 
-    public GamePanel(int size) {
+    public GamePanel(int size,int COUNT,int target) {
+        this.setTarget(target);
+        this.setCOUNT(COUNT);
         this.setVisible(true);
         this.setFocusable(true);
         this.setLayout(null);
         this.setBackground(Color.DARK_GRAY);
         this.setSize(size, size);
-        this.GRID_SIZE = size / COUNT;
-        this.grids = new GridComponent[COUNT][COUNT];
-        this.model = new GridNumber(COUNT, COUNT);
+        this.GRID_SIZE = size / this.COUNT;
+        this.grids = new GridComponent[this.COUNT][this.COUNT];
+        this.model = new GridNumber(this.COUNT,this. COUNT);
         initialGame();
     }
 
@@ -64,35 +66,35 @@ public class GamePanel extends ListenerPanel {
     public void doMoveRight() {
         System.out.println("Click VK_RIGHT");
         this.model.moveRight();
-        this.afterMove();
         this.updateGridsNumber();
+        this.afterMove();
     }
 
     @Override
     public void doMoveLeft() {
         System.out.println("Click VK_Left");
         this.model.moveLeft();
-        this.afterMove();
         this.updateGridsNumber();
+        this.afterMove();
     }
 
     @Override
     public void doMoveUp() {
         System.out.println("Click VK_Up");
         this.model.moveUp();
-        this.afterMove();
         this.updateGridsNumber();
+        this.afterMove();
     }
 
     @Override
     public void doMoveDown() {
         System.out.println("Click VK_Down");
         this.model.moveDown();
-        this.afterMove();
         this.updateGridsNumber();
+        this.afterMove();
     }
 
-    public boolean afterMove() {
+    public void afterMove() {
         boolean isOver=false;
         if (model.getIfGenerate())
         {
@@ -109,7 +111,10 @@ public class GamePanel extends ListenerPanel {
                 }
             }
         }
-        return isOver;
+        if (isOver)
+        {
+            JOptionPane.showMessageDialog(this,"You Win!");
+        }
     }
 
     public void refreshGame()

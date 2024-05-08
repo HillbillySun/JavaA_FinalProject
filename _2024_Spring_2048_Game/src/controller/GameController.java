@@ -1,12 +1,13 @@
 package controller;
+
 import model.GridNumber;
-import view.GamePanel;
 import view.GameFrame;
+import view.GamePanel;
 
 /**
  * This class is used for interactive with JButton in GameFrame.
  */
-public class GameController {
+public class GameController{
     private GamePanel view;
     private GridNumber model;
     private GameFrame gameFrame;
@@ -24,5 +25,4 @@ public class GameController {
 //        view.refreshGame();
     }
     //todo: add other methods such as loadGame, saveGame...
-
 }

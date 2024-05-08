@@ -2,7 +2,6 @@ package view;
 
 import controller.GameController;
 import util.ColorMap;
-import model.GridNumber;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,12 +27,12 @@ public class GameFrame extends JFrame {
     private JLabel pointLabel;
     private GamePanel gamePanel;
 
-    public GameFrame(int width, int height) {
+    public GameFrame(int width, int height, int COUNT,int Target) {
         this.setTitle("2048 Game");
         this.setLayout(null);
         this.setSize(width, height);
         ColorMap.InitialColorMap();
-        gamePanel = new GamePanel((int) (this.getHeight() * 0.8));
+        gamePanel = new GamePanel((int) (this.getHeight() * 0.8),COUNT,Target);
         gamePanel.setLocation(this.getHeight() / 15, this.getWidth() / 15);
         this.add(gamePanel);
 
@@ -63,14 +62,22 @@ public class GameFrame extends JFrame {
         {
             String str1 = JOptionPane.showInputDialog(this, "输入你想要的棋盘尺寸(2-10中的整数)");
             String str2 = JOptionPane.showInputDialog(this, "输入你的目标数字(128到2048中的2的幂次)：");
-            System.out.println(str1);
-            System.out.println(str2);
-            int boardSize = Integer.parseInt(str1);
-            int target = Integer.parseInt(str2);
-            if (boardSize >= 2 && boardSize <= 10 && target > 0 && isPowerOfTwo(target)) {
-                gamePanel.setCOUNT(boardSize);
-                gamePanel.setTarget(target);
-                gamePanel.refreshGame();
+            System.out.println("size: "+str1);
+            System.out.println("target: "+str2);
+            int boardSize;
+            int target;
+            if (isInteger(str1)&&isInteger(str2))
+            {
+                boardSize=Integer.parseInt(str1);
+                target=Integer.parseInt(str2);
+                if (boardSize >= 2 && boardSize <= 10 && target > 0 && isPowerOfTwo(target)) {
+                    StartGame(boardSize,target);
+                    gamePanel.refreshGame();
+                }
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(this,"请重新输入!");
             }
             gamePanel.requestFocusInWindow();
         });
@@ -122,5 +129,20 @@ public class GameFrame extends JFrame {
         // 例如，如果number是2的幂次，那么number & (number - 1)将等于0
         return (number > 0) && ((number & (number - 1)) == 0);
     }
+    public static boolean isInteger(String s) {
+        try {
+            Integer.parseInt(s);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
 
+    public static void StartGame(int COUNT,int Target)
+    {
+        SwingUtilities.invokeLater(() -> {
+            GameFrame gameFrame = new GameFrame(700, 500,COUNT,Target);
+            gameFrame.setVisible(true);
+        });
+    }
 }
