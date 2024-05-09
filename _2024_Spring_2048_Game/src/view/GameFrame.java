@@ -71,8 +71,13 @@ public class GameFrame extends JFrame {
                 boardSize=Integer.parseInt(str1);
                 target=Integer.parseInt(str2);
                 if (boardSize >= 2 && boardSize <= 10 && target > 0 && isPowerOfTwo(target)) {
+                    this.dispose();
                     StartGame(boardSize,target);
                     gamePanel.refreshGame();
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(this,"请重新输入!");
                 }
             }
             else
@@ -141,6 +146,7 @@ public class GameFrame extends JFrame {
     public static void StartGame(int COUNT,int Target)
     {
         SwingUtilities.invokeLater(() -> {
+
             GameFrame gameFrame = new GameFrame(700, 500,COUNT,Target);
             gameFrame.setVisible(true);
         });
