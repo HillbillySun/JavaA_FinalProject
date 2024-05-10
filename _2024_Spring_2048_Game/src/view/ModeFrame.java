@@ -1,5 +1,7 @@
 package view;
 
+import controller.GameController;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -9,36 +11,52 @@ public class ModeFrame extends JFrame {
     private JButton HardBtn;
     private JButton EditBtn;
     private GameFrame gameFrame;
+    private GameController controller;
+    protected boolean ifDispole;
 
     ModeFrame(int width,int height)
     {
         this.setTitle("2048 Game");
         this.setLayout(null);
         this.setSize(width,height);
+        this.setLocationRelativeTo(null);
         this.ClassicBtn=createButton("Classic",new Point(350,150),200,70);
         this.EasyBtn=createButton("Easy",new Point(350,250),200,70);
         this.HardBtn=createButton("Hard",new Point(350,350),200,70);
         this.EditBtn=createButton("Edit by Yourself",new Point(350,450),200,70);
+        ifDispole=false;
         this.ClassicBtn.addActionListener(e->
         {
             gameFrame=new GameFrame(900,700,4,2048);
+            gameFrame.setModeFrame(this);
+            this.controller = new GameController(gameFrame.getGamePanel(),gameFrame.getGamePanel().getModel(),gameFrame,this);
+            gameFrame.setController(this.controller);
             this.dispose();
             GameFrame.StartGame(gameFrame);
             JOptionPane.showMessageDialog(gameFrame,"经典4*4，合成2048!");
+            ifDispole=true;
         });
         this.EasyBtn.addActionListener(e->
         {
             gameFrame=new GameFrame(900,700,4,1024);
+            this.controller = new GameController(gameFrame.getGamePanel(),gameFrame.getGamePanel().getModel(),gameFrame,this);
+            gameFrame.setModeFrame(this);
+            gameFrame.setController(this.controller);
             this.dispose();
             GameFrame.StartGame(gameFrame);
             JOptionPane.showMessageDialog(gameFrame,"简单4*4，合成1024即可!");
+            ifDispole=true;
         });
         this.HardBtn.addActionListener(e->
         {
             gameFrame=new GameFrame(900,700,3,2048);
+            this.controller = new GameController(gameFrame.getGamePanel(),gameFrame.getGamePanel().getModel(),gameFrame,this);
+            gameFrame.setModeFrame(this);
+            gameFrame.setController(this.controller);
             this.dispose();
             GameFrame.StartGame(gameFrame);
             JOptionPane.showMessageDialog(gameFrame,"使用3*3，合成2048!");
+            ifDispole=true;
         });
         this.EditBtn.addActionListener(e->
         {
@@ -54,8 +72,12 @@ public class ModeFrame extends JFrame {
                 target=Integer.parseInt(str2);
                 if (boardSize >= 2 && boardSize <= 10 && target > 0 && GameFrame.isPowerOfTwo(target)){
                     gameFrame=new GameFrame(900,700,boardSize,target);
+                    this.controller = new GameController(gameFrame.getGamePanel(),gameFrame.getGamePanel().getModel(),gameFrame,this);
+                    gameFrame.setModeFrame(this);
+                    gameFrame.setController(this.controller);
                     this.dispose();
                     GameFrame.StartGame(gameFrame);
+                    JOptionPane.showMessageDialog(gameFrame,String.format("使用%d*%d，合成%d!",boardSize,boardSize,target));
                 }
                 else
                 {

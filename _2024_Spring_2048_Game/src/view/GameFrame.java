@@ -9,6 +9,7 @@ import java.awt.*;
 public class GameFrame extends JFrame {
 
     private GameController controller;
+    private JButton SaveBtn;
     private JButton restartBtn;
     private JButton loadBtn;
 
@@ -27,6 +28,8 @@ public class GameFrame extends JFrame {
     private JLabel pointLabel;
     private GamePanel gamePanel;
 
+    private ModeFrame modeFrame;
+
     public GameFrame(int width, int height, int COUNT,int Target) {
         this.setTitle("2048 Game");
         this.setLayout(null);
@@ -35,8 +38,6 @@ public class GameFrame extends JFrame {
         gamePanel = new GamePanel((int) (this.getHeight() * 0.8),COUNT,Target);
         gamePanel.setLocation(this.getHeight() / 15, this.getWidth() / 15);
         this.add(gamePanel);
-
-        this.controller = new GameController(gamePanel, gamePanel.getModel(),this);
         this.restartBtn = createButton("Restart", new Point(700, 150), 110, 50);
         this.loadBtn = createButton("Load", new Point(700, 220), 110, 50);
         this.mode = createButton("Mode", new Point(700, 290), 110, 50);
@@ -44,6 +45,7 @@ public class GameFrame extends JFrame {
         this.DownBtn = createButton("↓", new Point(725, 550), 60, 60);
         this.LeftBtn = createButton("←", new Point(655, 550), 60, 60);
         this.RightBtn = createButton("→", new Point(795, 550), 60, 60);
+        this.SaveBtn=createButton("Save",new Point(700,360),110,50);
         this.stepLabel = createLabel("Start", new Font("Arial", Font.PLAIN, 22), new Point(700, 30), 180, 50);
         this.pointLabel = createLabel("Point: 0", new Font("Arial", Font.PLAIN, 22), new Point(700, 80), 180, 50);
         gamePanel.setStepLabel(stepLabel);
@@ -61,6 +63,7 @@ public class GameFrame extends JFrame {
         this.mode.addActionListener(e ->
         {
             ModeFrame.OpenMode();
+            this.dispose();
         });
         this.RightBtn.addActionListener(e ->
         {
@@ -126,7 +129,14 @@ public class GameFrame extends JFrame {
             gameFrame.setVisible(true);
         });
     }
-
+    public void setModeFrame(ModeFrame modeFrame)
+    {
+        this.modeFrame=modeFrame;
+    }
+    public void setController(GameController controller)
+    {
+        this.controller=controller;
+    }
     public GamePanel getGamePanel()
     {
         return gamePanel;

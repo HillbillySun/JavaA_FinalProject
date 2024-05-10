@@ -11,6 +11,7 @@ public class InitiaFrame extends JFrame {
         this.setTitle("2048 Game");
         this.setLayout(null);
         this.setSize(width, height);
+        this.setLocationRelativeTo(null);
         NewGameBtn = createButton("New Game", new Point(150, 35), 300, 90);
         LoadGameBtn=createButton("Load Game",new Point(150,155),300,90);
         RankGameBtn=createButton("Rank",new Point(150,275),300,90);
@@ -39,7 +40,7 @@ public class InitiaFrame extends JFrame {
     {
         SwingUtilities.invokeLater(() ->
         {
-            InitiaFrame initiaFrame=new InitiaFrame(600,400);
+            InitiaFrame initiaFrame=new InitiaFrame(600,500);
             initiaFrame.setVisible(true);
         });
     }
