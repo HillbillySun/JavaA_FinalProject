@@ -31,6 +31,7 @@ public class ModeFrame extends JFrame {
             gameFrame.setModeFrame(this);
             this.controller = new GameController(gameFrame.getGamePanel(),gameFrame.getGamePanel().getModel(),gameFrame,this);
             gameFrame.setController(this.controller);
+            gameFrame.getGamePanel().setController(this.controller);
             this.dispose();
             GameFrame.StartGame(gameFrame);
             JOptionPane.showMessageDialog(gameFrame,"经典4*4，合成2048!");
@@ -42,6 +43,7 @@ public class ModeFrame extends JFrame {
             this.controller = new GameController(gameFrame.getGamePanel(),gameFrame.getGamePanel().getModel(),gameFrame,this);
             gameFrame.setModeFrame(this);
             gameFrame.setController(this.controller);
+            gameFrame.getGamePanel().setController(this.controller);
             this.dispose();
             GameFrame.StartGame(gameFrame);
             JOptionPane.showMessageDialog(gameFrame,"简单4*4，合成1024即可!");
@@ -53,6 +55,7 @@ public class ModeFrame extends JFrame {
             this.controller = new GameController(gameFrame.getGamePanel(),gameFrame.getGamePanel().getModel(),gameFrame,this);
             gameFrame.setModeFrame(this);
             gameFrame.setController(this.controller);
+            gameFrame.getGamePanel().setController(this.controller);
             this.dispose();
             GameFrame.StartGame(gameFrame);
             JOptionPane.showMessageDialog(gameFrame,"使用3*3，合成2048!");
@@ -75,6 +78,7 @@ public class ModeFrame extends JFrame {
                     this.controller = new GameController(gameFrame.getGamePanel(),gameFrame.getGamePanel().getModel(),gameFrame,this);
                     gameFrame.setModeFrame(this);
                     gameFrame.setController(this.controller);
+                    gameFrame.getGamePanel().setController(this.controller);
                     this.dispose();
                     GameFrame.StartGame(gameFrame);
                     JOptionPane.showMessageDialog(gameFrame,String.format("使用%d*%d，合成%d!",boardSize,boardSize,target));

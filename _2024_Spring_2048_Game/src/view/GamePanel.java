@@ -1,5 +1,6 @@
 package view;
 
+import controller.GameController;
 import model.GridNumber;
 
 import javax.swing.*;
@@ -16,7 +17,10 @@ public class GamePanel extends ListenerPanel {
     private JLabel pointLabel;
     private int steps;
     private int points;
+    private boolean isOver1 = false;
+    private boolean isOver2 = false;
     private final int GRID_SIZE;
+    private GameController controller;
 
     public GamePanel(int size,int COUNT,int target) {
         this.setTarget(target);
@@ -64,38 +68,47 @@ public class GamePanel extends ListenerPanel {
      */
     @Override
     public void doMoveRight() {
-        System.out.println("Click VK_RIGHT");
-        this.model.moveRight();
-        this.updateGridsNumber();
-        this.afterMove();
+        if(!isOver1||!isOver2)
+        {
+            System.out.println("Click VK_RIGHT");
+            this.model.moveRight();
+            this.updateGridsNumber();
+            this.afterMove();
+        }
     }
 
     @Override
     public void doMoveLeft() {
-        System.out.println("Click VK_Left");
-        this.model.moveLeft();
-        this.updateGridsNumber();
-        this.afterMove();
+        if(!isOver1||!isOver2)
+        {
+            System.out.println("Click VK_Left");
+            this.model.moveLeft();
+            this.updateGridsNumber();
+            this.afterMove();
+        }
     }
 
     @Override
     public void doMoveUp() {
-        System.out.println("Click VK_Up");
-        this.model.moveUp();
-        this.updateGridsNumber();
-        this.afterMove();
+        if(!isOver1||!isOver2){
+            System.out.println("Click VK_Up");
+            this.model.moveUp();
+            this.updateGridsNumber();
+            this.afterMove();
+        }
     }
 
     @Override
     public void doMoveDown() {
-        System.out.println("Click VK_Down");
-        this.model.moveDown();
-        this.updateGridsNumber();
-        this.afterMove();
+        if(!isOver1||!isOver2){
+            System.out.println("Click VK_Down");
+            this.model.moveDown();
+            this.updateGridsNumber();
+            this.afterMove();
+        }
     }
 
-    public boolean afterMove() {
-        boolean isOver=false;
+    public void afterMove() {
         if (model.getIfGenerate())
         {
             this.steps++;
@@ -103,23 +116,69 @@ public class GamePanel extends ListenerPanel {
         this.stepLabel.setText(String.format("Step: %d", this.steps));
         points+=model.getMarkPoint();
         this.pointLabel.setText(String.format("Points: %d",this.points));
+        int[][] clonenumber=new int[COUNT+2][COUNT+2];
+        Loop1:
         for (int i = 0; i < COUNT; i++) {
             for (int j = 0; j < COUNT; j++) {
+                clonenumber[i+1][j+1]=model.getNumber(i,j);
                 if (model.getNumber(i,j)==Target)
                 {
-                    isOver=true;
+                    isOver1 =true;
+                    break Loop1;
                 }
             }
         }
-        if (isOver)
+        boolean isMax=true;
+        Loop2:
+        for (int i = 0; i < COUNT; i++) {
+            for (int j = 0; j < COUNT; j++) {
+                int x=i+1;
+                int y=j+1;
+                if (clonenumber[x][y]==0)
+                {
+                    isMax=false;
+                    break Loop2;
+                }
+            }
+        }
+        Loop3:
+        if (isMax)
+        {
+            int count=0;
+            for (int i = 0; i < COUNT; i++) {
+                for (int j = 0; j < COUNT; j++) {
+                    int x=i+1;
+                    int y=j+1;
+                    int mark=clonenumber[x][y];
+                    if (clonenumber[x-1][y]!=mark&&clonenumber[x][y-1]!=mark&&clonenumber[x+1][y]!=mark&&clonenumber[x][y+1]!=mark)
+                    {
+                       count++;
+                    }
+                }
+            }
+            if (count==COUNT*COUNT)
+            {
+                isOver2=true;
+            }
+        }
+        if (isOver1)
         {
             JOptionPane.showMessageDialog(this,"You Win!");
+            controller.endGame();
         }
-        return isOver;
+        else if (isOver2)
+        {
+            JOptionPane.showMessageDialog(this,"You Lose, Try Again!");
+            controller.endGame();
+        }
+
     }
 
     public void refreshGame()
     {
+        this.isOver1=false;
+        this.isOver2=false;
+        model.setisMove(true);
         this.points=0;
         this.steps=0;
         model.initialNumbers();
@@ -170,15 +229,13 @@ public class GamePanel extends ListenerPanel {
     {
         this.Target=target;
     }
-    public boolean isMove()
+    public void setController(GameController controller)
     {
-        boolean isMove=false;
-        int[][] CloneNumbers=new int[COUNT][COUNT];
-        for (int i = 0; i < CloneNumbers.length; i++) {
-            for (int j = 0; j < CloneNumbers[0].length; j++) {
-                CloneNumbers[i][j]=model.getNumber(i,j);
-            }
-        }
-        return isMove;
+        this.controller=controller;
+    }
+    public void setifOver(boolean b)
+    {
+        isOver1=b;
+        isOver2=b;
     }
 }

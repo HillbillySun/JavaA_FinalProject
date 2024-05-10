@@ -27,5 +27,11 @@ public class GameController{
          * */
 //        view.refreshGame();
     }
+    public void endGame()
+    {
+        System.out.println("Game Over!");
+        model.setisMove(false);
+        view.setifOver(true);
+    }
     //todo: add other methods such as loadGame, saveGame...
 }
