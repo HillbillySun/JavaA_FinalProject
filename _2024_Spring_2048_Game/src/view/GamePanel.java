@@ -94,7 +94,7 @@ public class GamePanel extends ListenerPanel {
         this.afterMove();
     }
 
-    public void afterMove() {
+    public boolean afterMove() {
         boolean isOver=false;
         if (model.getIfGenerate())
         {
@@ -115,6 +115,7 @@ public class GamePanel extends ListenerPanel {
         {
             JOptionPane.showMessageDialog(this,"You Win!");
         }
+        return isOver;
     }
 
     public void refreshGame()
@@ -123,8 +124,8 @@ public class GamePanel extends ListenerPanel {
         this.steps=0;
         model.initialNumbers();
         this.updateGridsNumber();
-        this.stepLabel.setText(String.format("Step: %d", this.steps));
-        this.pointLabel.setText(String.format("Point: %d",this.points));
+        this.stepLabel.setText("Start");
+        this.pointLabel.setText(String.format("Points: %d",this.points));
     }
     public void setSteps(int steps)
     {
@@ -168,5 +169,16 @@ public class GamePanel extends ListenerPanel {
     public void setTarget(int target)
     {
         this.Target=target;
+    }
+    public boolean isMove()
+    {
+        boolean isMove=false;
+        int[][] CloneNumbers=new int[COUNT][COUNT];
+        for (int i = 0; i < CloneNumbers.length; i++) {
+            for (int j = 0; j < CloneNumbers[0].length; j++) {
+                CloneNumbers[i][j]=model.getNumber(i,j);
+            }
+        }
+        return isMove;
     }
 }

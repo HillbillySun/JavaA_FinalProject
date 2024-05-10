@@ -27,11 +27,20 @@ public class GridComponent extends JComponent {
 
     @Override
     public void paintComponent(Graphics g) {
-        super.printComponents(g);
+        super.paintComponent(g);
         if (number > 0) {
-            g.setColor(Color.white);
-            g.fillRect(1, 1, getWidth() - 2, getHeight() - 2);
             g.setColor(ColorMap.getColor(number));
+            g.fillRect(0, 0, getWidth(), getHeight());
+            // 设置边框的粗细为 3，并且设置边框颜色为浅灰色
+            ((Graphics2D) g).setStroke(new BasicStroke(5));
+            ((Graphics2D) g).setColor(Color.GRAY); // 将边框颜色设置为浅灰色
+            // 绘制填充矩形
+            g.drawRect(0, 0, getWidth(), getHeight());
+            if (number > 4) {
+                g.setColor(Color.WHITE);
+            } else {
+                g.setColor(Color.BLACK);
+            }
             g.setFont(font);
             FontMetrics metrics = g.getFontMetrics(g.getFont());
             int textWidth = metrics.stringWidth(String.valueOf(number));
@@ -40,9 +49,18 @@ public class GridComponent extends JComponent {
             g.drawString(String.valueOf(number), x, y);
         } else {
             g.setColor(Color.LIGHT_GRAY);
-            g.fillRect(1, 1, getWidth() - 2, getHeight() - 2);
+            g.fillRect(0, 0, getWidth(), getHeight());
+            // 设置边框的粗细为 3，并且设置边框颜色为浅灰色
+            ((Graphics2D) g).setStroke(new BasicStroke(5));
+            ((Graphics2D) g).setColor(Color.GRAY); // 将边框颜色设置为浅灰色
+            // 绘制填充矩形
+            g.drawRect(0, 0, getWidth(), getHeight());
         }
     }
+
+
+
+
 
 
     public int getRow() {
