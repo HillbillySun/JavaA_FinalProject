@@ -22,6 +22,7 @@ public class GameController{
     public void restartGame() {
         System.out.println("Do restart game here");
         view.refreshGame();
+        view.setifOver(false);
         /*
          * We can also use the method view.refreshGame();
          * */
