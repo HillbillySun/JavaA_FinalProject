@@ -34,5 +34,13 @@ public class GameController{
         model.setisMove(false);
         view.setifOver(true);
     }
+    public void saveGame()
+    {
+    //todo: edit the save method
+    }
+    public void loadGame()
+    {
+        //todo: edit the load method
+    }
     //todo: add other methods such as loadGame, saveGame...
 }
