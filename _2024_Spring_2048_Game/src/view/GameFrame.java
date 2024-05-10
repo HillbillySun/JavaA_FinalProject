@@ -37,15 +37,15 @@ public class GameFrame extends JFrame {
         this.add(gamePanel);
 
         this.controller = new GameController(gamePanel, gamePanel.getModel(),this);
-        this.restartBtn = createButton("Restart", new Point(500, 150), 110, 50);
-        this.loadBtn = createButton("Load", new Point(500, 220), 110, 50);
-        this.mode = createButton("Mode", new Point(500, 290), 110, 50);
-        this.UpBtn = createButton("↑", new Point(520, 360), 70, 25);
-        this.DownBtn = createButton("↓", new Point(520, 395), 70, 25);
-        this.LeftBtn = createButton("←", new Point(450, 360), 60, 60);
-        this.RightBtn = createButton("→", new Point(600, 360), 60, 60);
-        this.stepLabel = createLabel("Start", new Font("Arial", Font.PLAIN, 22), new Point(500, 30), 180, 50);
-        this.pointLabel = createLabel("Point: 0", new Font("Arial", Font.PLAIN, 22), new Point(500, 80), 180, 50);
+        this.restartBtn = createButton("Restart", new Point(700, 150), 110, 50);
+        this.loadBtn = createButton("Load", new Point(700, 220), 110, 50);
+        this.mode = createButton("Mode", new Point(700, 290), 110, 50);
+        this.UpBtn = createButton("↑", new Point(725, 480), 60, 60);
+        this.DownBtn = createButton("↓", new Point(725, 550), 60, 60);
+        this.LeftBtn = createButton("←", new Point(655, 550), 60, 60);
+        this.RightBtn = createButton("→", new Point(795, 550), 60, 60);
+        this.stepLabel = createLabel("Start", new Font("Arial", Font.PLAIN, 22), new Point(700, 30), 180, 50);
+        this.pointLabel = createLabel("Point: 0", new Font("Arial", Font.PLAIN, 22), new Point(700, 80), 180, 50);
         gamePanel.setStepLabel(stepLabel);
         gamePanel.setPointLabel(pointLabel);
 
@@ -146,8 +146,7 @@ public class GameFrame extends JFrame {
     public static void StartGame(int COUNT,int Target)
     {
         SwingUtilities.invokeLater(() -> {
-
-            GameFrame gameFrame = new GameFrame(700, 500,COUNT,Target);
+            GameFrame gameFrame = new GameFrame(900, 700,COUNT,Target);
             gameFrame.setVisible(true);
         });
     }
