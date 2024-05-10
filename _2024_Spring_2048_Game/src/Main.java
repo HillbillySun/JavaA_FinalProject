@@ -1,7 +1,7 @@
-import view.GameFrame;
+import view.InitiaFrame;
 
 public class Main {
     public static void main(String[] args) {
-        GameFrame.StartGame(4,2048);
+        InitiaFrame.initialGame();
     }
 }

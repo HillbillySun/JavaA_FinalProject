@@ -60,31 +60,7 @@ public class GameFrame extends JFrame {
         });
         this.mode.addActionListener(e ->
         {
-            String str1 = JOptionPane.showInputDialog(this, "输入你想要的棋盘尺寸(2-10中的整数)");
-            String str2 = JOptionPane.showInputDialog(this, "输入你的目标数字(128到2048中的2的幂次)：");
-            System.out.println("size: "+str1);
-            System.out.println("target: "+str2);
-            int boardSize;
-            int target;
-            if (isInteger(str1)&&isInteger(str2))
-            {
-                boardSize=Integer.parseInt(str1);
-                target=Integer.parseInt(str2);
-                if (boardSize >= 2 && boardSize <= 10 && target > 0 && isPowerOfTwo(target)) {
-                    this.dispose();
-                    StartGame(boardSize,target);
-                    gamePanel.refreshGame();
-                }
-                else
-                {
-                    JOptionPane.showMessageDialog(this,"请重新输入!");
-                }
-            }
-            else
-            {
-                JOptionPane.showMessageDialog(this,"请重新输入!");
-            }
-            gamePanel.requestFocusInWindow();
+            ModeFrame.OpenMode();
         });
         this.RightBtn.addActionListener(e ->
         {
@@ -143,11 +119,16 @@ public class GameFrame extends JFrame {
         }
     }
 
-    public static void StartGame(int COUNT,int Target)
+    public static void StartGame(GameFrame GameFrame)
     {
         SwingUtilities.invokeLater(() -> {
-            GameFrame gameFrame = new GameFrame(900, 700,COUNT,Target);
+            GameFrame gameFrame = GameFrame;
             gameFrame.setVisible(true);
         });
+    }
+
+    public GamePanel getGamePanel()
+    {
+        return gamePanel;
     }
 }
