@@ -31,6 +31,7 @@ public class ModeFrame extends JFrame {
         {
             gameFrame=new GameFrame(900,700,4,2048);
             gameFrame.setModeFrame(this);
+            gameFrame.getGamePanel().setModeFrame(this);
             this.controller=new GameController(gameFrame.getGamePanel(),gameFrame.getGamePanel().getModel(),gameFrame,this,this.initiaFrame);
             gameFrame.setController(this.controller);
             gameFrame.getGamePanel().setController(this.controller);
@@ -43,6 +44,7 @@ public class ModeFrame extends JFrame {
         {
             gameFrame=new GameFrame(900,700,4,1024);
             gameFrame.setModeFrame(this);
+            gameFrame.getGamePanel().setModeFrame(this);
             this.controller=new GameController(gameFrame.getGamePanel(),gameFrame.getGamePanel().getModel(),gameFrame,this,this.initiaFrame);
             gameFrame.setController(this.controller);
             gameFrame.getGamePanel().setController(this.controller);
@@ -55,6 +57,7 @@ public class ModeFrame extends JFrame {
         {
             gameFrame=new GameFrame(900,700,3,2048);
             gameFrame.setModeFrame(this);
+            gameFrame.getGamePanel().setModeFrame(this);
             this.controller=new GameController(gameFrame.getGamePanel(),gameFrame.getGamePanel().getModel(),gameFrame,this,this.initiaFrame);
             gameFrame.setController(this.controller);
             gameFrame.getGamePanel().setController(this.controller);
@@ -78,6 +81,7 @@ public class ModeFrame extends JFrame {
                 if (boardSize >= 2 && boardSize <= 10 && target > 0 && GameFrame.isPowerOfTwo(target)){
                     gameFrame=new GameFrame(900,700,boardSize,target);
                     gameFrame.setModeFrame(this);
+                    gameFrame.getGamePanel().setModeFrame(this);
                     this.controller=new GameController(gameFrame.getGamePanel(),gameFrame.getGamePanel().getModel(),gameFrame,this,this.initiaFrame);
                     gameFrame.setController(this.controller);
                     gameFrame.getGamePanel().setController(this.controller);

@@ -13,6 +13,7 @@ public class GamePanel extends ListenerPanel {
 
     private int Target=2048;
     private GridNumber model;
+    private ModeFrame modeFrame;
     private JLabel stepLabel;
     private JLabel pointLabel;
     private int steps;
@@ -21,6 +22,7 @@ public class GamePanel extends ListenerPanel {
     private boolean isOver2 = false;
     private final int GRID_SIZE;
     private GameController controller;
+    private GameFrame gameFrame;
 
     public GamePanel(int size,int COUNT,int target) {
         this.setTarget(target);
@@ -60,8 +62,6 @@ public class GamePanel extends ListenerPanel {
         }
         repaint();
     }
-
-
     /**
      * Implement the abstract method declared in ListenerPanel.
      * Do move right.
@@ -168,10 +168,19 @@ public class GamePanel extends ListenerPanel {
         }
         else if (isOver2)
         {
-            JOptionPane.showMessageDialog(this,"You Lose, Try Again!");
+            Object[] options = {"Restart", "Change Mode"};
+            int result = JOptionPane.CLOSED_OPTION; // 初始值设为 CLOSED_OPTION，表示用户还没有做出选择
             controller.endGame();
+            while (result == JOptionPane.CLOSED_OPTION) {
+                result = JOptionPane.showOptionDialog(null, "You lose, try again!", "Game Over", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+            }
+            if (result == 0) {
+                controller.restartGame();
+            } else if (result == 1) {
+                ModeFrame.OpenMode(modeFrame);
+                gameFrame.dispose();
+            }
         }
-
     }
 
     public void refreshGame()
@@ -237,5 +246,13 @@ public class GamePanel extends ListenerPanel {
     {
         isOver1=b;
         isOver2=b;
+    }
+    public void setModeFrame(ModeFrame modeFrame)
+    {
+        this.modeFrame=modeFrame;
+    }
+    public void setGameFrame(GameFrame gameFrame)
+    {
+        this.gameFrame=gameFrame;
     }
 }

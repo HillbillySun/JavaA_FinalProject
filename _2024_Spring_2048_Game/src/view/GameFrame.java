@@ -36,6 +36,7 @@ public class GameFrame extends JFrame {
         this.setSize(width, height);
         ColorMap.InitialColorMap();
         gamePanel = new GamePanel((int) (this.getHeight() * 0.8),COUNT,Target);
+        gamePanel.setGameFrame(this);
         gamePanel.setLocation(this.getHeight() / 15, this.getWidth() / 15);
         this.add(gamePanel);
         this.restartBtn = createButton("Restart", new Point(700, 150), 110, 50);
