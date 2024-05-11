@@ -3,6 +3,7 @@ package controller;
 import model.GridNumber;
 import view.GameFrame;
 import view.GamePanel;
+import view.InitiaFrame;
 import view.ModeFrame;
 
 /**
@@ -11,13 +12,15 @@ import view.ModeFrame;
 public class GameController{
     private GamePanel view;
     private GridNumber model;
+    private InitiaFrame initiaFrame;
     private GameFrame gameFrame;
     private ModeFrame modeFrame;
-    public GameController(GamePanel view, GridNumber model, GameFrame gameFrame,ModeFrame modeFrame) {
+    public GameController(GamePanel view, GridNumber model, GameFrame gameFrame,ModeFrame modeFrame,InitiaFrame initiaFrame) {
         this.view = view;
         this.model = model;
         this.gameFrame=gameFrame;
         this.modeFrame=modeFrame;
+        this.initiaFrame=initiaFrame;
     }
     public void restartGame() {
         System.out.println("Do restart game here");

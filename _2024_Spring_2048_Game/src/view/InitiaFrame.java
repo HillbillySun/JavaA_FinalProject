@@ -1,5 +1,7 @@
 package view;
 
+import controller.GameController;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -7,6 +9,8 @@ public class InitiaFrame extends JFrame {
     JButton NewGameBtn;
     JButton LoadGameBtn;
     JButton RankGameBtn;
+    private GameController controller;
+    private ModeFrame modeFrame;
     public InitiaFrame(int width,int height) {
         this.setTitle("2048 Game");
         this.setLayout(null);
@@ -18,7 +22,8 @@ public class InitiaFrame extends JFrame {
         this.NewGameBtn.addActionListener(e->
         {
             this.dispose();
-            ModeFrame.OpenMode();
+            modeFrame=new ModeFrame(900,700,this);
+            ModeFrame.OpenMode(this.modeFrame);
         });
         this.LoadGameBtn.addActionListener(e->
         {

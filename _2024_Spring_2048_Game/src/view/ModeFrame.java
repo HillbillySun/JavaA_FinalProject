@@ -11,11 +11,13 @@ public class ModeFrame extends JFrame {
     private JButton HardBtn;
     private JButton EditBtn;
     private GameFrame gameFrame;
+    private InitiaFrame initiaFrame;
     private GameController controller;
     protected boolean ifDispole;
 
-    ModeFrame(int width,int height)
+    ModeFrame(int width,int height,InitiaFrame initiaFrame)
     {
+        this.initiaFrame=initiaFrame;
         this.setTitle("2048 Game");
         this.setLayout(null);
         this.setSize(width,height);
@@ -29,7 +31,7 @@ public class ModeFrame extends JFrame {
         {
             gameFrame=new GameFrame(900,700,4,2048);
             gameFrame.setModeFrame(this);
-            this.controller = new GameController(gameFrame.getGamePanel(),gameFrame.getGamePanel().getModel(),gameFrame,this);
+            this.controller=new GameController(gameFrame.getGamePanel(),gameFrame.getGamePanel().getModel(),gameFrame,this,this.initiaFrame);
             gameFrame.setController(this.controller);
             gameFrame.getGamePanel().setController(this.controller);
             this.dispose();
@@ -40,8 +42,8 @@ public class ModeFrame extends JFrame {
         this.EasyBtn.addActionListener(e->
         {
             gameFrame=new GameFrame(900,700,4,1024);
-            this.controller = new GameController(gameFrame.getGamePanel(),gameFrame.getGamePanel().getModel(),gameFrame,this);
             gameFrame.setModeFrame(this);
+            this.controller=new GameController(gameFrame.getGamePanel(),gameFrame.getGamePanel().getModel(),gameFrame,this,this.initiaFrame);
             gameFrame.setController(this.controller);
             gameFrame.getGamePanel().setController(this.controller);
             this.dispose();
@@ -52,8 +54,8 @@ public class ModeFrame extends JFrame {
         this.HardBtn.addActionListener(e->
         {
             gameFrame=new GameFrame(900,700,3,2048);
-            this.controller = new GameController(gameFrame.getGamePanel(),gameFrame.getGamePanel().getModel(),gameFrame,this);
             gameFrame.setModeFrame(this);
+            this.controller=new GameController(gameFrame.getGamePanel(),gameFrame.getGamePanel().getModel(),gameFrame,this,this.initiaFrame);
             gameFrame.setController(this.controller);
             gameFrame.getGamePanel().setController(this.controller);
             this.dispose();
@@ -75,8 +77,8 @@ public class ModeFrame extends JFrame {
                 target=Integer.parseInt(str2);
                 if (boardSize >= 2 && boardSize <= 10 && target > 0 && GameFrame.isPowerOfTwo(target)){
                     gameFrame=new GameFrame(900,700,boardSize,target);
-                    this.controller = new GameController(gameFrame.getGamePanel(),gameFrame.getGamePanel().getModel(),gameFrame,this);
                     gameFrame.setModeFrame(this);
+                    this.controller=new GameController(gameFrame.getGamePanel(),gameFrame.getGamePanel().getModel(),gameFrame,this,this.initiaFrame);
                     gameFrame.setController(this.controller);
                     gameFrame.getGamePanel().setController(this.controller);
                     this.dispose();
@@ -101,12 +103,10 @@ public class ModeFrame extends JFrame {
         this.add(button);
         return button;
     }
-    public static void OpenMode()
+    public static void OpenMode(ModeFrame modeFrame)
     {
         SwingUtilities.invokeLater(() -> {
-            ModeFrame modeFrame = new ModeFrame(900, 700);
             modeFrame.setVisible(true);
         });
     }
-
 }

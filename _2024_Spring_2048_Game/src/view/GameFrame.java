@@ -62,7 +62,7 @@ public class GameFrame extends JFrame {
         });
         this.mode.addActionListener(e ->
         {
-            ModeFrame.OpenMode();
+            ModeFrame.OpenMode(this.modeFrame);
             this.dispose();
         });
         this.RightBtn.addActionListener(e ->

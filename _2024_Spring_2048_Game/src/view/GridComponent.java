@@ -33,7 +33,7 @@ public class GridComponent extends JComponent {
             g.fillRect(0, 0, getWidth(), getHeight());
             // 设置边框的粗细为 3，并且设置边框颜色为浅灰色
             ((Graphics2D) g).setStroke(new BasicStroke(5));
-            ((Graphics2D) g).setColor(Color.GRAY); // 将边框颜色设置为浅灰色
+             g.setColor(Color.GRAY); // 将边框颜色设置为浅灰色
             // 绘制填充矩形
             g.drawRect(0, 0, getWidth(), getHeight());
             if (number > 4) {
@@ -52,16 +52,11 @@ public class GridComponent extends JComponent {
             g.fillRect(0, 0, getWidth(), getHeight());
             // 设置边框的粗细为 3，并且设置边框颜色为浅灰色
             ((Graphics2D) g).setStroke(new BasicStroke(5));
-            ((Graphics2D) g).setColor(Color.GRAY); // 将边框颜色设置为浅灰色
+            g.setColor(Color.GRAY); // 将边框颜色设置为浅灰色
             // 绘制填充矩形
             g.drawRect(0, 0, getWidth(), getHeight());
         }
     }
-
-
-
-
-
 
     public int getRow() {
         return row;
