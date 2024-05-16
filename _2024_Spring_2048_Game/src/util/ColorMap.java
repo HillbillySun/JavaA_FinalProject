@@ -10,7 +10,7 @@ public class ColorMap {
 
     //todo: complete the method to add other color
     public static void InitialColorMap() {
-        colorMap.put(2, new Color(255, 182, 193));
+        colorMap.put(2, new Color(248, 236, 154));
         colorMap.put(4, new Color(255, 218, 185)); // 亮黄色
         colorMap.put(8, new Color(255, 220, 0)); // 金黄色
         colorMap.put(16, new Color(255, 200, 0)); // 橙黄色

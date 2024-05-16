@@ -29,7 +29,7 @@ public class ModeFrame extends JFrame {
         ifDispole=false;
         this.ClassicBtn.addActionListener(e->
         {
-            gameFrame=new GameFrame(900,700,4,2048);
+            gameFrame=new GameFrame(900,700,4,2048,null);
             gameFrame.setModeFrame(this);
             gameFrame.getGamePanel().setModeFrame(this);
             this.controller=new GameController(gameFrame.getGamePanel(),gameFrame.getGamePanel().getModel(),gameFrame,this,this.initiaFrame);
@@ -42,7 +42,7 @@ public class ModeFrame extends JFrame {
         });
         this.EasyBtn.addActionListener(e->
         {
-            gameFrame=new GameFrame(900,700,4,1024);
+            gameFrame=new GameFrame(900,700,4,1024,null);
             gameFrame.setModeFrame(this);
             gameFrame.getGamePanel().setModeFrame(this);
             this.controller=new GameController(gameFrame.getGamePanel(),gameFrame.getGamePanel().getModel(),gameFrame,this,this.initiaFrame);
@@ -55,7 +55,7 @@ public class ModeFrame extends JFrame {
         });
         this.HardBtn.addActionListener(e->
         {
-            gameFrame=new GameFrame(900,700,3,2048);
+            gameFrame=new GameFrame(900,700,3,2048,null);
             gameFrame.setModeFrame(this);
             gameFrame.getGamePanel().setModeFrame(this);
             this.controller=new GameController(gameFrame.getGamePanel(),gameFrame.getGamePanel().getModel(),gameFrame,this,this.initiaFrame);
@@ -79,7 +79,7 @@ public class ModeFrame extends JFrame {
                 boardSize=Integer.parseInt(str1);
                 target=Integer.parseInt(str2);
                 if (boardSize >= 2 && boardSize <= 10 && target > 0 && GameFrame.isPowerOfTwo(target)){
-                    gameFrame=new GameFrame(900,700,boardSize,target);
+                    gameFrame=new GameFrame(900,700,boardSize,target,null);
                     gameFrame.setModeFrame(this);
                     gameFrame.getGamePanel().setModeFrame(this);
                     this.controller=new GameController(gameFrame.getGamePanel(),gameFrame.getGamePanel().getModel(),gameFrame,this,this.initiaFrame);

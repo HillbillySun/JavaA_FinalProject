@@ -8,7 +8,6 @@ import java.awt.*;
 
 public class GameFrame extends JFrame {
 
-    private GameController controller;
     private JButton SaveBtn;
     private JButton restartBtn;
     private JButton loadBtn;
@@ -23,32 +22,38 @@ public class GameFrame extends JFrame {
 
     private JButton RightBtn;
 
+    private JButton setBck;
+
+    private JPanel backgroundPanel;
+
     private JLabel stepLabel;
 
     private JLabel pointLabel;
+    private GameController controller;
     private GamePanel gamePanel;
 
     private ModeFrame modeFrame;
 
-    public GameFrame(int width, int height, int COUNT,int Target) {
+    public GameFrame(int width, int height, int COUNT, int Target, String path) {
         this.setTitle("2048 Game");
         this.setLayout(null);
         this.setSize(width, height);
         ColorMap.InitialColorMap();
-        gamePanel = new GamePanel((int) (this.getHeight() * 0.8),COUNT,Target);
+        gamePanel = new GamePanel((int) (this.getHeight() * 0.8), COUNT, Target);
         gamePanel.setGameFrame(this);
         gamePanel.setLocation(this.getHeight() / 15, this.getWidth() / 15);
         this.add(gamePanel);
-        this.restartBtn = createButton("Restart", new Point(700, 150), 110, 50);
-        this.loadBtn = createButton("Load", new Point(700, 220), 110, 50);
-        this.mode = createButton("Mode", new Point(700, 290), 110, 50);
+        this.restartBtn = createButton("Restart", new Point(700, 135), 110, 50);
+        this.loadBtn = createButton("Load", new Point(700, 205), 110, 50);
+        this.mode = createButton("Mode", new Point(700, 275), 110, 50);
         this.UpBtn = createButton("↑", new Point(725, 480), 60, 60);
         this.DownBtn = createButton("↓", new Point(725, 550), 60, 60);
         this.LeftBtn = createButton("←", new Point(655, 550), 60, 60);
         this.RightBtn = createButton("→", new Point(795, 550), 60, 60);
-        this.SaveBtn=createButton("Save",new Point(700,360),110,50);
+        this.SaveBtn = createButton("Save", new Point(700, 415), 110, 50);
         this.stepLabel = createLabel("Start", new Font("Arial", Font.PLAIN, 22), new Point(700, 30), 180, 50);
         this.pointLabel = createLabel("Point: 0", new Font("Arial", Font.PLAIN, 22), new Point(700, 80), 180, 50);
+        this.setBck = createButton("Theme", new Point(700, 345), 110, 50);
         gamePanel.setStepLabel(stepLabel);
         gamePanel.setPointLabel(pointLabel);
 
@@ -85,7 +90,30 @@ public class GameFrame extends JFrame {
             gamePanel.doMoveDown();
             gamePanel.requestFocusInWindow();
         });
+        this.SaveBtn.addActionListener(e -> {
+
+        });
+        this.setBck.addActionListener(e -> {
+            Object[] options = {"香港", "天文台", "曼哈顿"};
+            int result = JOptionPane.showOptionDialog(
+                    null,
+                    "选择您的主题！",
+                    "选择主题",
+                    JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    options,
+                    options[0]);
+            if (result == 0) {
+                reOpen("/Pictures/香港.jpg");
+            } else if (result == 1) {
+                reOpen("/pictures/天文台.jpg");
+            } else if (result==2){
+                reOpen("/Pictures/曼哈顿.jpg");
+            }
+        });
         //todo: add other button here
+        setbkg(path);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
@@ -95,6 +123,8 @@ public class GameFrame extends JFrame {
         JButton button = new JButton(name);
         button.setLocation(location);
         button.setSize(width, height);
+        button.setBackground(new Color(175, 158, 137));
+        button.setForeground(Color.WHITE);
         this.add(button);
         return button;
     }
@@ -114,6 +144,7 @@ public class GameFrame extends JFrame {
         // 例如，如果number是2的幂次，那么number & (number - 1)将等于0
         return (number > 0) && ((number & (number - 1)) == 0);
     }
+
     public static boolean isInteger(String s) {
         try {
             Integer.parseInt(s);
@@ -123,23 +154,80 @@ public class GameFrame extends JFrame {
         }
     }
 
-    public static void StartGame(GameFrame GameFrame)
-    {
+    public static void StartGame(GameFrame GameFrame) {
         SwingUtilities.invokeLater(() -> {
             GameFrame gameFrame = GameFrame;
             gameFrame.setVisible(true);
         });
     }
-    public void setModeFrame(ModeFrame modeFrame)
-    {
-        this.modeFrame=modeFrame;
+
+    public void setModeFrame(ModeFrame modeFrame) {
+        this.modeFrame = modeFrame;
     }
-    public void setController(GameController controller)
-    {
-        this.controller=controller;
+
+    public void setController(GameController controller) {
+        this.controller = controller;
     }
-    public GamePanel getGamePanel()
-    {
+
+    public GamePanel getGamePanel() {
         return gamePanel;
+    }
+
+    public void setbkg(String path) {
+        try {
+            this.repaint();
+            ImageIcon bg = new ImageIcon(GameFrame.class.getResource(path));
+            JPanel bkgPanel = new JPanel() {
+                @Override
+                protected void paintComponent(Graphics g) {
+                    super.paintComponent(g);
+                    Graphics2D g2d = (Graphics2D) g.create();
+                    float alpha = 0.5f; // 0.0f 完全透明，1.0f 完全不透明
+                    g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
+                    g2d.drawImage(bg.getImage(), 0, 0, getWidth(), getHeight(), this);
+                    g2d.dispose();
+                }
+            };
+            this.backgroundPanel = bkgPanel;
+            backgroundPanel.setLayout(null); // 使用绝对布局
+            this.setContentPane(backgroundPanel);
+            backgroundPanel.add(gamePanel);
+            backgroundPanel.add(restartBtn);
+            backgroundPanel.add(loadBtn);
+            backgroundPanel.add(mode);
+            backgroundPanel.add(UpBtn);
+            backgroundPanel.add(DownBtn);
+            backgroundPanel.add(LeftBtn);
+            backgroundPanel.add(RightBtn);
+            backgroundPanel.add(SaveBtn);
+            backgroundPanel.add(stepLabel);
+            backgroundPanel.add(pointLabel);
+            backgroundPanel.add(setBck);
+        } catch (NullPointerException ignore) {
+            JPanel bkgPanel = new JPanel();
+            bkgPanel.setBackground(new Color(255, 237, 211));
+            this.backgroundPanel = bkgPanel;
+            backgroundPanel.setLayout(null); // 使用绝对布局
+            this.setContentPane(backgroundPanel);
+            backgroundPanel.add(gamePanel);
+            backgroundPanel.add(restartBtn);
+            backgroundPanel.add(loadBtn);
+            backgroundPanel.add(mode);
+            backgroundPanel.add(UpBtn);
+            backgroundPanel.add(DownBtn);
+            backgroundPanel.add(LeftBtn);
+            backgroundPanel.add(RightBtn);
+            backgroundPanel.add(SaveBtn);
+            backgroundPanel.add(stepLabel);
+            backgroundPanel.add(pointLabel);
+            backgroundPanel.add(setBck);
+        }
+    }
+    public void reOpen(String path)
+    {
+        GameFrame temp=this;
+        this.dispose();
+        temp.setbkg(path);
+        StartGame(temp);
     }
 }
