@@ -45,5 +45,12 @@ public class GameController{
     {
         //todo: edit the load method
     }
+    public void Revive()
+    {
+        System.out.println("Revive!");
+        view.reviveGame();
+        view.setifOver(false);
+    }
+
     //todo: add other methods such as loadGame, saveGame...
 }

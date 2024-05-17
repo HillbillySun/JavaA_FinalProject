@@ -3,8 +3,15 @@ package view;
 import controller.GameController;
 import model.GridNumber;
 
+import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowStateListener;
+import java.io.File;
+import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class GamePanel extends ListenerPanel {
@@ -168,7 +175,7 @@ public class GamePanel extends ListenerPanel {
         }
         else if (isOver2)
         {
-            Object[] options = {"Restart", "Change Mode"};
+            Object[] options = {"Restart", "Change Mode","Revive"};
             int result = JOptionPane.CLOSED_OPTION; // 初始值设为 CLOSED_OPTION，表示用户还没有做出选择
             controller.endGame();
             while (result == JOptionPane.CLOSED_OPTION) {
@@ -179,6 +186,38 @@ public class GamePanel extends ListenerPanel {
             } else if (result == 1) {
                 ModeFrame.OpenMode(modeFrame);
                 gameFrame.dispose();
+            } else if (result==2) {
+                playAudio("C:\\Users\\Lenovo\\Downloads\\SUSTech_CSE_Projects-main\\SUSTech_CSE_Projects-main\\CS109_2022_Fall\\Chess\\out\\production\\Chess\\Chess\\Resources\\bgm1.wav",15000);
+                JFrame adsframe=new JFrame();
+                adsframe.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+                adsframe.setResizable(false);
+                adsframe.addWindowStateListener(new WindowStateListener() {
+                    @Override
+                    public void windowStateChanged(WindowEvent e) {
+                        if ((e.getNewState() & Frame.ICONIFIED) == Frame.ICONIFIED) {
+                            adsframe.setState(Frame.NORMAL);
+                        }
+                    }
+                });
+
+                adsframe.setLayout(new BorderLayout());
+                adsframe.setSize(300,300);
+                adsframe.setLocationRelativeTo(null);
+                ImageIcon gifIcon = new ImageIcon("C:\\Users\\Lenovo\\Documents\\GitHub\\JavaA_FinalProject\\_2024_Spring_2048_Game\\src\\Pictures\\IMG_9298.gif");
+                JLabel gifLabel = new JLabel(gifIcon);
+                adsframe.add(gifLabel, BorderLayout.CENTER);
+                adsframe.setVisible(true);
+                Timer timer = new Timer();
+                TimerTask revive = new TimerTask() {
+                    @Override
+                    public void run() {
+                        controller.Revive();
+                        timer.cancel();
+                        adsframe.dispose();
+                        JOptionPane.showMessageDialog(null,"Revive! Continue! ");
+                    }
+                };
+                timer.schedule(revive,15000);
             }
         }
     }
@@ -194,6 +233,15 @@ public class GamePanel extends ListenerPanel {
         this.updateGridsNumber();
         this.stepLabel.setText("Start");
         this.pointLabel.setText(String.format("Points: %d",this.points));
+    }
+
+    public void reviveGame()
+    {
+        this.isOver1=false;
+        this.isOver2=false;
+        model.setisMove(true);
+        model.ReviveNumbers();
+        this.updateGridsNumber();
     }
     public void setSteps(int steps)
     {
@@ -255,4 +303,42 @@ public class GamePanel extends ListenerPanel {
     {
         this.gameFrame=gameFrame;
     }
+    private void playAudio(String filePath,int time) {
+        try {
+            // 打开音频文件
+            File audioFile = new File(filePath);
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+
+            // 获取音频格式
+            AudioFormat format = audioStream.getFormat();
+
+            // 获取音频数据行信息
+            DataLine.Info info = new DataLine.Info(Clip.class, format);
+
+            // 获取音频数据行
+            Clip audioClip = (Clip) AudioSystem.getLine(info);
+
+            // 打开音频剪辑并加载样本
+            audioClip.open(audioStream);
+
+            // 播放音频
+            audioClip.start();
+            Timer timer = new Timer();
+            TimerTask stopMusic=new TimerTask() {
+                @Override
+                public void run() {
+                    if (audioClip != null && audioClip.isRunning()) {
+                        audioClip.stop();
+                        audioClip.close();
+                        System.out.println("播放停止");
+                    }
+                }
+            };
+            timer.schedule(stopMusic,time);
+
+        } catch (UnsupportedAudioFileException | LineUnavailableException | IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
 }

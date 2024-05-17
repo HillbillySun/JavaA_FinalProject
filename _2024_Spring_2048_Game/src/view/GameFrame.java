@@ -175,7 +175,7 @@ public class GameFrame extends JFrame {
 
     public void setbkg(String path) {
         try {
-            this.repaint();
+//            this.repaint();
             ImageIcon bg = new ImageIcon(GameFrame.class.getResource(path));
             JPanel bkgPanel = new JPanel() {
                 @Override

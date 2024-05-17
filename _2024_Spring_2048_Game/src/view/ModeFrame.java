@@ -10,6 +10,7 @@ public class ModeFrame extends JFrame {
     private JButton EasyBtn;
     private JButton HardBtn;
     private JButton EditBtn;
+    private JPanel backgroundPanel;
     private GameFrame gameFrame;
     private InitiaFrame initiaFrame;
     private GameController controller;
@@ -27,6 +28,15 @@ public class ModeFrame extends JFrame {
         this.HardBtn=createButton("Hard",new Point(350,350),200,70);
         this.EditBtn=createButton("Edit by Yourself",new Point(350,450),200,70);
         ifDispole=false;
+        JPanel bkgPanel = new JPanel();
+        bkgPanel.setBackground(new Color(255, 237, 211));
+        this.backgroundPanel = bkgPanel;
+        backgroundPanel.setLayout(null); // 使用绝对布局
+        this.setContentPane(backgroundPanel);
+        backgroundPanel.add(ClassicBtn);
+        backgroundPanel.add(HardBtn);
+        backgroundPanel.add(EditBtn);
+        backgroundPanel.add(EasyBtn);
         this.ClassicBtn.addActionListener(e->
         {
             gameFrame=new GameFrame(900,700,4,2048,null);
@@ -104,6 +114,8 @@ public class ModeFrame extends JFrame {
         JButton button = new JButton(name);
         button.setLocation(location);
         button.setSize(width, height);
+        button.setBackground(new Color(175, 158, 137));
+        button.setForeground(Color.WHITE);
         this.add(button);
         return button;
     }

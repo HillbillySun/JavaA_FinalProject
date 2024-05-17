@@ -23,6 +23,17 @@ public class GridNumber {
         setisMove(true);
     }
 
+    public void ReviveNumbers()
+    {;
+        for (int i = 0; i < numbers.length; i++) {
+            for (int j = 0; j < numbers[0].length; j++) {
+                if (numbers[i][j]==2||numbers[i][j]==4)
+                {
+                    numbers[i][j]=0;
+                }
+            }
+        }
+    }
     public void initialNumbers() {
         for (int i = 0; i < numbers.length; i++) {
             for (int j = 0; j < numbers[0].length; j++) {
