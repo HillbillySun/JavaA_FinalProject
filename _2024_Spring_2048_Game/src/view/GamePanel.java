@@ -187,7 +187,7 @@ public class GamePanel extends ListenerPanel {
                 ModeFrame.OpenMode(modeFrame);
                 gameFrame.dispose();
             } else if (result==2) {
-                playAudio("C:\\Users\\Lenovo\\Downloads\\SUSTech_CSE_Projects-main\\SUSTech_CSE_Projects-main\\CS109_2022_Fall\\Chess\\out\\production\\Chess\\Chess\\Resources\\bgm1.wav",15000);
+                playAudio("C:\\Users\\Lenovo\\Documents\\GitHub\\JavaA_FinalProject\\_2024_Spring_2048_Game\\src\\Music\\adsBGM.wav",15000);
                 JFrame adsframe=new JFrame();
                 adsframe.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
                 adsframe.setResizable(false);

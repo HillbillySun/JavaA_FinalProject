@@ -37,7 +37,7 @@ public class InitiaFrame extends JFrame {
         });
         this.LoadGameBtn.addActionListener(e->
         {
-            //todo: 加载已有游戏
+
         });
         this.RankGameBtn.addActionListener(e->
         {
