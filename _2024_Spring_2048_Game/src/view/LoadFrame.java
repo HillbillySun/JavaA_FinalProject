@@ -53,7 +53,7 @@ public class LoadFrame extends JFrame {
                 boolean success = LoadModel.login(str1,str2);
                 if (success) {
                     JOptionPane.showMessageDialog(LoadFrame.this, "登录成功！");
-                    InitiaFrame initiaFrame=new InitiaFrame(600,500);
+                    InitiaFrame initiaFrame=new InitiaFrame(900,700);
                     InitiaFrame.OpenInitial(initiaFrame);
                     this.dispose();
                 } else {

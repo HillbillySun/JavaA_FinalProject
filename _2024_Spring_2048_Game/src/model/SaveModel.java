@@ -5,8 +5,8 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 public class SaveModel {
+    private static final String FILE_PATH = "model/游戏存档.txt";
     public static boolean save(String username, GridComponent[][]a){
-        final String FILE_PATH = "model/游戏存档.txt";
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH));
              BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, true))) {
             boolean foundString = false;

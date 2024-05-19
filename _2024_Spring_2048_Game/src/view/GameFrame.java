@@ -119,7 +119,8 @@ public class GameFrame extends JFrame {
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
-    
+
+
     private JButton createButton(String name, Point location, int width, int height) {
         JButton button = new JButton(name);
         button.setLocation(location);
