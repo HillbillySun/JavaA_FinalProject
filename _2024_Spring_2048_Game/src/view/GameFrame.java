@@ -115,7 +115,85 @@ public class GameFrame extends JFrame {
             }
         });
         //todo: add other button here
-        setbkg(path);
+        setbkg(path,false);
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    }
+    public GameFrame(int width, int height, int COUNT, int Target, String path,String tourist) {
+        this.setTitle("2048 Game");
+        this.setLayout(null);
+        this.setSize(width, height);
+        ColorMap.InitialColorMap();
+        gamePanel = new GamePanel((int) (this.getHeight() * 0.8), COUNT, Target);
+        gamePanel.setGameFrame(this);
+        gamePanel.setLocation(this.getHeight() / 15, this.getWidth() / 15);
+        this.add(gamePanel);
+        this.restartBtn = createButton("Restart", new Point(700, 135), 110, 50);
+        this.mode = createButton("Mode", new Point(700, 205), 110, 50);
+        this.UpBtn = createButton("↑", new Point(725, 480), 60, 60);
+        this.DownBtn = createButton("↓", new Point(725, 550), 60, 60);
+        this.LeftBtn = createButton("←", new Point(655, 550), 60, 60);
+        this.RightBtn = createButton("→", new Point(795, 550), 60, 60);
+        this.stepLabel = createLabel("Start", new Font("Arial", Font.PLAIN, 22), new Point(700, 30), 180, 50);
+        this.pointLabel = createLabel("Point: 0", new Font("Arial", Font.PLAIN, 22), new Point(700, 80), 180, 50);
+        this.setBck = createButton("Theme", new Point(700, 275), 110, 50);
+        gamePanel.setStepLabel(stepLabel);
+        gamePanel.setPointLabel(pointLabel);
+
+        this.restartBtn.addActionListener(e -> {
+            controller.restartGame();
+            gamePanel.requestFocusInWindow();//enable key listener
+        });
+        this.mode.addActionListener(e ->
+        {
+            ModeFrame.OpenMode(this.modeFrame);
+            this.dispose();
+        });
+        this.RightBtn.addActionListener(e ->
+        {
+            gamePanel.doMoveRight();
+            gamePanel.requestFocusInWindow();
+        });
+        this.LeftBtn.addActionListener(e ->
+        {
+            gamePanel.doMoveLeft();
+            gamePanel.requestFocusInWindow();
+        });
+        this.UpBtn.addActionListener(e -> {
+            gamePanel.doMoveUp();
+            gamePanel.requestFocusInWindow();
+        });
+        this.DownBtn.addActionListener(e ->
+        {
+            gamePanel.doMoveDown();
+            gamePanel.requestFocusInWindow();
+        });
+        this.setBck.addActionListener(e -> {
+            Object[] options = {"香港", "天文台", "曼哈顿","默认"};
+            int result = JOptionPane.showOptionDialog(
+                    null,
+                    "选择您的主题！",
+                    "选择主题",
+                    JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    options,
+                    options[0]);
+            if (result == 0) {
+                reOpen("/Pictures/香港.jpg");
+            } else if (result == 1) {
+                reOpen("/pictures/天文台.jpg");
+            } else if (result==2){
+                reOpen("/Pictures/曼哈顿.jpg");
+            }
+            else
+            {
+                reOpen(null);
+            }
+
+        });
+        //todo: add other button here
+        setbkg(path,true);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
@@ -175,7 +253,7 @@ public class GameFrame extends JFrame {
         return gamePanel;
     }
 
-    public void setbkg(String path) {
+    public void setbkg(String path,boolean isTour) {
         try {
 //            this.repaint();
             ImageIcon bg = new ImageIcon(GameFrame.class.getResource(path));
@@ -195,16 +273,19 @@ public class GameFrame extends JFrame {
             this.setContentPane(backgroundPanel);
             backgroundPanel.add(gamePanel);
             backgroundPanel.add(restartBtn);
-            backgroundPanel.add(loadBtn);
             backgroundPanel.add(mode);
             backgroundPanel.add(UpBtn);
             backgroundPanel.add(DownBtn);
             backgroundPanel.add(LeftBtn);
             backgroundPanel.add(RightBtn);
-            backgroundPanel.add(SaveBtn);
             backgroundPanel.add(stepLabel);
             backgroundPanel.add(pointLabel);
             backgroundPanel.add(setBck);
+            if (!isTour)
+            {
+                backgroundPanel.add(loadBtn);
+                backgroundPanel.add(SaveBtn);
+            }
         } catch (NullPointerException ignore) {
             JPanel bkgPanel = new JPanel();
             bkgPanel.setBackground(new Color(255, 237, 211));
@@ -213,23 +294,27 @@ public class GameFrame extends JFrame {
             this.setContentPane(backgroundPanel);
             backgroundPanel.add(gamePanel);
             backgroundPanel.add(restartBtn);
-            backgroundPanel.add(loadBtn);
             backgroundPanel.add(mode);
             backgroundPanel.add(UpBtn);
             backgroundPanel.add(DownBtn);
             backgroundPanel.add(LeftBtn);
             backgroundPanel.add(RightBtn);
-            backgroundPanel.add(SaveBtn);
             backgroundPanel.add(stepLabel);
             backgroundPanel.add(pointLabel);
             backgroundPanel.add(setBck);
+            if (!isTour)
+            {
+                backgroundPanel.add(SaveBtn);
+                backgroundPanel.add(loadBtn);
+            }
         }
     }
     public void reOpen(String path)
     {
         GameFrame temp=this;
         this.dispose();
-        temp.setbkg(path);
+        temp.setbkg(path,modeFrame.getloadframe().isTour);
         StartGame(temp);
     }
+
 }

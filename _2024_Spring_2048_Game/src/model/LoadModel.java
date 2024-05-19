@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LoadModel {
-    private static final String FILE_PATH = "model/用户名录.txt";
-    private static final String FILE_PATH2 = "mode/游戏存档.txt";
+    private static final String FILE_PATH = "C:\\Users\\Lenovo\\Documents\\GitHub\\JavaA_FinalProject\\_2024_Spring_2048_Game\\src\\model\\用户名录.txt";
+    private static final String FILE_PATH2 = "C:\\Users\\Lenovo\\Documents\\GitHub\\JavaA_FinalProject\\_2024_Spring_2048_Game\\src\\model\\游戏存档.txt";
     static UserNow user=new UserNow();
     public static boolean register(String username, String password) {
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH));

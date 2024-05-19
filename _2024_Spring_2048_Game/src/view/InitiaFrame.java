@@ -9,8 +9,8 @@ public class InitiaFrame extends JFrame {
     JButton NewGameBtn;
     JButton LoadGameBtn;
     JButton RankGameBtn;
-
     JPanel backgroundPanel;
+    private LoadFrame loadFrame;
     private GameController controller;
     private ModeFrame modeFrame;
     public InitiaFrame(int width,int height) {
@@ -33,6 +33,7 @@ public class InitiaFrame extends JFrame {
         {
             this.dispose();
             modeFrame=new ModeFrame(900,700,this);
+            modeFrame.setLoadFrame(loadFrame);
             ModeFrame.OpenMode(this.modeFrame);
         });
         this.LoadGameBtn.addActionListener(e->
@@ -67,5 +68,14 @@ public class InitiaFrame extends JFrame {
         SwingUtilities.invokeLater(() -> {
             initiaFrame.setVisible(true);
         });
+    }
+    public void setLoadFrame(LoadFrame loadFrame)
+    {
+        this.loadFrame = loadFrame;
+    }
+
+    public LoadFrame getLoadFrame()
+    {
+        return loadFrame;
     }
 }
