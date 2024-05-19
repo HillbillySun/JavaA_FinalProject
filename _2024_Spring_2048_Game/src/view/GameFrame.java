@@ -1,6 +1,8 @@
 package view;
 
 import controller.GameController;
+import model.SaveModel;
+import model.UserNow;
 import util.ColorMap;
 
 import javax.swing.*;
@@ -91,7 +93,7 @@ public class GameFrame extends JFrame {
             gamePanel.requestFocusInWindow();
         });
         this.SaveBtn.addActionListener(e -> {
-
+            boolean success= SaveModel.save(UserNow.getUsername(),UserNow.getA());
         });
         this.setBck.addActionListener(e -> {
             Object[] options = {"香港", "天文台", "曼哈顿"};

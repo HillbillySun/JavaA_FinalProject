@@ -187,7 +187,7 @@ public class GamePanel extends ListenerPanel {
                 ModeFrame.OpenMode(modeFrame);
                 gameFrame.dispose();
             } else if (result==2) {
-                playAudio("C:\\Users\\Lenovo\\Documents\\GitHub\\JavaA_FinalProject\\_2024_Spring_2048_Game\\src\\Music\\adsBGM.wav",15000);
+                playAudio("Music/adsBGM.wav",15000);
                 JFrame adsframe=new JFrame();
                 adsframe.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
                 adsframe.setResizable(false);
@@ -203,7 +203,7 @@ public class GamePanel extends ListenerPanel {
                 adsframe.setLayout(new BorderLayout());
                 adsframe.setSize(300,300);
                 adsframe.setLocationRelativeTo(null);
-                ImageIcon gifIcon = new ImageIcon("C:\\Users\\Lenovo\\Documents\\GitHub\\JavaA_FinalProject\\_2024_Spring_2048_Game\\src\\Pictures\\IMG_9298.gif");
+                ImageIcon gifIcon = new ImageIcon("Pictures/IMG_9298.gif");
                 JLabel gifLabel = new JLabel(gifIcon);
                 adsframe.add(gifLabel, BorderLayout.CENTER);
                 adsframe.setVisible(true);

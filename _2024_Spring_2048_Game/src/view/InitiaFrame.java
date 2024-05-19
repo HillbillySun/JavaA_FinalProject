@@ -62,10 +62,10 @@ public class InitiaFrame extends JFrame {
             initiaFrame.setVisible(true);
         });
     }
-//    public static void initialGame(InitiaFrame initiaFrame) {
-//        SwingUtilities.invokeLater(() ->
-//        {
-//            initiaFrame.setVisible(true);
-//        });
-//    }
+    public static void OpenInitial(InitiaFrame initiaFrame)
+    {
+        SwingUtilities.invokeLater(() -> {
+            initiaFrame.setVisible(true);
+        });
+    }
 }
