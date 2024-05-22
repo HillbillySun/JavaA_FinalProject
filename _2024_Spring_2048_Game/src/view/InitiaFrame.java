@@ -44,8 +44,13 @@ public class InitiaFrame extends JFrame {
             if(controller.isRead()){
                 this.dispose();
                 JOptionPane.showMessageDialog(InitiaFrame.this, "可以继续游戏啦！");
-                gameFrame=new GameFrame(900,700,Filer.ReadCount(),Filer.ReadTarget(),null);
-                gameFrame.reOpen(null);
+                modeFrame=new ModeFrame(900,700,this);
+                gameFrame=new GameFrame(900,700,Filer.ReadCount(),Filer.ReadTarget(),null,false,0);
+                gameFrame.setModeFrame(this.modeFrame);
+                modeFrame.setLoadFrame(this.loadFrame);
+                gameFrame.getGamePanel().getModel().LoadNumbers(Filer.ReadArray());
+                gameFrame.getGamePanel().updateGridsNumber();
+                GameFrame.StartGame(gameFrame);
             }
             else{
                 JOptionPane.showMessageDialog(InitiaFrame.this, "您无存档可读！");

@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.*;
 public class Filer {
     public static void WriteUsersInitial(String username,String password)throws IOException {
-        String BasePath="src\\Users";
+        String BasePath="Users";
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(BasePath + "/" + username,true));
             writer.write(password);
@@ -19,12 +19,12 @@ public class Filer {
         }
     }
     public static boolean CheckDirectory(String username){
-        String TxtPath= STR."src\\Users\\\{username}";
+        String TxtPath= String.format("Users/%s",username);
         File file=new File(TxtPath);
         return file.exists()&&file.isFile();
     }
     public static String ReadPassword(String username) {
-        String TxtPath = "src\\Users\\" + username;
+        String TxtPath = "Users/" + username;
         String Password;
         try {
             BufferedReader reader = new BufferedReader(new FileReader(TxtPath));
@@ -36,7 +36,7 @@ public class Filer {
     }
     public static void SaveNumber(int[][]a,int count,int target){
         String password = null;
-        String TxtPath = STR."src\\Users\\\{User.CurrentUser}";
+        String TxtPath = "Users\\"+User.CurrentUser;
         try (BufferedReader reader = new BufferedReader(new FileReader(TxtPath))) {
             password= reader.readLine();
         } catch (IOException e) {
@@ -69,7 +69,7 @@ public class Filer {
         }
     }
     public static int[][] ReadArray(){
-        String TxtPath = "src\\Users\\" + User.CurrentUser;
+        String TxtPath = "Users\\" + User.CurrentUser;
         File file = new File(TxtPath);
         int[][] array = null;
                         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
@@ -105,7 +105,7 @@ public class Filer {
         return array;
     }
     public static int ReadTarget(){
-        String filePath = STR."src\\Users\\\{User.CurrentUser}";
+        String filePath = "Users\\"+User.CurrentUser;
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line = reader.readLine();
             line = reader.readLine();
@@ -116,7 +116,7 @@ public class Filer {
         }
     }
     public static int ReadCount(){
-       String TxtPath= STR."src\\Users\\\{User.CurrentUser}";
+        String TxtPath = "Users\\"+User.CurrentUser;
        try (BufferedReader reader = new BufferedReader(new FileReader(TxtPath))) {
             reader.readLine();
             reader.readLine();
@@ -128,7 +128,7 @@ public class Filer {
         }
     }
         public static boolean CheckRead(){
-            String TxtPath = STR."src\\Users\\\{User.CurrentUser}";
+            String TxtPath = "Users\\"+User.CurrentUser;
             try (BufferedReader reader = new BufferedReader(new FileReader(TxtPath))) {
                 String line = reader.readLine();
                 line = reader.readLine();
