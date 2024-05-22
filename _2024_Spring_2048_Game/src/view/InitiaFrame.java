@@ -1,7 +1,7 @@
 package view;
 
 import controller.GameController;
-
+import util.Filer;
 import javax.swing.*;
 import java.awt.*;
 
@@ -9,11 +9,12 @@ public class InitiaFrame extends JFrame {
     JButton NewGameBtn;
     JButton LoadGameBtn;
     JButton RankGameBtn;
-
     JPanel backgroundPanel;
     private GameController controller;
     private ModeFrame modeFrame;
+    private GameFrame gameFrame;
     public InitiaFrame(int width,int height) {
+        GameController controller=new GameController();
         this.setTitle("2048 Game");
         this.setLayout(null);
         this.setSize(width, height);
@@ -37,7 +38,16 @@ public class InitiaFrame extends JFrame {
         });
         this.LoadGameBtn.addActionListener(e->
         {
-
+            controller.CheckRead();
+            if(controller.isRead()){
+                this.dispose();
+                JOptionPane.showMessageDialog(InitiaFrame.this, "可以继续游戏啦！");
+                gameFrame=new GameFrame(900,700,Filer.ReadCount(),Filer.ReadTarget(),null);
+                gameFrame.reOpen(null);
+            }
+            else{
+                JOptionPane.showMessageDialog(InitiaFrame.this, "您无存档可读！");
+            }
         });
         this.RankGameBtn.addActionListener(e->
         {

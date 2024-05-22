@@ -1,9 +1,9 @@
 package view;
 
 import controller.GameController;
-import model.SaveModel;
-import model.UserNow;
+import model.User;
 import util.ColorMap;
+import util.Filer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,8 +12,6 @@ public class GameFrame extends JFrame {
 
     private JButton SaveBtn;
     private JButton restartBtn;
-    private JButton loadBtn;
-
     private JButton mode;
 
     private JButton UpBtn;
@@ -46,7 +44,6 @@ public class GameFrame extends JFrame {
         gamePanel.setLocation(this.getHeight() / 15, this.getWidth() / 15);
         this.add(gamePanel);
         this.restartBtn = createButton("Restart", new Point(700, 135), 110, 50);
-        this.loadBtn = createButton("Load", new Point(700, 205), 110, 50);
         this.mode = createButton("Mode", new Point(700, 275), 110, 50);
         this.UpBtn = createButton("↑", new Point(725, 480), 60, 60);
         this.DownBtn = createButton("↓", new Point(725, 550), 60, 60);
@@ -61,11 +58,6 @@ public class GameFrame extends JFrame {
 
         this.restartBtn.addActionListener(e -> {
             controller.restartGame();
-            gamePanel.requestFocusInWindow();//enable key listener
-        });
-        this.loadBtn.addActionListener(e -> {
-            String string = JOptionPane.showInputDialog(this, "Input path:");
-            System.out.println(string);
             gamePanel.requestFocusInWindow();//enable key listener
         });
         this.mode.addActionListener(e ->
@@ -93,7 +85,9 @@ public class GameFrame extends JFrame {
             gamePanel.requestFocusInWindow();
         });
         this.SaveBtn.addActionListener(e -> {
-            boolean success= SaveModel.save(UserNow.getUsername(),UserNow.getA());
+            controller.saveGame();
+            gamePanel.requestFocusInWindow();
+            JOptionPane.showMessageDialog(GameFrame.this, "保存成功！");
         });
         this.setBck.addActionListener(e -> {
             Object[] options = {"香港", "天文台", "曼哈顿"};
@@ -114,7 +108,6 @@ public class GameFrame extends JFrame {
                 reOpen("/Pictures/曼哈顿.jpg");
             }
         });
-        //todo: add other button here
         setbkg(path);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -195,7 +188,6 @@ public class GameFrame extends JFrame {
             this.setContentPane(backgroundPanel);
             backgroundPanel.add(gamePanel);
             backgroundPanel.add(restartBtn);
-            backgroundPanel.add(loadBtn);
             backgroundPanel.add(mode);
             backgroundPanel.add(UpBtn);
             backgroundPanel.add(DownBtn);
@@ -213,7 +205,6 @@ public class GameFrame extends JFrame {
             this.setContentPane(backgroundPanel);
             backgroundPanel.add(gamePanel);
             backgroundPanel.add(restartBtn);
-            backgroundPanel.add(loadBtn);
             backgroundPanel.add(mode);
             backgroundPanel.add(UpBtn);
             backgroundPanel.add(DownBtn);
