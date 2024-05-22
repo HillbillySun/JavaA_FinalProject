@@ -7,6 +7,8 @@ import util.ColorMap;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class GameFrame extends JFrame {
 
@@ -31,12 +33,19 @@ public class GameFrame extends JFrame {
     private JLabel stepLabel;
 
     private JLabel pointLabel;
+
+    private JLabel TimeLabel;
     private GameController controller;
     private GamePanel gamePanel;
-
     private ModeFrame modeFrame;
+    private boolean isTimelimit;
+    private int TimeLimit;
+    private int tempTime;
+    private Timer timer = new Timer();
 
-    public GameFrame(int width, int height, int COUNT, int Target, String path) {
+    public GameFrame(int width, int height, int COUNT, int Target, String path, boolean isTimelimit, int timeLimit) {
+        this.TimeLimit = timeLimit;
+        this.isTimelimit = isTimelimit;
         this.setTitle("2048 Game");
         this.setLayout(null);
         this.setSize(width, height);
@@ -54,11 +63,12 @@ public class GameFrame extends JFrame {
         this.RightBtn = createButton("→", new Point(795, 550), 60, 60);
         this.SaveBtn = createButton("Save", new Point(700, 415), 110, 50);
         this.stepLabel = createLabel("Start", new Font("Arial", Font.PLAIN, 22), new Point(700, 30), 180, 50);
-        this.pointLabel = createLabel("Point: 0", new Font("Arial", Font.PLAIN, 22), new Point(700, 80), 180, 50);
+        this.pointLabel = createLabel("Point: 0", new Font("Arial", Font.PLAIN, 22), new Point(700, 55), 180, 50);
+        this.TimeLabel = createLabel("Time: No Limit", new Font("Arial", Font.PLAIN, 22), new Point(700, 80), 180, 50);
         this.setBck = createButton("Theme", new Point(700, 345), 110, 50);
         gamePanel.setStepLabel(stepLabel);
         gamePanel.setPointLabel(pointLabel);
-
+        gamePanel.setTimeLabel(TimeLabel);
         this.restartBtn.addActionListener(e -> {
             controller.restartGame();
             gamePanel.requestFocusInWindow();//enable key listener
@@ -93,10 +103,10 @@ public class GameFrame extends JFrame {
             gamePanel.requestFocusInWindow();
         });
         this.SaveBtn.addActionListener(e -> {
-            boolean success= SaveModel.save(UserNow.getUsername(),UserNow.getA());
+            boolean success = SaveModel.save(UserNow.getUsername(), UserNow.getA());
         });
         this.setBck.addActionListener(e -> {
-            Object[] options = {"香港", "天文台", "曼哈顿"};
+            Object[] options = {"香港", "天文台", "曼哈顿", "默认"};
             int result = JOptionPane.showOptionDialog(
                     null,
                     "选择您的主题！",
@@ -110,16 +120,21 @@ public class GameFrame extends JFrame {
                 reOpen("/Pictures/香港.jpg");
             } else if (result == 1) {
                 reOpen("/pictures/天文台.jpg");
-            } else if (result==2){
+            } else if (result == 2) {
                 reOpen("/Pictures/曼哈顿.jpg");
+            } else if (result == 3) {
+                reOpen(null);
             }
         });
         //todo: add other button here
-        setbkg(path,false);
+        setbkg(path, false);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
-    public GameFrame(int width, int height, int COUNT, int Target, String path,String tourist) {
+
+    public GameFrame(int width, int height, int COUNT, int Target, String path, String tourist, boolean isTimelimit, int timeLimit) {
+        this.TimeLimit = timeLimit;
+        this.isTimelimit = isTimelimit;
         this.setTitle("2048 Game");
         this.setLayout(null);
         this.setSize(width, height);
@@ -135,11 +150,15 @@ public class GameFrame extends JFrame {
         this.LeftBtn = createButton("←", new Point(655, 550), 60, 60);
         this.RightBtn = createButton("→", new Point(795, 550), 60, 60);
         this.stepLabel = createLabel("Start", new Font("Arial", Font.PLAIN, 22), new Point(700, 30), 180, 50);
-        this.pointLabel = createLabel("Point: 0", new Font("Arial", Font.PLAIN, 22), new Point(700, 80), 180, 50);
+        this.pointLabel = createLabel("Point: 0", new Font("Arial", Font.PLAIN, 22), new Point(700, 55), 180, 50);
+        this.TimeLabel = createLabel("Time: No Limit", new Font("Arial", Font.PLAIN, 22), new Point(700, 80), 180, 50);
         this.setBck = createButton("Theme", new Point(700, 275), 110, 50);
         gamePanel.setStepLabel(stepLabel);
         gamePanel.setPointLabel(pointLabel);
-
+        gamePanel.setTimeLabel(TimeLabel);
+        if (isTimelimit) {
+            limitMode();
+        }
         this.restartBtn.addActionListener(e -> {
             controller.restartGame();
             gamePanel.requestFocusInWindow();//enable key listener
@@ -169,7 +188,7 @@ public class GameFrame extends JFrame {
             gamePanel.requestFocusInWindow();
         });
         this.setBck.addActionListener(e -> {
-            Object[] options = {"香港", "天文台", "曼哈顿","默认"};
+            Object[] options = {"香港", "天文台", "曼哈顿", "默认"};
             int result = JOptionPane.showOptionDialog(
                     null,
                     "选择您的主题！",
@@ -183,17 +202,15 @@ public class GameFrame extends JFrame {
                 reOpen("/Pictures/香港.jpg");
             } else if (result == 1) {
                 reOpen("/pictures/天文台.jpg");
-            } else if (result==2){
+            } else if (result == 2) {
                 reOpen("/Pictures/曼哈顿.jpg");
-            }
-            else
-            {
+            } else {
                 reOpen(null);
             }
 
         });
         //todo: add other button here
-        setbkg(path,true);
+        setbkg(path, true);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
@@ -253,7 +270,7 @@ public class GameFrame extends JFrame {
         return gamePanel;
     }
 
-    public void setbkg(String path,boolean isTour) {
+    public void setbkg(String path, boolean isTour) {
         try {
 //            this.repaint();
             ImageIcon bg = new ImageIcon(GameFrame.class.getResource(path));
@@ -281,8 +298,8 @@ public class GameFrame extends JFrame {
             backgroundPanel.add(stepLabel);
             backgroundPanel.add(pointLabel);
             backgroundPanel.add(setBck);
-            if (!isTour)
-            {
+            backgroundPanel.add(TimeLabel);
+            if (!isTour) {
                 backgroundPanel.add(loadBtn);
                 backgroundPanel.add(SaveBtn);
             }
@@ -302,19 +319,63 @@ public class GameFrame extends JFrame {
             backgroundPanel.add(stepLabel);
             backgroundPanel.add(pointLabel);
             backgroundPanel.add(setBck);
-            if (!isTour)
-            {
+            backgroundPanel.add(TimeLabel);
+            if (!isTour) {
                 backgroundPanel.add(SaveBtn);
                 backgroundPanel.add(loadBtn);
             }
         }
     }
-    public void reOpen(String path)
-    {
-        GameFrame temp=this;
+
+    public void reOpen(String path) {
+        GameFrame temp = this;
         this.dispose();
-        temp.setbkg(path,modeFrame.getloadframe().isTour);
+        temp.setbkg(path, modeFrame.getloadframe().isTour);
         StartGame(temp);
     }
 
+    public boolean getisTimelimit()
+    {
+        return this.isTimelimit;
+    }
+
+    public int getTempTime()
+    {
+        return tempTime;
+    }
+
+    public void setTimelimit(int tempTime)
+    {
+        TimeLimit = tempTime;
+    }
+    public void resetTimer()
+    {
+        timer.cancel();
+        timer = new Timer();
+    }
+    public void limitMode() {
+        TimeLabel.setText("Time: " + TimeLimit);
+        tempTime = TimeLimit;
+        TimeLimit++;
+        TimerTask countTime = new TimerTask() {
+            @Override
+            public void run() {
+                if (TimeLimit > 0) {
+                    TimeLimit--;
+                    TimeLabel.setText("Time: " + TimeLimit);
+                    if (TimeLimit == 0 && !gamePanel.getisOver()) {
+                        System.out.println("Game Over!");
+                        gamePanel.getModel().setisMove(false);
+                        gamePanel.setifOver(true);
+                        JOptionPane.showMessageDialog(null, "Times Out");
+                    }
+                    if (gamePanel.getisOver())
+                    {
+                        this.cancel();
+                    }
+                }
+            }
+        };
+        timer.scheduleAtFixedRate(countTime,0,1000);
+    }
 }

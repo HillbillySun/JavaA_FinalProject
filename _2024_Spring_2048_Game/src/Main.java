@@ -1,7 +1,5 @@
-import view.InitiaFrame;
-import view.LoadFrame;
 
-import javax.sound.sampled.*;
+import view.LoadFrame;
 
 public class Main {
     public static void main(String[] args) {

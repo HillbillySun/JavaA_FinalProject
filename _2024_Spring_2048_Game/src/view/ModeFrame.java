@@ -42,11 +42,11 @@ public class ModeFrame extends JFrame {
         {
             if (loadFrame.getisTour())
             {
-                gameFrame=new GameFrame(900,700,4,2048,null,"Tourist");
+                gameFrame=new GameFrame(900,700,4,2048,null,"Tourist",false,0);
             }
             else
             {
-                gameFrame=new GameFrame(900,700,4,2048,null);
+                gameFrame=new GameFrame(900,700,4,2048,null,false,0);
             }
             gameFrame.setModeFrame(this);
             gameFrame.getGamePanel().setModeFrame(this);
@@ -62,11 +62,11 @@ public class ModeFrame extends JFrame {
         {
             if (loadFrame.getisTour())
             {
-                gameFrame=new GameFrame(900,700,4,2048,null,"Tourist");
+                gameFrame=new GameFrame(900,700,4,1024,null,"Tourist",false,0);
             }
             else
             {
-                gameFrame=new GameFrame(900,700,4,2048,null);
+                gameFrame=new GameFrame(900,700,4,1024,null,false,0);
             }
             gameFrame.setModeFrame(this);
             gameFrame.getGamePanel().setModeFrame(this);
@@ -82,11 +82,11 @@ public class ModeFrame extends JFrame {
         {
             if (loadFrame.getisTour())
             {
-                gameFrame=new GameFrame(900,700,3,2048,null,"Tourist");
+                gameFrame=new GameFrame(900,700,3,2048,null,"Tourist",false,0);
             }
             else
             {
-                gameFrame=new GameFrame(900,700,3,2048,null);
+                gameFrame=new GameFrame(900,700,3,2048,null,false,0);
             }
             gameFrame.setModeFrame(this);
             gameFrame.getGamePanel().setModeFrame(this);
@@ -102,22 +102,28 @@ public class ModeFrame extends JFrame {
         {
             String str1 = JOptionPane.showInputDialog(this, "输入你想要的棋盘尺寸(2-10中的整数)");
             String str2 = JOptionPane.showInputDialog(this, "输入你的目标数字(128到2048中的2的幂次)：");
+            String str3 = JOptionPane.showInputDialog(this,"输入时间限制");
             System.out.println("size: "+str1);
             System.out.println("target: "+str2);
+            System.out.println("Time: "+str3);
             int boardSize;
             int target;
-            if (GameFrame.isInteger(str1)&&GameFrame.isInteger(str2))
+            boolean isTimeLimit = (GameFrame.isInteger(str3) && Integer.parseInt(str3) > 0);
+            System.out.println("isTimelimit: " + isTimeLimit);
+            if (GameFrame.isInteger(str1) && GameFrame.isInteger(str2))
             {
                 boardSize=Integer.parseInt(str1);
                 target=Integer.parseInt(str2);
                 if (boardSize >= 2 && boardSize <= 10 && target > 0 && GameFrame.isPowerOfTwo(target)){
                     if (loadFrame.getisTour())
                     {
-                        gameFrame=new GameFrame(900,700,boardSize,target,null,"Tourist");
+                        if (isTimeLimit)gameFrame=new GameFrame(900,700,boardSize,target,null,"Tourist",true,Integer.parseInt(str3));
+                        else gameFrame=new GameFrame(900,700,boardSize,target,null,"Tourist",false,0);
                     }
                     else
                     {
-                        gameFrame=new GameFrame(900,700,boardSize,target,null);
+                        if (isTimeLimit)gameFrame = new  GameFrame(900,700,boardSize,target,null,true,Integer.parseInt(str3));
+                        else gameFrame = new  GameFrame(900,700,boardSize,target,null,true,Integer.parseInt(str3));
                     }
                     gameFrame.setModeFrame(this);
                     gameFrame.getGamePanel().setModeFrame(this);

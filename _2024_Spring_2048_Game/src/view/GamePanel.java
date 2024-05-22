@@ -23,6 +23,7 @@ public class GamePanel extends ListenerPanel {
     private ModeFrame modeFrame;
     private JLabel stepLabel;
     private JLabel pointLabel;
+    private JLabel TimeLabel;
     private int steps;
     private int points;
     private boolean isOver1 = false;
@@ -233,6 +234,13 @@ public class GamePanel extends ListenerPanel {
         this.updateGridsNumber();
         this.stepLabel.setText("Start");
         this.pointLabel.setText(String.format("Points: %d",this.points));
+        if (gameFrame.getisTimelimit())
+        {
+            this.TimeLabel.setText("Time: "+gameFrame.getTempTime());
+            gameFrame.resetTimer();
+            gameFrame.setTimelimit(gameFrame.getTempTime());
+            gameFrame.limitMode();
+        }
     }
 
     public void reviveGame()
@@ -242,6 +250,12 @@ public class GamePanel extends ListenerPanel {
         model.setisMove(true);
         model.ReviveNumbers();
         this.updateGridsNumber();
+        if (gameFrame.getisTimelimit())
+        {
+            gameFrame.setTimelimit(gameFrame.getTempTime());
+            gameFrame.resetTimer();
+            gameFrame.limitMode();
+        }
     }
     public void setSteps(int steps)
     {
@@ -272,6 +286,10 @@ public class GamePanel extends ListenerPanel {
         this.pointLabel=pointLabel;
     }
 
+    public void setTimeLabel(JLabel timeLabel)
+    {
+        this.TimeLabel = timeLabel;
+    }
     public int getCOUNT()
     {
         return COUNT;
@@ -303,6 +321,8 @@ public class GamePanel extends ListenerPanel {
     {
         this.gameFrame=gameFrame;
     }
+    public boolean getisOver()
+    {return (isOver2||isOver1);}
     private void playAudio(String filePath,int time) {
         try {
             // 打开音频文件
@@ -335,10 +355,9 @@ public class GamePanel extends ListenerPanel {
                 }
             };
             timer.schedule(stopMusic,time);
-
+            timer.cancel();
         } catch (UnsupportedAudioFileException | LineUnavailableException | IOException ex) {
             ex.printStackTrace();
         }
     }
-
 }
