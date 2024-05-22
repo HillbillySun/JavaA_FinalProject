@@ -17,7 +17,6 @@ import java.util.TimerTask;
 public class GamePanel extends ListenerPanel {
     private int COUNT = 4;
     private GridComponent[][] grids;
-
     private int Target=2048;
     private GridNumber model;
     private ModeFrame modeFrame;
@@ -304,6 +303,10 @@ public class GamePanel extends ListenerPanel {
     {
         this.Target=target;
     }
+    public int getTarget() {
+        return Target;
+    }
+
     public void setController(GameController controller)
     {
         this.controller=controller;

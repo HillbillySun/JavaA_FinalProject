@@ -39,7 +39,14 @@ public class GridNumber {
             }
         }
     }
-
+    public void LoadNumbers(int[][] _numbers)
+    {
+        for (int i = 0; i < numbers.length; i++) {
+            for (int j = 0; j < numbers[0].length; j++) {
+                numbers[i][j] = _numbers[i][j];
+            }
+        }
+    }
     public void initialNumbers() {
         for (int i = 0; i < numbers.length; i++) {
             for (int j = 0; j < numbers[0].length; j++) {
@@ -249,8 +256,13 @@ public class GridNumber {
     public int getNumber(int i, int j) {
         return numbers[i][j];
     }
+    public void setNumbers(int[][] numbers) {
+        this.numbers = numbers;
 
-    public int[][] getNumbers() {
+    }
+
+    public int[][] getNumbers()
+    {
         return numbers;
     }
 
