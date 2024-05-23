@@ -93,13 +93,13 @@ public class GridNumber {
                 }
             }
         }
-        if (isPlay) {
-            playaudio();
-        }
         boolean temp = ifGenerate;
         JustMoveRight();
         ifGenerate = temp;
         generateNumberRandomly();
+        if (isPlay) {
+            playaudio();
+        }
     }
 
     public void moveLeft() {
@@ -117,13 +117,13 @@ public class GridNumber {
                 }
             }
         }
-        if (isPlay) {
-            playaudio();
-        }
         boolean temp = ifGenerate;
         JustMoveLeft();
         ifGenerate = temp;
         generateNumberRandomly();
+        if (isPlay) {
+            playaudio();
+        }
     }
 
     public void moveUp() {
@@ -141,13 +141,13 @@ public class GridNumber {
                 }
             }
         }
-        if (isPlay) {
-            playaudio();
-        }
         boolean temp = ifGenerate;
         JustMoveUp();
         ifGenerate = temp;
         generateNumberRandomly();
+        if (isPlay) {
+            playaudio();
+        }
     }
 
     public void moveDown() {
@@ -165,13 +165,13 @@ public class GridNumber {
                 }
             }
         }
-        if (isPlay) {
-            playaudio();
-        }
         boolean temp = ifGenerate;
         JustMoveDown();
         ifGenerate = temp;
         generateNumberRandomly();
+        if (isPlay) {
+            playaudio();
+        }
     }
 
     public void JustMoveRight() {
