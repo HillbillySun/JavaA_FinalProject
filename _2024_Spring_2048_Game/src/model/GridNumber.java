@@ -26,7 +26,6 @@ public class GridNumber {
         this.numbers = new int[this.X_COUNT][this.Y_COUNT];
         this.initialNumbers();
         setisMove(true);
-        addaudio("Music/effect.wav");
     }
 
     public void ReviveNumbers() {
@@ -316,20 +315,23 @@ public class GridNumber {
     public void playaudio()
     {
         try {
+            addaudio("Music/effect.wav");
             actionAudio = (Clip) AudioSystem.getLine(info);
 
             // 打开音频剪辑并加载样本
-            actionAudio.open(audiostream);
             System.out.println("播放开始");
+            actionAudio.open(audiostream);
             actionAudio.start();
             // 获取音频数据行
             actionAudio.addLineListener(event -> {
                 if (event.getType() == LineEvent.Type.STOP) {
+                    System.out.println("End");
                     actionAudio.close();
                 }
             });
         }catch (LineUnavailableException ex)
         {
+            System.out.println("播放开始1");
             throw new RuntimeException(ex);
         } catch (IOException e) {
             throw new RuntimeException(e);
