@@ -187,6 +187,11 @@ public class GamePanel extends ListenerPanel {
                 ModeFrame.OpenMode(modeFrame);
                 gameFrame.dispose();
             } else if (result==2) {
+                if (gameFrame.getAudioClip() != null)
+                {
+                    gameFrame.getAudioClip().stop();
+                    System.out.println("volume turn to 0");
+                }
                 playAudio("Music/adsBGM.wav",15000);
                 JFrame adsframe=new JFrame();
                 adsframe.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -244,8 +249,6 @@ public class GamePanel extends ListenerPanel {
 
     public void reviveGame()
     {
-        this.isOver1=false;
-        this.isOver2=false;
         model.setisMove(true);
         model.ReviveNumbers();
         this.updateGridsNumber();

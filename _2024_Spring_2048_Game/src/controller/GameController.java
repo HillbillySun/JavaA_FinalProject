@@ -80,6 +80,11 @@ public class GameController{
         System.out.println("Revive!");
         view.reviveGame();
         view.setifOver(false);
+        if (!gameFrame.getsiplay())
+        {
+            gameFrame.setIsplay(true);
+            gameFrame.playmusic("Music/马念先 - 1989的下午.wav");
+        }
     }
     public void CheckRead(){
          if(Filer.CheckRead()){

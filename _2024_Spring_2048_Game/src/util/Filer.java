@@ -15,7 +15,7 @@ public class Filer {
             writer.newLine();
             writer.close();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.out.println(e);
         }
     }
     public static boolean CheckDirectory(String username){
@@ -53,6 +53,7 @@ public class Filer {
             writer.write(String.valueOf(count));
             writer.newLine();
             writer.write(String.valueOf(point));
+            writer.newLine();
             for (int i = 0; i < a.length; i++) {
                 for (int j = 0; j < a[i].length; j++) {
                     writer.write(Integer.toString(a[i][j]));

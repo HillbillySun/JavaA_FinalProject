@@ -5,8 +5,11 @@ import model.User;
 import util.ColorMap;
 import util.Filer;
 
+import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -28,6 +31,8 @@ public class GameFrame extends JFrame {
 
     private JPanel backgroundPanel;
 
+    private JButton musicBtn;
+
     private JLabel stepLabel;
 
     private JLabel pointLabel;
@@ -40,8 +45,10 @@ public class GameFrame extends JFrame {
     private int TimeLimit;
     private int tempTime;
     private Timer timer = new Timer();
+    private Clip audioClip;
+    private boolean isplay = true;
 
-    public GameFrame(int width, int height, int COUNT, int Target,int Point,String path, boolean isTimelimit, int timeLimit) {
+    public GameFrame(int width, int height, int COUNT, int Target, int Point, String path, boolean isTimelimit, int timeLimit) {
         this.TimeLimit = timeLimit;
         this.isTimelimit = isTimelimit;
         this.setTitle("2048 Game");
@@ -50,17 +57,19 @@ public class GameFrame extends JFrame {
         ColorMap.InitialColorMap();
         gamePanel = new GamePanel((int) (this.getHeight() * 0.8), COUNT, Target);
         gamePanel.setGameFrame(this);
+        gamePanel.setPoints(Point);
         gamePanel.setLocation(this.getHeight() / 15, this.getWidth() / 15);
         this.add(gamePanel);
         this.restartBtn = createButton("Restart", new Point(700, 135), 110, 50);
         this.mode = createButton("Mode", new Point(700, 275), 110, 50);
+        this.musicBtn = createButton("Music", new Point(700, 205), 110, 50);
         this.UpBtn = createButton("↑", new Point(725, 480), 60, 60);
         this.DownBtn = createButton("↓", new Point(725, 550), 60, 60);
         this.LeftBtn = createButton("←", new Point(655, 550), 60, 60);
         this.RightBtn = createButton("→", new Point(795, 550), 60, 60);
         this.SaveBtn = createButton("Save", new Point(700, 415), 110, 50);
         this.stepLabel = createLabel("Start", new Font("Arial", Font.PLAIN, 22), new Point(700, 30), 180, 50);
-        this.pointLabel = createLabel("Point: 0", new Font("Arial", Font.PLAIN, 22), new Point(700, 55), 180, 50);
+        this.pointLabel = createLabel("Point: "+Point, new Font("Arial", Font.PLAIN, 22), new Point(700, 55), 180, 50);
         this.TimeLabel = createLabel("Time: No Limit", new Font("Arial", Font.PLAIN, 22), new Point(700, 80), 180, 50);
         this.setBck = createButton("Theme", new Point(700, 345), 110, 50);
         gamePanel.setStepLabel(stepLabel);
@@ -74,6 +83,10 @@ public class GameFrame extends JFrame {
         {
             ModeFrame.OpenMode(this.modeFrame);
             this.dispose();
+        });
+        this.musicBtn.addActionListener(e -> {
+            playmusic("Music/马念先 - 1989的下午.wav");
+            gamePanel.requestFocusInWindow();
         });
         this.RightBtn.addActionListener(e ->
         {
@@ -147,6 +160,7 @@ public class GameFrame extends JFrame {
         this.pointLabel = createLabel("Point: 0", new Font("Arial", Font.PLAIN, 22), new Point(700, 55), 180, 50);
         this.TimeLabel = createLabel("Time: No Limit", new Font("Arial", Font.PLAIN, 22), new Point(700, 80), 180, 50);
         this.setBck = createButton("Theme", new Point(700, 275), 110, 50);
+        this.musicBtn = createButton("Music", new Point(700, 345), 110, 50);
         gamePanel.setStepLabel(stepLabel);
         gamePanel.setPointLabel(pointLabel);
         gamePanel.setTimeLabel(TimeLabel);
@@ -179,6 +193,10 @@ public class GameFrame extends JFrame {
         this.DownBtn.addActionListener(e ->
         {
             gamePanel.doMoveDown();
+            gamePanel.requestFocusInWindow();
+        });
+        this.musicBtn.addActionListener(e -> {
+            playmusic("Music/马念先 - 1989的下午.wav");
             gamePanel.requestFocusInWindow();
         });
         this.setBck.addActionListener(e -> {
@@ -293,6 +311,7 @@ public class GameFrame extends JFrame {
             backgroundPanel.add(pointLabel);
             backgroundPanel.add(setBck);
             backgroundPanel.add(TimeLabel);
+            backgroundPanel.add(musicBtn);
             if (!isTour) {
                 backgroundPanel.add(SaveBtn);
             }
@@ -313,6 +332,7 @@ public class GameFrame extends JFrame {
             backgroundPanel.add(pointLabel);
             backgroundPanel.add(setBck);
             backgroundPanel.add(TimeLabel);
+            backgroundPanel.add(musicBtn);
             if (!isTour) {
                 backgroundPanel.add(SaveBtn);
             }
@@ -326,25 +346,67 @@ public class GameFrame extends JFrame {
         StartGame(temp);
     }
 
-    public boolean getisTimelimit()
-    {
+    public boolean getisTimelimit() {
         return this.isTimelimit;
     }
 
-    public int getTempTime()
-    {
+    public int getTempTime() {
         return tempTime;
     }
 
-    public void setTimelimit(int tempTime)
-    {
+    public void setTimelimit(int tempTime) {
         TimeLimit = tempTime;
     }
-    public void resetTimer()
-    {
+
+    public void resetTimer() {
         timer.cancel();
         timer = new Timer();
     }
+
+    public Clip getAudioClip()
+    {
+        return audioClip;
+    }
+
+    public boolean getsiplay()
+    {
+        return isplay;
+    }
+
+    public void setIsplay(boolean b)
+    {isplay = b;}
+    public void playmusic(String path) {
+        new Thread(() ->
+        {
+            try {
+                File audioFile = new File(path);
+                AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+
+                // 获取音频格式
+                AudioFormat format = audioStream.getFormat();
+
+                // 获取音频数据行信息
+                DataLine.Info info = new DataLine.Info(Clip.class, format);
+
+                // 获取音频数据行
+                audioClip = (Clip) AudioSystem.getLine(info);
+
+                // 打开音频剪辑并加载样本
+                audioClip.open(audioStream);
+
+                // 播放音频
+                if (isplay) {
+                    audioClip.loop(Clip.LOOP_CONTINUOUSLY);
+                    audioClip.start();
+                    isplay = false;
+                    System.out.println("bgm播放开始");
+                }
+            } catch (UnsupportedAudioFileException | LineUnavailableException | IOException ex) {
+                System.out.println(ex);
+            }
+        }).start();
+    }
+
     public void limitMode() {
         TimeLabel.setText("Time: " + TimeLimit);
         tempTime = TimeLimit;
@@ -361,13 +423,12 @@ public class GameFrame extends JFrame {
                         gamePanel.setifOver(true);
                         JOptionPane.showMessageDialog(null, "Times Out");
                     }
-                    if (gamePanel.getisOver())
-                    {
+                    if (gamePanel.getisOver()) {
                         this.cancel();
                     }
                 }
             }
         };
-        timer.scheduleAtFixedRate(countTime,0,1000);
+        timer.scheduleAtFixedRate(countTime, 0, 1000);
     }
 }
