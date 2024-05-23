@@ -42,7 +42,7 @@ public class GameController{
     }
     public void saveGame()
     {
-        Filer.SaveNumber(model.getNumbers(),view.getCOUNT(),view.getTarget());
+        Filer.SaveNumber(model.getNumbers(),view.getCOUNT(),view.getTarget(),view.getPoints());
     }
     public void CheckLogin(String username)
     {

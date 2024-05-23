@@ -34,7 +34,7 @@ public class Filer {
         }
         return Password;
     }
-    public static void SaveNumber(int[][]a,int count,int target){
+    public static void SaveNumber(int[][]a,int count,int target,int point){
         String password = null;
         String TxtPath = "Users\\"+User.CurrentUser;
         try (BufferedReader reader = new BufferedReader(new FileReader(TxtPath))) {
@@ -52,6 +52,7 @@ public class Filer {
             writer.newLine();
             writer.write(String.valueOf(count));
             writer.newLine();
+            writer.write(String.valueOf(point));
             for (int i = 0; i < a.length; i++) {
                 for (int j = 0; j < a[i].length; j++) {
                     writer.write(Integer.toString(a[i][j]));
@@ -76,13 +77,13 @@ public class Filer {
                             String line;
                             int row = 0;
                             while ((line = reader.readLine()) != null) {
-                                if (row >= 3) {
+                                if (row >= 4) {
                                     String[] values = line.split("\\s+");
                                     if (array == null) {
                                         array = new int[values.length][values.length];
                                     }
                                     for (int i = 0; i < values.length; i++) {
-                                        array[row-3][i] = Integer.parseInt(values[i]);
+                                        array[row-4][i] = Integer.parseInt(values[i]);
                                     }
                                 }
                                 row++;
@@ -135,6 +136,20 @@ public class Filer {
                 return false;
             }
         }
+    public static int ReadPoint(){
+        String filePath = "Users\\"+User.CurrentUser;
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line = reader.readLine();
+            line = reader.readLine();
+            line = reader.readLine();
+            line = reader.readLine();
+            return Integer.parseInt(line.trim());
+        } catch (IOException | NumberFormatException e) {
+            e.printStackTrace();
+            return Integer.MIN_VALUE;
+        }
+    }
+
 }
 
 

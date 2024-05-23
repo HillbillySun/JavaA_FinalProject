@@ -46,7 +46,7 @@ public class ModeFrame extends JFrame {
             }
             else
             {
-                gameFrame=new GameFrame(900,700,4,2048,null,false,0);
+                gameFrame=new GameFrame(900,700,4,2048,0,null,false,0);
             }
             gameFrame.setModeFrame(this);
             gameFrame.getGamePanel().setModeFrame(this);
@@ -66,7 +66,7 @@ public class ModeFrame extends JFrame {
             }
             else
             {
-                gameFrame=new GameFrame(900,700,4,1024,null,false,0);
+                gameFrame=new GameFrame(900,700,4,1024,0,null,false,0);
             }
             gameFrame.setModeFrame(this);
             gameFrame.getGamePanel().setModeFrame(this);
@@ -86,7 +86,7 @@ public class ModeFrame extends JFrame {
             }
             else
             {
-                gameFrame=new GameFrame(900,700,3,2048,null,false,0);
+                gameFrame=new GameFrame(900,700,3,2048,0,null,false,0);
             }
             gameFrame.setModeFrame(this);
             gameFrame.getGamePanel().setModeFrame(this);
@@ -115,16 +115,8 @@ public class ModeFrame extends JFrame {
                 boardSize=Integer.parseInt(str1);
                 target=Integer.parseInt(str2);
                 if (boardSize >= 2 && boardSize <= 10 && target > 0 && GameFrame.isPowerOfTwo(target)){
-                    if (loadFrame.getisTour())
-                    {
-                        if (isTimeLimit)gameFrame=new GameFrame(900,700,boardSize,target,null,"Tourist",true,Integer.parseInt(str3));
-                        else gameFrame=new GameFrame(900,700,boardSize,target,null,"Tourist",false,0);
-                    }
-                    else
-                    {
-                        if (isTimeLimit)gameFrame = new  GameFrame(900,700,boardSize,target,null,true,Integer.parseInt(str3));
-                        else gameFrame = new  GameFrame(900,700,boardSize,target,null,true,Integer.parseInt(str3));
-                    }
+                    if (isTimeLimit)gameFrame=new GameFrame(900,700,boardSize,target,null,"Tourist",true,Integer.parseInt(str3));
+                    else gameFrame=new GameFrame(900,700,boardSize,target,null,"Tourist",false,0);
                     gameFrame.setModeFrame(this);
                     gameFrame.getGamePanel().setModeFrame(this);
                     this.controller=new GameController(gameFrame.getGamePanel(),gameFrame.getGamePanel().getModel(),gameFrame,this,this.initiaFrame);
