@@ -15,7 +15,7 @@ public class Filer {
             writer.newLine();
             writer.close();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.out.println(e);
         }
     }
     public static boolean CheckDirectory(String username){

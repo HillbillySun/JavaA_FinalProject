@@ -47,6 +47,7 @@ public class InitiaFrame extends JFrame {
                 modeFrame=new ModeFrame(900,700,this);
                 gameFrame=new GameFrame(900,700,Filer.ReadCount(),Filer.ReadTarget(),Filer.ReadPoint(),null,false,0);
                 gameFrame.setModeFrame(this.modeFrame);
+                gameFrame.getGamePanel().setModeFrame(this.modeFrame);
                 modeFrame.setLoadFrame(this.loadFrame);
                 gameFrame.setController(this.controller);
                 gameFrame.getGamePanel().setController(this.controller);

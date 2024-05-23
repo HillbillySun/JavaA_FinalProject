@@ -7,17 +7,12 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class GridNumber {
-    private Clip actionAudio;
     private final int X_COUNT;
     private final int Y_COUNT;
-
     private int MarkPoint;
     private boolean isMove;
     private int[][] numbers;
-    private AudioInputStream audiostream;
     private boolean ifGenerate = false;
-
-    private DataLine.Info info;
     static Random random = new Random();
 
     public GridNumber(int xCount, int yCount) {
@@ -38,14 +33,15 @@ public class GridNumber {
             }
         }
     }
-    public void LoadNumbers(int[][] _numbers)
-    {
+
+    public void LoadNumbers(int[][] _numbers) {
         for (int i = 0; i < numbers.length; i++) {
             for (int j = 0; j < numbers[0].length; j++) {
                 numbers[i][j] = _numbers[i][j];
             }
         }
     }
+
     public void initialNumbers() {
         for (int i = 0; i < numbers.length; i++) {
             for (int j = 0; j < numbers[0].length; j++) {
@@ -98,7 +94,7 @@ public class GridNumber {
         ifGenerate = temp;
         generateNumberRandomly();
         if (isPlay) {
-            playaudio();
+            playAction();
         }
     }
 
@@ -122,7 +118,7 @@ public class GridNumber {
         ifGenerate = temp;
         generateNumberRandomly();
         if (isPlay) {
-            playaudio();
+            playAction();
         }
     }
 
@@ -146,7 +142,7 @@ public class GridNumber {
         ifGenerate = temp;
         generateNumberRandomly();
         if (isPlay) {
-            playaudio();
+            playAction();
         }
     }
 
@@ -170,7 +166,7 @@ public class GridNumber {
         ifGenerate = temp;
         generateNumberRandomly();
         if (isPlay) {
-            playaudio();
+            playAction();
         }
     }
 
@@ -255,13 +251,13 @@ public class GridNumber {
     public int getNumber(int i, int j) {
         return numbers[i][j];
     }
+
     public void setNumbers(int[][] numbers) {
         this.numbers = numbers;
 
     }
 
-    public int[][] getNumbers()
-    {
+    public int[][] getNumbers() {
         return numbers;
     }
 
@@ -283,58 +279,53 @@ public class GridNumber {
         this.isMove = b;
     }
 
-    public void addaudio(String path) {
-        try {
-            // 打开音频文件
-            File audioFile = new File(path);
-            AudioInputStream originalAudioStream = AudioSystem.getAudioInputStream(audioFile);
 
-            // 获取音频格式
-            AudioFormat originalFormat = originalAudioStream.getFormat();
+    public void playAction() {
+        new Thread(() -> {
+            try {
+                File audioFile = new File("Music/effect.wav");
+                AudioInputStream originalAudioStream = AudioSystem.getAudioInputStream(audioFile);
 
-            // 定义目标格式 (PCM_SIGNED)
-            AudioFormat targetFormat = new AudioFormat(
-                    AudioFormat.Encoding.PCM_SIGNED,
-                    originalFormat.getSampleRate(),
-                    16,
-                    originalFormat.getChannels(),
-                    originalFormat.getChannels() * 2,
-                    originalFormat.getSampleRate(),
-                    false);
+                // 获取音频格式
+                AudioFormat originalFormat = originalAudioStream.getFormat();
 
-            // 转换音频输入流到目标格式
-            audiostream = AudioSystem.getAudioInputStream(targetFormat, originalAudioStream);
+                // 定义目标格式 (PCM_SIGNED)
+                AudioFormat targetFormat = new AudioFormat(
+                        AudioFormat.Encoding.PCM_SIGNED,
+                        originalFormat.getSampleRate(),
+                        16,
+                        originalFormat.getChannels(),
+                        originalFormat.getChannels() * 2,
+                        originalFormat.getSampleRate(),
+                        false);
 
-            // 获取音频数据行信息
-            info = new DataLine.Info(Clip.class, targetFormat);
-        } catch (UnsupportedAudioFileException | IOException ex) {
-            ex.printStackTrace();
+                // 转换音频输入流到目标格式
+                AudioInputStream audiostream = AudioSystem.getAudioInputStream(targetFormat, originalAudioStream);
+
+                // 获取音频数据行信
+                DataLine.Info info = new DataLine.Info(Clip.class, targetFormat);
+                Clip actionAudio = (Clip) AudioSystem.getLine(info);
+
+                // 打开音频剪辑并加载样本
+                System.out.println("播放开始");
+                actionAudio.open(audiostream);
+                actionAudio.start();
+                // 获取音频数据行
+                actionAudio.addLineListener(event -> {
+                    if (event.getType() == LineEvent.Type.STOP) {
+                        System.out.println("End");
+                        actionAudio.close();
+                    }
+                });
+            } catch (LineUnavailableException ex) {
+                System.out.println("播放开始1");
+                throw new RuntimeException(ex);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (UnsupportedAudioFileException e) {
+                throw new RuntimeException(e);
+            }
         }
-    }
-
-    public void playaudio()
-    {
-        try {
-            addaudio("Music/effect.wav");
-            actionAudio = (Clip) AudioSystem.getLine(info);
-
-            // 打开音频剪辑并加载样本
-            System.out.println("播放开始");
-            actionAudio.open(audiostream);
-            actionAudio.start();
-            // 获取音频数据行
-            actionAudio.addLineListener(event -> {
-                if (event.getType() == LineEvent.Type.STOP) {
-                    System.out.println("End");
-                    actionAudio.close();
-                }
-            });
-        }catch (LineUnavailableException ex)
-        {
-            System.out.println("播放开始1");
-            throw new RuntimeException(ex);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        ).start();
     }
 }
