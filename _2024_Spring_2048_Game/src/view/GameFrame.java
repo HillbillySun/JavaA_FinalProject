@@ -41,7 +41,7 @@ public class GameFrame extends JFrame {
     private int tempTime;
     private Timer timer = new Timer();
 
-    public GameFrame(int width, int height, int COUNT, int Target, String path, boolean isTimelimit, int timeLimit) {
+    public GameFrame(int width, int height, int COUNT, int Target,int Point,String path, boolean isTimelimit, int timeLimit) {
         this.TimeLimit = timeLimit;
         this.isTimelimit = isTimelimit;
         this.setTitle("2048 Game");
