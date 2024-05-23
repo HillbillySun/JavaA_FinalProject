@@ -82,7 +82,7 @@ public class LoadFrame extends JFrame {
                         if (controller.isLogin()) {
                             isTour = false;
                             JOptionPane.showMessageDialog(LoadFrame.this, "登录成功！");
-                            InitiaFrame initiaFrame = new InitiaFrame(900, 700);
+                            InitiaFrame initiaFrame = new InitiaFrame(600, 500);
                             initiaFrame.setLoadFrame(this);
                             User.CurrentUser = name;
                             InitiaFrame.OpenInitial(initiaFrame);

@@ -85,7 +85,7 @@ public class Filer {
                                         if (array[i] == null) {
                                             array[i] = new int[values.length];
                                         }
-                                        array[i][row - 1] = Integer.parseInt(values[i]);
+                                        array[i][row - 3] = Integer.parseInt(values[i]);
                                     }
                                 }
                                 row++;

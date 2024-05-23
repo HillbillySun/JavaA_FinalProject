@@ -123,5 +123,16 @@ public class GameController{
     public boolean isRead() {
         return read;
     }
+
+    public void setGameFrame(GameFrame gameFrame)
+    {this.gameFrame = gameFrame;}
+
+    public void setView(GamePanel gamePanel)
+    {this.view = gamePanel;}
+
+    public void setModel(GridNumber model)
+    {
+        this.model = model;
+    }
     //todo: add other methods such as loadGame, saveGame...
 }

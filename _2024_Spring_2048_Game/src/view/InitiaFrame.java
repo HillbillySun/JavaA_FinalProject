@@ -15,7 +15,7 @@ public class InitiaFrame extends JFrame {
     private ModeFrame modeFrame;
     private GameFrame gameFrame;
     public InitiaFrame(int width,int height) {
-        GameController controller=new GameController();
+        controller = new GameController();
         this.setTitle("2048 Game");
         this.setLayout(null);
         this.setSize(width, height);
@@ -48,8 +48,13 @@ public class InitiaFrame extends JFrame {
                 gameFrame=new GameFrame(900,700,Filer.ReadCount(),Filer.ReadTarget(),null,false,0);
                 gameFrame.setModeFrame(this.modeFrame);
                 modeFrame.setLoadFrame(this.loadFrame);
+                gameFrame.setController(this.controller);
+                gameFrame.getGamePanel().setController(this.controller);
                 gameFrame.getGamePanel().getModel().LoadNumbers(Filer.ReadArray());
                 gameFrame.getGamePanel().updateGridsNumber();
+                controller.setModel(gameFrame.getGamePanel().getModel());
+                controller.setView(gameFrame.getGamePanel());
+                controller.setGameFrame(gameFrame);
                 GameFrame.StartGame(gameFrame);
             }
             else{
