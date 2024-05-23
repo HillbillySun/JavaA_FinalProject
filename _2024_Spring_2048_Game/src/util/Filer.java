@@ -79,13 +79,10 @@ public class Filer {
                                 if (row >= 3) {
                                     String[] values = line.split("\\s+");
                                     if (array == null) {
-                                        array = new int[values.length][];
+                                        array = new int[values.length][values.length];
                                     }
                                     for (int i = 0; i < values.length; i++) {
-                                        if (array[i] == null) {
-                                            array[i] = new int[values.length];
-                                        }
-                                        array[i][row - 3] = Integer.parseInt(values[i]);
+                                        array[row-3][i] = Integer.parseInt(values[i]);
                                     }
                                 }
                                 row++;
