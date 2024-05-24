@@ -17,7 +17,7 @@ public class EttGameFrame extends GameFrame {
             Object[] options = {"香港", "天文台", "曼哈顿", "默认"};
             int result = JOptionPane.showOptionDialog(
                     null,
-                    "这里是ett！",
+                    "选择你的主题!",
                     "选择主题",
                     JOptionPane.DEFAULT_OPTION,
                     JOptionPane.QUESTION_MESSAGE,
@@ -77,8 +77,10 @@ public class EttGameFrame extends GameFrame {
                     }
                     else if (result == 1)
                     {
-                        super.getGamePanel().getModel().mutiNumbers();
-                        playaudio("Music/mutiaction.wav");
+                        if (super.getGamePanel().getModel().mutiNumbers())
+                        {
+                            playaudio("Music/mutiaction.wav");
+                        }
                     }
                     super.getGamePanel().updateGridsNumber();
                     super.getGamePanel().requestFocusInWindow();

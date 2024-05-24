@@ -58,7 +58,7 @@ public class GridNumber {
         }
     }
 
-    public void mutiNumbers()
+    public boolean mutiNumbers()
     {
         boolean isMulti = true;
         for (int i = 0; i < numbers.length; i++) {
@@ -81,6 +81,7 @@ public class GridNumber {
         {
             JOptionPane.showMessageDialog(null,"不可通过乘法直接达到目标分数!");
         }
+        return isMulti;
     }
 
     public void initialNumbers() {
