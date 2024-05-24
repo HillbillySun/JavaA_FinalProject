@@ -8,6 +8,7 @@ import util.Filer;
 import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.Timer;
@@ -27,8 +28,9 @@ public class GameFrame extends JFrame {
 
     private JButton RightBtn;
 
-    private JButton setBck;
+    protected JButton setBck;
 
+    protected ActionListener actionListener;
     private JPanel backgroundPanel;
 
     private JButton musicBtn;
@@ -75,6 +77,7 @@ public class GameFrame extends JFrame {
         gamePanel.setStepLabel(stepLabel);
         gamePanel.setPointLabel(pointLabel);
         gamePanel.setTimeLabel(TimeLabel);
+        gamePanel.getModel().setTarget(Target);
         this.restartBtn.addActionListener(e -> {
             controller.restartGame();
             gamePanel.requestFocusInWindow();//enable key listener
@@ -112,7 +115,7 @@ public class GameFrame extends JFrame {
             gamePanel.requestFocusInWindow();
             JOptionPane.showMessageDialog(GameFrame.this, "保存成功！");
         });
-        this.setBck.addActionListener(e -> {
+        actionListener = e -> {
             Object[] options = {"香港", "天文台", "曼哈顿", "默认"};
             int result = JOptionPane.showOptionDialog(
                     null,
@@ -131,6 +134,31 @@ public class GameFrame extends JFrame {
                 reOpen("/Pictures/曼哈顿.jpg");
             } else if (result == 3) {
                 reOpen(null);
+            }
+        };
+        this.setBck.addActionListener(actionListener);
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                Object[] options = {"Save and exit", "Exit"};
+                int result = JOptionPane.showOptionDialog(
+                        GameFrame.this,
+                        "Do you want to save this game?",
+                        "Exit",
+                        JOptionPane.DEFAULT_OPTION,
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        options,
+                        options[0]
+                );
+                if (result == 0) {
+                    controller.saveGame();
+                    JOptionPane.showMessageDialog(GameFrame.this, "保存成功！");
+                    dispose();
+                } else if (result == 1) {
+                    dispose();
+                }
             }
         });
         //todo: add other button here
@@ -164,6 +192,7 @@ public class GameFrame extends JFrame {
         gamePanel.setStepLabel(stepLabel);
         gamePanel.setPointLabel(pointLabel);
         gamePanel.setTimeLabel(TimeLabel);
+        gamePanel.getModel().setTarget(Target);
         if (isTimelimit) {
             limitMode();
         }
@@ -199,7 +228,7 @@ public class GameFrame extends JFrame {
             playmusic("Music/马念先 - 1989的下午.wav");
             gamePanel.requestFocusInWindow();
         });
-        this.setBck.addActionListener(e -> {
+        actionListener = e -> {
             Object[] options = {"香港", "天文台", "曼哈顿", "默认"};
             int result = JOptionPane.showOptionDialog(
                     null,
@@ -216,11 +245,11 @@ public class GameFrame extends JFrame {
                 reOpen("/pictures/天文台.jpg");
             } else if (result == 2) {
                 reOpen("/Pictures/曼哈顿.jpg");
-            } else {
+            } else if (result == 3) {
                 reOpen(null);
             }
-
-        });
+        };
+        this.setBck.addActionListener(actionListener);
         //todo: add other button here
         setbkg(path, true);
         this.setLocationRelativeTo(null);
@@ -375,31 +404,37 @@ public class GameFrame extends JFrame {
 
     public void setIsplay(boolean b)
     {isplay = b;}
+
+    public JPanel getBackgroundPanel()
+    {
+        return backgroundPanel;
+    }
     public void playmusic(String path) {
         new Thread(() ->
         {
             try {
                 File audioFile = new File(path);
                 AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
-
-                // 获取音频格式
                 AudioFormat format = audioStream.getFormat();
-
-                // 获取音频数据行信息
                 DataLine.Info info = new DataLine.Info(Clip.class, format);
-
-                // 获取音频数据行
-                audioClip = (Clip) AudioSystem.getLine(info);
-
-                // 打开音频剪辑并加载样本
-                audioClip.open(audioStream);
-
-                // 播放音频
                 if (isplay) {
+                    audioClip = (Clip) AudioSystem.getLine(info);
+                    audioClip.open(audioStream);
+                    System.out.println(isplay);
+                    System.out.println(audioClip);
                     audioClip.loop(Clip.LOOP_CONTINUOUSLY);
                     audioClip.start();
                     isplay = false;
                     System.out.println("bgm播放开始");
+                }
+                else
+                {
+                    System.out.println(isplay);
+                    System.out.println(audioClip);
+                    audioClip.stop();
+                    audioClip.close();
+                    isplay = true;
+                    System.out.println("bgm停止");
                 }
             } catch (UnsupportedAudioFileException | LineUnavailableException | IOException ex) {
                 System.out.println(ex);

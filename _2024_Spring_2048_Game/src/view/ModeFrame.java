@@ -9,9 +9,10 @@ public class ModeFrame extends JFrame {
     private JButton ClassicBtn;
     private JButton EasyBtn;
     private JButton HardBtn;
-    private JButton EditBtn;
+    private JButton EttBtn;
     private JPanel backgroundPanel;
     private GameFrame gameFrame;
+    private EttGameFrame ettGameFrame;
     private InitiaFrame initiaFrame;
     private GameController controller;
     private LoadFrame loadFrame;
@@ -27,7 +28,7 @@ public class ModeFrame extends JFrame {
         this.ClassicBtn=createButton("Classic",new Point(350,150),200,70);
         this.EasyBtn=createButton("Easy",new Point(350,250),200,70);
         this.HardBtn=createButton("Hard",new Point(350,350),200,70);
-        this.EditBtn=createButton("Edit by Yourself",new Point(350,450),200,70);
+        this.EttBtn =createButton("Entertaiment",new Point(350,450),200,70);
         ifDispole=false;
         JPanel bkgPanel = new JPanel();
         bkgPanel.setBackground(new Color(255, 237, 211));
@@ -36,7 +37,7 @@ public class ModeFrame extends JFrame {
         this.setContentPane(backgroundPanel);
         backgroundPanel.add(ClassicBtn);
         backgroundPanel.add(HardBtn);
-        backgroundPanel.add(EditBtn);
+        backgroundPanel.add(EttBtn);
         backgroundPanel.add(EasyBtn);
         this.ClassicBtn.addActionListener(e->
         {
@@ -98,11 +99,14 @@ public class ModeFrame extends JFrame {
             JOptionPane.showMessageDialog(gameFrame,"使用3*3，合成2048!");
             ifDispole=true;
         });
-        this.EditBtn.addActionListener(e->
+        this.EttBtn.addActionListener(e->
         {
             String str1 = JOptionPane.showInputDialog(this, "输入你想要的棋盘尺寸(2-10中的整数)");
             String str2 = JOptionPane.showInputDialog(this, "输入你的目标数字(128到2048中的2的幂次)：");
             String str3 = JOptionPane.showInputDialog(this,"输入时间限制");
+            Object[] options = {"Yes","No"};
+            int result = JOptionPane.CLOSED_OPTION;
+            result = JOptionPane.showOptionDialog(null, "是否需要道具模式?", "道具模式设置", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
             System.out.println("size: "+str1);
             System.out.println("target: "+str2);
             System.out.println("Time: "+str3);
@@ -115,16 +119,21 @@ public class ModeFrame extends JFrame {
                 boardSize=Integer.parseInt(str1);
                 target=Integer.parseInt(str2);
                 if (boardSize >= 2 && boardSize <= 10 && target > 0 && GameFrame.isPowerOfTwo(target)){
-                    if (isTimeLimit)gameFrame=new GameFrame(900,700,boardSize,target,null,"Tourist",true,Integer.parseInt(str3));
-                    else gameFrame=new GameFrame(900,700,boardSize,target,null,"Tourist",false,0);
-                    gameFrame.setModeFrame(this);
-                    gameFrame.getGamePanel().setModeFrame(this);
-                    this.controller=new GameController(gameFrame.getGamePanel(),gameFrame.getGamePanel().getModel(),gameFrame,this,this.initiaFrame);
-                    gameFrame.setController(this.controller);
-                    gameFrame.getGamePanel().setController(this.controller);
+                    if (isTimeLimit)ettGameFrame=new EttGameFrame(900,700,boardSize,target,null,"Tourist",true,Integer.parseInt(str3));
+                    else ettGameFrame=new EttGameFrame(900,700,boardSize,target,null,"Tourist",false,0);
+                    ettGameFrame.setModeFrame(this);
+                    ettGameFrame.getGamePanel().setModeFrame(this);
+                    this.controller=new GameController(ettGameFrame.getGamePanel(),ettGameFrame.getGamePanel().getModel(),ettGameFrame,this,this.initiaFrame);
+                    ettGameFrame.setController(this.controller);
+                    ettGameFrame.getGamePanel().setController(this.controller);
+                    if (result == 0)
+                    {
+                        ettGameFrame.setisTool(true);
+                        ettGameFrame.creatTool();
+                    }
                     this.dispose();
-                    GameFrame.StartGame(gameFrame);
-                    JOptionPane.showMessageDialog(gameFrame,String.format("使用%d*%d，合成%d!",boardSize,boardSize,target));
+                    GameFrame.StartGame(ettGameFrame);
+                    JOptionPane.showMessageDialog(ettGameFrame,String.format("使用%d*%d，合成%d!",boardSize,boardSize,target));
                 }
                 else
                 {

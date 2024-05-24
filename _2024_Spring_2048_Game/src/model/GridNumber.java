@@ -1,6 +1,7 @@
 package model;
 
 import javax.sound.sampled.*;
+import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
@@ -15,6 +16,8 @@ public class GridNumber {
     private boolean ifGenerate = false;
     static Random random = new Random();
 
+    private int target;
+
     public GridNumber(int xCount, int yCount) {
         this.X_COUNT = xCount;
         this.Y_COUNT = yCount;
@@ -24,7 +27,6 @@ public class GridNumber {
     }
 
     public void ReviveNumbers() {
-        ;
         for (int i = 0; i < numbers.length; i++) {
             for (int j = 0; j < numbers[0].length; j++) {
                 if (numbers[i][j] == 2 || numbers[i][j] == 4) {
@@ -34,11 +36,50 @@ public class GridNumber {
         }
     }
 
+    public boolean isBomb()
+    {
+        boolean isBomb = false;
+        Loop:
+        for (int[] number : numbers) {
+            for (int k: number) {
+                if (k > 4) {
+                    isBomb = true;
+                    break Loop;
+                }
+            }
+        }
+        return isBomb;
+    }
     public void LoadNumbers(int[][] _numbers) {
         for (int i = 0; i < numbers.length; i++) {
             for (int j = 0; j < numbers[0].length; j++) {
                 numbers[i][j] = _numbers[i][j];
             }
+        }
+    }
+
+    public void mutiNumbers()
+    {
+        boolean isMulti = true;
+        for (int i = 0; i < numbers.length; i++) {
+            for (int j = 0; j < numbers[0].length; j++) {
+                if (numbers[i][j] == target/2 )
+                {
+                    isMulti = false;
+                }
+            }
+        }
+        if (isMulti)
+        {
+            for (int i = 0; i < numbers.length; i++) {
+                for (int j = 0; j < numbers[0].length; j++) {
+                    numbers[i][j] = 2*numbers[i][j];
+                }
+            }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null,"不可通过乘法直接达到目标分数!");
         }
     }
 
@@ -328,4 +369,6 @@ public class GridNumber {
         }
         ).start();
     }
+    public void setTarget(int target)
+    {this.target = target;}
 }
