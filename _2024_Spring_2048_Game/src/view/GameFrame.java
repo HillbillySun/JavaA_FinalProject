@@ -48,9 +48,10 @@ public class GameFrame extends JFrame {
     private int tempTime;
     private Timer timer = new Timer();
     private Clip audioClip;
-    private boolean isplay = true;
+    private boolean isplay;
 
     public GameFrame(int width, int height, int COUNT, int Target, int Point, String path, boolean isTimelimit, int timeLimit) {
+        isplay = true;
         this.TimeLimit = timeLimit;
         this.isTimelimit = isTimelimit;
         this.setTitle("2048 Game");
@@ -84,11 +85,21 @@ public class GameFrame extends JFrame {
         });
         this.mode.addActionListener(e ->
         {
+            if (!isplay)
+            {
+                audioClip.stop();
+                audioClip.close();
+            }
+            gamePanel.getModel().playAction("Music/Win.wav");
             ModeFrame.OpenMode(this.modeFrame);
             this.dispose();
         });
         this.musicBtn.addActionListener(e -> {
-            playmusic("Music/马念先 - 1989的下午.wav");
+            System.out.println(gamePanel.getisOver());
+            if (!gamePanel.getisOver())
+            {
+                playmusic("Music/Yellow Magic Orchestra - ファイアークラッカー.wav");
+            }
             gamePanel.requestFocusInWindow();
         });
         this.RightBtn.addActionListener(e ->
@@ -113,7 +124,6 @@ public class GameFrame extends JFrame {
         this.SaveBtn.addActionListener(e -> {
             controller.saveGame();
             gamePanel.requestFocusInWindow();
-            JOptionPane.showMessageDialog(GameFrame.this, "保存成功！");
         });
         actionListener = e -> {
             Object[] options = {"香港", "天文台", "曼哈顿", "默认"};
@@ -154,8 +164,6 @@ public class GameFrame extends JFrame {
                 );
                 if (result == 0) {
                     controller.saveGame();
-                    JOptionPane.showMessageDialog(GameFrame.this, "保存成功！");
-                    dispose();
                 } else if (result == 1) {
                     dispose();
                 }
@@ -168,6 +176,7 @@ public class GameFrame extends JFrame {
     }
 
     public GameFrame(int width, int height, int COUNT, int Target, String path, String tourist, boolean isTimelimit, int timeLimit) {
+        isplay = true;
         this.TimeLimit = timeLimit;
         this.isTimelimit = isTimelimit;
         this.setTitle("2048 Game");
@@ -202,6 +211,12 @@ public class GameFrame extends JFrame {
         });
         this.mode.addActionListener(e ->
         {
+            if (!isplay)
+            {
+                audioClip.stop();
+                audioClip.close();
+            }
+            gamePanel.getModel().playAction("Music/Win.wav");
             ModeFrame.OpenMode(this.modeFrame);
             this.dispose();
         });
@@ -225,7 +240,10 @@ public class GameFrame extends JFrame {
             gamePanel.requestFocusInWindow();
         });
         this.musicBtn.addActionListener(e -> {
-            playmusic("Music/马念先 - 1989的下午.wav");
+            if (!gamePanel.getisOver())
+            {
+                playmusic("Music/Yellow Magic Orchestra - ファイアークラッカー.wav");
+            }
             gamePanel.requestFocusInWindow();
         });
         actionListener = e -> {
@@ -429,7 +447,7 @@ public class GameFrame extends JFrame {
                 }
                 else
                 {
-                    System.out.println(isplay);
+                    System.out.println("isplay = "+isplay);
                     System.out.println(audioClip);
                     audioClip.stop();
                     audioClip.close();
@@ -453,9 +471,15 @@ public class GameFrame extends JFrame {
                     TimeLimit--;
                     TimeLabel.setText("Time: " + TimeLimit);
                     if (TimeLimit == 0 && !gamePanel.getisOver()) {
+                        if (!isplay)
+                        {
+                            audioClip.stop();
+                            audioClip.close();
+                            isplay = true;
+                        }
+                        gamePanel.getModel().playAction("Music/failEnd.wav");
                         System.out.println("Game Over!");
-                        gamePanel.getModel().setisMove(false);
-                        gamePanel.setifOver(true);
+                        controller.endGame();
                         JOptionPane.showMessageDialog(null, "Times Out");
                     }
                     if (gamePanel.getisOver()) {

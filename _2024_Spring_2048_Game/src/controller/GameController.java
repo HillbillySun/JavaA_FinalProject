@@ -4,6 +4,9 @@ import model.GridNumber;
 import view.*;
 import util.Filer;
 
+import javax.sound.sampled.*;
+import javax.swing.*;
+import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -30,19 +33,39 @@ public class GameController{
     }
     public GameController(){}
     public void restartGame() {
+        if (!gameFrame.getsiplay())
+        {
+            gameFrame.getAudioClip().stop();
+            gameFrame.getAudioClip().close();
+            gameFrame.setIsplay(true);
+        }
         System.out.println("Do restart game here");
         view.refreshGame();
         view.setifOver(false);
     }
     public void endGame()
     {
+        if (!gameFrame.getsiplay())
+        {
+            gameFrame.getAudioClip().stop();
+            gameFrame.getAudioClip().close();
+            gameFrame.setIsplay(true);
+        }
         System.out.println("Game Over!");
         model.setisMove(false);
         view.setifOver(true);
     }
     public void saveGame()
     {
-        Filer.SaveNumber(model.getNumbers(),view.getCOUNT(),view.getTarget(),view.getPoints());
+        if (!view.getisOver())
+        {
+            Filer.SaveNumber(model.getNumbers(),view.getCOUNT(),view.getTarget(),view.getPoints());
+            JOptionPane.showMessageDialog(null, "保存成功！");
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null,"游戏已结束，不可存档");
+        }
     }
     public void CheckLogin(String username)
     {
@@ -83,7 +106,7 @@ public class GameController{
         if (!gameFrame.getsiplay())
         {
             gameFrame.setIsplay(true);
-            gameFrame.playmusic("Music/马念先 - 1989的下午.wav");
+            gameFrame.playmusic("Music/Yellow Magic Orchestra - ファイアークラッカー.wav");
         }
     }
     public void CheckRead(){

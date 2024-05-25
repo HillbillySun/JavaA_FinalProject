@@ -136,7 +136,7 @@ public class GridNumber {
         ifGenerate = temp;
         generateNumberRandomly();
         if (isPlay) {
-            playAction();
+            playAction("Music/effect.wav");
         }
     }
 
@@ -160,7 +160,7 @@ public class GridNumber {
         ifGenerate = temp;
         generateNumberRandomly();
         if (isPlay) {
-            playAction();
+            playAction("Music/effect.wav");
         }
     }
 
@@ -184,7 +184,7 @@ public class GridNumber {
         ifGenerate = temp;
         generateNumberRandomly();
         if (isPlay) {
-            playAction();
+            playAction("Music/effect.wav");
         }
     }
 
@@ -208,7 +208,7 @@ public class GridNumber {
         ifGenerate = temp;
         generateNumberRandomly();
         if (isPlay) {
-            playAction();
+            playAction("Music/effect.wav");
         }
     }
 
@@ -322,10 +322,10 @@ public class GridNumber {
     }
 
 
-    public void playAction() {
+    public void playAction(String path) {
         new Thread(() -> {
             try {
-                File audioFile = new File("Music/effect.wav");
+                File audioFile = new File(path);
                 AudioInputStream originalAudioStream = AudioSystem.getAudioInputStream(audioFile);
 
                 // 获取音频格式

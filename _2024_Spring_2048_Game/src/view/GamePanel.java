@@ -170,11 +170,13 @@ public class GamePanel extends ListenerPanel {
         }
         if (isOver1)
         {
-            JOptionPane.showMessageDialog(this,"You Win!");
             controller.endGame();
+            JOptionPane.showMessageDialog(this,"You Win!");
+            this.getModel().playAction("Music/Win.wav");
         }
         else if (isOver2)
         {
+            getModel().playAction("Music/failEnd.wav");
             Object[] options = {"Restart", "Change Mode","Revive"};
             int result = JOptionPane.CLOSED_OPTION; // 初始值设为 CLOSED_OPTION，表示用户还没有做出选择
             controller.endGame();
