@@ -46,7 +46,7 @@ public class GameFrame extends JFrame {
     private boolean isTimelimit;
     private int TimeLimit;
     private int tempTime;
-    private Timer timer = new Timer();
+    private Timer timer;
     private Clip audioClip;
     private boolean isplay;
 
@@ -203,6 +203,7 @@ public class GameFrame extends JFrame {
         gamePanel.setTimeLabel(TimeLabel);
         gamePanel.getModel().setTarget(Target);
         if (isTimelimit) {
+            timer = new Timer();
             limitMode();
         }
         this.restartBtn.addActionListener(e -> {
@@ -215,6 +216,10 @@ public class GameFrame extends JFrame {
             {
                 audioClip.stop();
                 audioClip.close();
+            }
+            if (timer != null)
+            {
+                timer.cancel();
             }
             gamePanel.getModel().playAction("Music/Win.wav");
             ModeFrame.OpenMode(this.modeFrame);
@@ -460,6 +465,10 @@ public class GameFrame extends JFrame {
         }).start();
     }
 
+    public Timer getTimer()
+    {
+        return timer;
+    }
     public void limitMode() {
         TimeLabel.setText("Time: " + TimeLimit);
         tempTime = TimeLimit;

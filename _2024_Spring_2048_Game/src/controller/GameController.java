@@ -33,7 +33,7 @@ public class GameController{
     }
     public GameController(){}
     public void restartGame() {
-        if (!gameFrame.getsiplay())
+        if (view.getisOver() && !gameFrame.getsiplay())
         {
             gameFrame.getAudioClip().stop();
             gameFrame.getAudioClip().close();
@@ -50,6 +50,10 @@ public class GameController{
             gameFrame.getAudioClip().stop();
             gameFrame.getAudioClip().close();
             gameFrame.setIsplay(true);
+        }
+        if (gameFrame.getTimer() != null)
+        {
+            gameFrame.getTimer().cancel();
         }
         System.out.println("Game Over!");
         model.setisMove(false);
