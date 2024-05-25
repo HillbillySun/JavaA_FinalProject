@@ -30,7 +30,7 @@ public class EttGameFrame extends GameFrame {
                 ettreOpen("/pictures/天文台.jpg");
             } else if (result == 2) {
                 ettreOpen("/Pictures/曼哈顿.jpg");
-            } else {
+            } else if (result == 3){
                 ettreOpen(null);
             }
         });

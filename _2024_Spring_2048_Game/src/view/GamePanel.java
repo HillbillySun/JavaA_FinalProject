@@ -171,8 +171,8 @@ public class GamePanel extends ListenerPanel {
         if (isOver1)
         {
             controller.endGame();
-            JOptionPane.showMessageDialog(this,"You Win!");
             this.getModel().playAction("Music/Win.wav");
+            JOptionPane.showMessageDialog(this,"You Win!");
         }
         else if (isOver2)
         {
