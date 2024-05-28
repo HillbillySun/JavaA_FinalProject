@@ -2,6 +2,7 @@ package view;
 
 import controller.GameController;
 import model.GridNumber;
+import util.Filer;
 
 import javax.sound.sampled.*;
 import javax.swing.*;
@@ -173,6 +174,7 @@ public class GamePanel extends ListenerPanel {
             controller.endGame();
             this.getModel().playAction("Music/Win.wav");
             JOptionPane.showMessageDialog(this,"You Win!");
+            Filer.RecordPoint(this.points);
         }
         else if (isOver2)
         {
@@ -266,6 +268,10 @@ public class GamePanel extends ListenerPanel {
         this.steps=steps;
     }
 
+    public int getSteps() {
+        return steps;
+    }
+
     public void setPoints(int point)
     {
         this.points =point;
@@ -294,14 +300,14 @@ public class GamePanel extends ListenerPanel {
     {
         this.TimeLabel = timeLabel;
     }
-    public int getCOUNT()
-    {
-        return COUNT;
-    }
 
     public void setCOUNT(int COUNT)
     {
         this.COUNT=COUNT;
+    }
+
+    public int getCOUNT() {
+        return COUNT;
     }
 
     public void setTarget(int target)

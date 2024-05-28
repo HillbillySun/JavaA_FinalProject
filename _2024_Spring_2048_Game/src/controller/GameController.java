@@ -63,7 +63,7 @@ public class GameController{
     {
         if (!view.getisOver())
         {
-            Filer.SaveNumber(model.getNumbers(),view.getCOUNT(),view.getTarget(),view.getPoints());
+            Filer.SaveNumber(model.getNumbers(),view.getSteps(),view.getTarget(),view.getPoints(),view.getCOUNT());
             JOptionPane.showMessageDialog(null, "保存成功！");
         }
         else
@@ -121,9 +121,6 @@ public class GameController{
          else {
              System.out.println("读取失败！");
          }
-    }
-    public void ReadGame(){
-          model.setNumbers(Filer.ReadArray());
     }
     public void setLogin(boolean login) {
         this.login = login;

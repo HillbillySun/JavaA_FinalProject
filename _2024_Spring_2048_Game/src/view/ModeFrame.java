@@ -54,7 +54,7 @@ public class ModeFrame extends JFrame {
             }
             else
             {
-                gameFrame=new GameFrame(900,700,4,2048,0,null,false,0);
+                gameFrame=new GameFrame(900,700,4,2048,0,0,null,false,0);
             }
             gameFrame.setModeFrame(this);
             gameFrame.getGamePanel().setModeFrame(this);
@@ -74,7 +74,7 @@ public class ModeFrame extends JFrame {
             }
             else
             {
-                gameFrame=new GameFrame(900,700,4,1024,0,null,false,0);
+                gameFrame=new GameFrame(900,700,4,1024,0,0,null,false,0);
             }
             gameFrame.setModeFrame(this);
             gameFrame.getGamePanel().setModeFrame(this);
@@ -94,7 +94,7 @@ public class ModeFrame extends JFrame {
             }
             else
             {
-                gameFrame=new GameFrame(900,700,3,2048,0,null,false,0);
+                gameFrame=new GameFrame(900,700,3,2048,0,0,null,false,0);
             }
             gameFrame.setModeFrame(this);
             gameFrame.getGamePanel().setModeFrame(this);
