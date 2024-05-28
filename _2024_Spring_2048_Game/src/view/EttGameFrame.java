@@ -1,5 +1,7 @@
 package view;
 
+import util.Font;
+
 import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
@@ -49,6 +51,7 @@ public class EttGameFrame extends GameFrame {
     public void creatTool() {
         if (isTool) {
             Tool = createButton("Tool", new Point(700, 415), 110, 50);
+            Tool.setFont(Font.creatFont("ttfFont/Jersey10-Regular.ttf",20f));
             super.getBackgroundPanel().add(Tool);
             Tool.addActionListener(e -> {
                 if (!super.getGamePanel().getisOver())

@@ -9,7 +9,7 @@ public class GridComponent extends JComponent {
     private int row;
     private int col;
     private int number;
-    static Font font = new Font("Serif", Font.BOLD, 42);
+    static Font font = util.Font.creatFont("ttfFont/BungeeInline-Regular.ttf",40f);
 
     public GridComponent(int row, int col, int gridSize) {
         this.setSize(gridSize, gridSize);
@@ -31,10 +31,8 @@ public class GridComponent extends JComponent {
         if (number > 0) {
             g.setColor(ColorMap.getColor(number));
             g.fillRect(0, 0, getWidth(), getHeight());
-            // 设置边框的粗细为 3，并且设置边框颜色为浅灰色
             ((Graphics2D) g).setStroke(new BasicStroke(5));
-             g.setColor(Color.GRAY); // 将边框颜色设置为浅灰色
-            // 绘制填充矩形
+             g.setColor(Color.GRAY);
             g.drawRect(0, 0, getWidth(), getHeight());
             if (number > 4) {
                 g.setColor(Color.WHITE);
@@ -50,10 +48,8 @@ public class GridComponent extends JComponent {
         } else {
             g.setColor(Color.LIGHT_GRAY);
             g.fillRect(0, 0, getWidth(), getHeight());
-            // 设置边框的粗细为 3，并且设置边框颜色为浅灰色
             ((Graphics2D) g).setStroke(new BasicStroke(5));
-            g.setColor(Color.GRAY); // 将边框颜色设置为浅灰色
-            // 绘制填充矩形
+            g.setColor(Color.GRAY);
             g.drawRect(0, 0, getWidth(), getHeight());
         }
     }

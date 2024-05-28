@@ -1,6 +1,8 @@
 package view;
 
 import controller.GameController;
+import jdk.jshell.execution.Util;
+import util.Font;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,7 +19,8 @@ public class ModeFrame extends JFrame {
     private GameController controller;
     private LoadFrame loadFrame;
     protected boolean ifDispole;
-
+    private JLabel ChooseMode;
+    private JLabel begingame;
     ModeFrame(int width,int height,InitiaFrame initiaFrame)
     {
         this.initiaFrame=initiaFrame;
@@ -25,20 +28,24 @@ public class ModeFrame extends JFrame {
         this.setLayout(null);
         this.setSize(width,height);
         this.setLocationRelativeTo(null);
-        this.ClassicBtn=createButton("Classic",new Point(350,150),200,70);
-        this.EasyBtn=createButton("Easy",new Point(350,250),200,70);
-        this.HardBtn=createButton("Hard",new Point(350,350),200,70);
-        this.EttBtn =createButton("Entertaiment",new Point(350,450),200,70);
+        this.ClassicBtn=createButton("Classic",new Point(100,400),300,80);
+        this.EasyBtn=createButton("Easy",new Point(100,510),300,80);
+        this.HardBtn=createButton("Hard",new Point(500,400),300,80);
+        this.EttBtn =createButton("Entertaiment",new Point(500,510),300,80);
+        begingame = createLabel("Begin Your Game",util.Font.creatFont("ttfFont/Jersey10-Regular.ttf",100f),new Point(150,235),900,100);
+        ChooseMode = createLabel("Choose Your Mode", util.Font.creatFont("ttfFont/Jersey10-Regular.ttf",100f),new Point(125,100),900,100);
         ifDispole=false;
         JPanel bkgPanel = new JPanel();
         bkgPanel.setBackground(new Color(255, 237, 211));
         this.backgroundPanel = bkgPanel;
-        backgroundPanel.setLayout(null); // 使用绝对布局
+        backgroundPanel.setLayout(null);
         this.setContentPane(backgroundPanel);
         backgroundPanel.add(ClassicBtn);
         backgroundPanel.add(HardBtn);
         backgroundPanel.add(EttBtn);
         backgroundPanel.add(EasyBtn);
+        backgroundPanel.add(ChooseMode);
+        backgroundPanel.add(begingame);
         this.ClassicBtn.addActionListener(e->
         {
             if (loadFrame.getisTour())
@@ -153,7 +160,16 @@ public class ModeFrame extends JFrame {
         button.setBackground(new Color(175, 158, 137));
         button.setForeground(Color.WHITE);
         this.add(button);
+        button.setFont(Font.creatFont("ttfFont/Jersey10-Regular.ttf",30f));
         return button;
+    }
+    private JLabel createLabel(String name, java.awt.Font font, Point location, int width, int height) {
+        JLabel label = new JLabel(name);
+        label.setFont(font);
+        label.setLocation(location);
+        label.setSize(width, height);
+        this.add(label);
+        return label;
     }
     public static void OpenMode(ModeFrame modeFrame)
     {

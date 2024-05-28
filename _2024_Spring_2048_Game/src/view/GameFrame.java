@@ -63,18 +63,28 @@ public class GameFrame extends JFrame {
         gamePanel.setPoints(Point);
         gamePanel.setLocation(this.getHeight() / 15, this.getWidth() / 15);
         this.add(gamePanel);
+        Font buttonfont = util.Font.creatFont("ttfFont/Jersey10-Regular.ttf",20f);
         this.restartBtn = createButton("Restart", new Point(700, 135), 110, 50);
         this.mode = createButton("Mode", new Point(700, 275), 110, 50);
         this.musicBtn = createButton("Music", new Point(700, 205), 110, 50);
-        this.UpBtn = createButton("↑", new Point(725, 480), 60, 60);
-        this.DownBtn = createButton("↓", new Point(725, 550), 60, 60);
-        this.LeftBtn = createButton("←", new Point(655, 550), 60, 60);
-        this.RightBtn = createButton("→", new Point(795, 550), 60, 60);
+        this.UpBtn = createButton("W", new Point(725, 480), 60, 60);
+        this.DownBtn = createButton("S", new Point(725, 550), 60, 60);
+        this.LeftBtn = createButton("A", new Point(655, 550), 60, 60);
+        this.RightBtn = createButton("D", new Point(795, 550), 60, 60);
         this.SaveBtn = createButton("Save", new Point(700, 415), 110, 50);
         this.stepLabel = createLabel("Start", new Font("Arial", Font.PLAIN, 22), new Point(700, 30), 180, 50);
         this.pointLabel = createLabel("Point: "+Point, new Font("Arial", Font.PLAIN, 22), new Point(700, 55), 180, 50);
         this.TimeLabel = createLabel("Time: No Limit", new Font("Arial", Font.PLAIN, 22), new Point(700, 80), 180, 50);
         this.setBck = createButton("Theme", new Point(700, 345), 110, 50);
+        restartBtn.setFont(buttonfont);
+        mode.setFont(buttonfont);
+        musicBtn.setFont(buttonfont);
+        UpBtn.setFont(buttonfont);
+        DownBtn.setFont(buttonfont);
+        LeftBtn.setFont(buttonfont);
+        RightBtn.setFont(buttonfont);
+        SaveBtn.setFont(buttonfont);
+        setBck.setFont(buttonfont);
         gamePanel.setStepLabel(stepLabel);
         gamePanel.setPointLabel(pointLabel);
         gamePanel.setTimeLabel(TimeLabel);
@@ -187,17 +197,26 @@ public class GameFrame extends JFrame {
         gamePanel.setGameFrame(this);
         gamePanel.setLocation(this.getHeight() / 15, this.getWidth() / 15);
         this.add(gamePanel);
+        Font buttonfont = util.Font.creatFont("ttfFont/Jersey10-Regular.ttf",20f);
         this.restartBtn = createButton("Restart", new Point(700, 135), 110, 50);
         this.mode = createButton("Mode", new Point(700, 205), 110, 50);
-        this.UpBtn = createButton("↑", new Point(725, 480), 60, 60);
-        this.DownBtn = createButton("↓", new Point(725, 550), 60, 60);
-        this.LeftBtn = createButton("←", new Point(655, 550), 60, 60);
-        this.RightBtn = createButton("→", new Point(795, 550), 60, 60);
+        this.UpBtn = createButton("W", new Point(725, 480), 60, 60);
+        this.DownBtn = createButton("S", new Point(725, 550), 60, 60);
+        this.LeftBtn = createButton("A", new Point(655, 550), 60, 60);
+        this.RightBtn = createButton("D", new Point(795, 550), 60, 60);
         this.stepLabel = createLabel("Start", new Font("Arial", Font.PLAIN, 22), new Point(700, 30), 180, 50);
         this.pointLabel = createLabel("Point: 0", new Font("Arial", Font.PLAIN, 22), new Point(700, 55), 180, 50);
         this.TimeLabel = createLabel("Time: No Limit", new Font("Arial", Font.PLAIN, 22), new Point(700, 80), 180, 50);
         this.setBck = createButton("Theme", new Point(700, 275), 110, 50);
         this.musicBtn = createButton("Music", new Point(700, 345), 110, 50);
+        restartBtn.setFont(buttonfont);
+        mode.setFont(buttonfont);
+        UpBtn.setFont(buttonfont);
+        DownBtn.setFont(buttonfont);
+        LeftBtn.setFont(buttonfont);
+        RightBtn.setFont(buttonfont);
+        setBck.setFont(buttonfont);
+        musicBtn.setFont(buttonfont);
         gamePanel.setStepLabel(stepLabel);
         gamePanel.setPointLabel(pointLabel);
         gamePanel.setTimeLabel(TimeLabel);
@@ -337,7 +356,7 @@ public class GameFrame extends JFrame {
     public void setbkg(String path, boolean isTour) {
         try {
 //            this.repaint();
-            ImageIcon bg = new ImageIcon(GameFrame.class.getResource(path));
+            ImageIcon bg = new ImageIcon(this.getClass().getResource(path));
             JPanel bkgPanel = new JPanel() {
                 @Override
                 protected void paintComponent(Graphics g) {

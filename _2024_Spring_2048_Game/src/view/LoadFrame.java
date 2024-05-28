@@ -15,6 +15,10 @@ public class LoadFrame extends JFrame {
     private JButton TouristBtn;
     private GameController controller;
     private InitiaFrame initiaFrame;
+    private JLabel welcomeLabel;
+    private JLabel designerLabel;
+    private JLabel hintLabel;
+
 
     protected boolean isTour;
 
@@ -22,6 +26,7 @@ public class LoadFrame extends JFrame {
 
 
     public LoadFrame(int width, int height) {
+        Font buttonfont = util.Font.creatFont("ttfFont/Jersey10-Regular.ttf",40f);
         JPanel panel = new JPanel();
         JLabel nameLabel = new JLabel("用户名:");
         JTextField nameField = new JTextField(18);
@@ -36,9 +41,17 @@ public class LoadFrame extends JFrame {
         this.setLayout(null);
         this.setSize(width, height);
         this.setLocationRelativeTo(null);
-        registerButton = createButton("Sign Up", new Point(150, 35), 300, 90);
-        loginButton = createButton("Log In", new Point(150, 155), 300, 90);
-        TouristBtn = createButton("Tourist", new Point(150, 275), 300, 90);
+        registerButton = createButton("Sign Up", new Point(100, 450), 300, 90);
+        loginButton = createButton("Log In", new Point(300, 300), 300, 90);
+        TouristBtn = createButton("Tourist", new Point(500, 450), 300, 90);
+        registerButton.setFont(buttonfont);
+        loginButton.setFont(buttonfont);
+        TouristBtn.setFont(buttonfont);
+        registerButton.setFont(buttonfont);
+        welcomeLabel = createLabel("Welcome to 2048", util.Font.creatFont("ttfFont/Jersey10-Regular.ttf",125f),new Point(75,70),800,100);
+        designerLabel = createLabel("Designed by BillSun and lv05327", util.Font.creatFont("ttfFont/DancingScript-VariableFont_wght.ttf",35f),new Point(220,200),500,50);
+        hintLabel = createLabel("Hint: Only 'Log in' and 'Sign up' can enter the game!", util.Font.creatFont("ttfFont/DancingScript-VariableFont_wght.ttf",25f),new Point(210,580),500,40);
+        hintLabel.setForeground(Color.RED);
         JPanel bkgPanel = new JPanel();
         bkgPanel.setBackground(new Color(255, 237, 211));
         this.backgroundPanel = bkgPanel;
@@ -47,6 +60,9 @@ public class LoadFrame extends JFrame {
         backgroundPanel.add(registerButton);
         backgroundPanel.add(loginButton);
         backgroundPanel.add(TouristBtn);
+        backgroundPanel.add(welcomeLabel);
+        backgroundPanel.add(designerLabel);
+        backgroundPanel.add(hintLabel);
         this.registerButton.addActionListener(e ->
         {
             String name = JOptionPane.showInputDialog(this, "输入你想要的用户名");
@@ -117,9 +133,18 @@ public class LoadFrame extends JFrame {
     public static void OpenLoad() {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                new LoadFrame(600, 500).setVisible(true);
+                new LoadFrame(900, 700).setVisible(true);
             }
         });
+    }
+
+    private JLabel createLabel(String name, Font font, Point location, int width, int height) {
+        JLabel label = new JLabel(name);
+        label.setFont(font);
+        label.setLocation(location);
+        label.setSize(width, height);
+        this.add(label);
+        return label;
     }
 
     public boolean getisTour() {
