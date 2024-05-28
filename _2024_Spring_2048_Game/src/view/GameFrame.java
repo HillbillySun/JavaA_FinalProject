@@ -40,6 +40,7 @@ public class GameFrame extends JFrame {
     private JLabel pointLabel;
 
     private JLabel TimeLabel;
+    private JLabel saveLabel;
     private GameController controller;
     private GamePanel gamePanel;
     private ModeFrame modeFrame;
@@ -63,7 +64,7 @@ public class GameFrame extends JFrame {
         gamePanel.setPoints(Point);
         gamePanel.setLocation(this.getHeight() / 15, this.getWidth() / 15);
         this.add(gamePanel);
-        Font buttonfont = util.Font.creatFont("ttfFont/Jersey10-Regular.ttf",20f);
+        Font buttonfont = util.Font.creatFont("ttfFont/Jersey10-Regular.ttf", 20f);
         this.restartBtn = createButton("Restart", new Point(700, 135), 110, 50);
         this.mode = createButton("Mode", new Point(700, 275), 110, 50);
         this.musicBtn = createButton("Music", new Point(700, 205), 110, 50);
@@ -73,8 +74,10 @@ public class GameFrame extends JFrame {
         this.RightBtn = createButton("D", new Point(795, 550), 60, 60);
         this.SaveBtn = createButton("Save", new Point(700, 415), 110, 50);
         this.stepLabel = createLabel("Start", new Font("Arial", Font.PLAIN, 22), new Point(700, 30), 180, 50);
-        this.pointLabel = createLabel("Point: "+Point, new Font("Arial", Font.PLAIN, 22), new Point(700, 55), 180, 50);
+        this.pointLabel = createLabel("Point: " + Point, new Font("Arial", Font.PLAIN, 22), new Point(700, 55), 180, 50);
         this.TimeLabel = createLabel("Time: No Limit", new Font("Arial", Font.PLAIN, 22), new Point(700, 80), 180, 50);
+        this.saveLabel = createLabel("save successfully!", new Font("Arial", Font.PLAIN, 15), new Point(50, 10), 180, 50);
+        saveLabel.setVisible(false);
         this.setBck = createButton("Theme", new Point(700, 345), 110, 50);
         restartBtn.setFont(buttonfont);
         mode.setFont(buttonfont);
@@ -95,8 +98,7 @@ public class GameFrame extends JFrame {
         });
         this.mode.addActionListener(e ->
         {
-            if (!isplay)
-            {
+            if (!isplay) {
                 audioClip.stop();
                 audioClip.close();
             }
@@ -106,8 +108,7 @@ public class GameFrame extends JFrame {
         });
         this.musicBtn.addActionListener(e -> {
             System.out.println(gamePanel.getisOver());
-            if (!gamePanel.getisOver())
-            {
+            if (!gamePanel.getisOver()) {
                 playmusic("Music/Yellow Magic Orchestra - ファイアークラッカー.wav");
             }
             gamePanel.requestFocusInWindow();
@@ -197,7 +198,7 @@ public class GameFrame extends JFrame {
         gamePanel.setGameFrame(this);
         gamePanel.setLocation(this.getHeight() / 15, this.getWidth() / 15);
         this.add(gamePanel);
-        Font buttonfont = util.Font.creatFont("ttfFont/Jersey10-Regular.ttf",20f);
+        Font buttonfont = util.Font.creatFont("ttfFont/Jersey10-Regular.ttf", 20f);
         this.restartBtn = createButton("Restart", new Point(700, 135), 110, 50);
         this.mode = createButton("Mode", new Point(700, 205), 110, 50);
         this.UpBtn = createButton("W", new Point(725, 480), 60, 60);
@@ -231,13 +232,11 @@ public class GameFrame extends JFrame {
         });
         this.mode.addActionListener(e ->
         {
-            if (!isplay)
-            {
+            if (!isplay) {
                 audioClip.stop();
                 audioClip.close();
             }
-            if (timer != null)
-            {
+            if (timer != null) {
                 timer.cancel();
             }
             gamePanel.getModel().playAction("Music/Win.wav");
@@ -264,8 +263,7 @@ public class GameFrame extends JFrame {
             gamePanel.requestFocusInWindow();
         });
         this.musicBtn.addActionListener(e -> {
-            if (!gamePanel.getisOver())
-            {
+            if (!gamePanel.getisOver()) {
                 playmusic("Music/Yellow Magic Orchestra - ファイアークラッカー.wav");
             }
             gamePanel.requestFocusInWindow();
@@ -384,6 +382,7 @@ public class GameFrame extends JFrame {
             backgroundPanel.add(TimeLabel);
             backgroundPanel.add(musicBtn);
             if (!isTour) {
+                backgroundPanel.add(saveLabel);
                 backgroundPanel.add(SaveBtn);
             }
         } catch (NullPointerException ignore) {
@@ -405,6 +404,7 @@ public class GameFrame extends JFrame {
             backgroundPanel.add(TimeLabel);
             backgroundPanel.add(musicBtn);
             if (!isTour) {
+                backgroundPanel.add(saveLabel);
                 backgroundPanel.add(SaveBtn);
             }
         }
@@ -434,23 +434,22 @@ public class GameFrame extends JFrame {
         timer = new Timer();
     }
 
-    public Clip getAudioClip()
-    {
+    public Clip getAudioClip() {
         return audioClip;
     }
 
-    public boolean getsiplay()
-    {
+    public boolean getsiplay() {
         return isplay;
     }
 
-    public void setIsplay(boolean b)
-    {isplay = b;}
+    public void setIsplay(boolean b) {
+        isplay = b;
+    }
 
-    public JPanel getBackgroundPanel()
-    {
+    public JPanel getBackgroundPanel() {
         return backgroundPanel;
     }
+
     public void playmusic(String path) {
         new Thread(() ->
         {
@@ -468,10 +467,8 @@ public class GameFrame extends JFrame {
                     audioClip.start();
                     isplay = false;
                     System.out.println("bgm播放开始");
-                }
-                else
-                {
-                    System.out.println("isplay = "+isplay);
+                } else {
+                    System.out.println("isplay = " + isplay);
                     System.out.println(audioClip);
                     audioClip.stop();
                     audioClip.close();
@@ -484,10 +481,10 @@ public class GameFrame extends JFrame {
         }).start();
     }
 
-    public Timer getTimer()
-    {
+    public Timer getTimer() {
         return timer;
     }
+
     public void limitMode() {
         TimeLabel.setText("Time: " + TimeLimit);
         tempTime = TimeLimit;
@@ -499,8 +496,7 @@ public class GameFrame extends JFrame {
                     TimeLimit--;
                     TimeLabel.setText("Time: " + TimeLimit);
                     if (TimeLimit == 0 && !gamePanel.getisOver()) {
-                        if (!isplay)
-                        {
+                        if (!isplay) {
                             audioClip.stop();
                             audioClip.close();
                             isplay = true;
