@@ -14,6 +14,7 @@ public class InitiaFrame extends JFrame {
     private GameController controller;
     private ModeFrame modeFrame;
     private GameFrame gameFrame;
+    private RankFrame rankFrame;
     public InitiaFrame(int width,int height) {
         controller = new GameController();
         this.setTitle("2048 Game");
@@ -45,7 +46,7 @@ public class InitiaFrame extends JFrame {
                 this.dispose();
                 JOptionPane.showMessageDialog(InitiaFrame.this, "可以继续游戏啦！");
                 modeFrame=new ModeFrame(900,700,this);
-                gameFrame=new GameFrame(900,700,Filer.ReadCount(),Filer.ReadTarget(),Filer.ReadPoint(),null,false,0);
+                gameFrame=new GameFrame(900,700,Filer.ReadCount(),Filer.ReadTarget(),Filer.ReadStep(),Filer.ReadPoint(),null,false,0);
                 gameFrame.setModeFrame(this.modeFrame);
                 gameFrame.getGamePanel().setModeFrame(this.modeFrame);
                 modeFrame.setLoadFrame(this.loadFrame);
@@ -53,6 +54,7 @@ public class InitiaFrame extends JFrame {
                 gameFrame.getGamePanel().setController(this.controller);
                 gameFrame.getGamePanel().getModel().LoadNumbers(Filer.ReadArray());
                 gameFrame.getGamePanel().updateGridsNumber();
+                gameFrame.getGamePanel().setSteps(Filer.ReadStep());
                 controller.setModel(gameFrame.getGamePanel().getModel());
                 controller.setView(gameFrame.getGamePanel());
                 controller.setGameFrame(gameFrame);
@@ -64,7 +66,9 @@ public class InitiaFrame extends JFrame {
         });
         this.RankGameBtn.addActionListener(e->
         {
-
+            Filer.Rank();
+            rankFrame=new RankFrame();
+            rankFrame.setVisible(true);
         });
 
     }

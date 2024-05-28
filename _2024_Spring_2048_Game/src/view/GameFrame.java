@@ -51,7 +51,7 @@ public class GameFrame extends JFrame {
     private Clip audioClip;
     private boolean isplay;
 
-    public GameFrame(int width, int height, int COUNT, int Target, int Point, String path, boolean isTimelimit, int timeLimit) {
+    public GameFrame(int width, int height, int COUNT, int Target, int Point, int step,String path, boolean isTimelimit, int timeLimit) {
         isplay = true;
         this.TimeLimit = timeLimit;
         this.isTimelimit = isTimelimit;
