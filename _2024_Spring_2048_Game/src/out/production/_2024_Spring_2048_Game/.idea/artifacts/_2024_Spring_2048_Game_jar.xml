@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="_2024_Spring_2048_Game:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/_2024_Spring_2048_Game_jar</output-path>
-    <root id="archive" name="_2024_Spring_2048_Game.jar">
-      <element id="module-output" name="_2024_Spring_2048_Game" />
-    </root>
-  </artifact>
-</component>

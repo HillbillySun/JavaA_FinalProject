@@ -16,7 +16,7 @@ public class Filer {
             writer.write(password);
             writer.newLine();
             writer.close();
-        } catch (IOException e) {
+        } catch (IOException | NullPointerException e) {
             System.out.println(e);
         }
     }
