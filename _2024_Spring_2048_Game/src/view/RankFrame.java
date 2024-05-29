@@ -15,12 +15,10 @@ public class RankFrame extends JFrame {
 
     public RankFrame() {
         setTitle("排行榜");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(300, 400);
         setLocationRelativeTo(null);
-
         loadDataFromFile();
-
         JPanel panel = new JPanel(new GridLayout(names.size(), 1));
         for (int i = 0; i < names.size(); i++) {
             JLabel label = new JLabel("第"+(i+1)+"名: "+names.get(i) + " ---------------- " + scores.get(i)+"分");

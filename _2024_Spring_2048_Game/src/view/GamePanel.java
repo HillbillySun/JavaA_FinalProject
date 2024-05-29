@@ -174,7 +174,7 @@ public class GamePanel extends ListenerPanel {
             controller.endGame();
             this.getModel().playAction("Music/Win.wav");
             JOptionPane.showMessageDialog(this,"You Win!");
-            Filer.RecordPoint(this.points);
+            Filer.RecordPoint(String.valueOf(this.points));
         }
         else if (isOver2)
         {
