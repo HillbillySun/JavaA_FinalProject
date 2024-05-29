@@ -168,9 +168,9 @@ public static int ReadCount(){
         return Integer.MIN_VALUE;
     }
 }
-public static void RecordPoint(int Point){
+public static void RecordPoint(String Point){
     String filePath = "Users\\RankMember";
-    try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+    try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath,true))) {
         writer.write(User.CurrentUser);
         writer.write("   ");
         writer.write(Point);
@@ -217,6 +217,9 @@ public static void Rank(){
     }
 
     System.out.println("数据已经成功写入到文件 Rank 中。");
+}
+public static boolean CheckSafety(){
+        return false;
 }
 }
 
