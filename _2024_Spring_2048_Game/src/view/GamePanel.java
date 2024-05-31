@@ -249,6 +249,18 @@ public class GamePanel extends ListenerPanel {
             gameFrame.setTimelimit(gameFrame.getTempTime());
             gameFrame.limitMode();
         }
+        System.out.println("isTour = "+gameFrame.isTour);
+        if (!gameFrame.isTour)
+        {
+            try {
+                gameFrame.getSaveTimer().cancel();
+                System.out.println( "cancel Timer Successfully" );
+                gameFrame.autoSave(10000);
+                System.out.println("Begin Save automatically");
+            }catch (Exception e) {
+                System.out.println(e);
+            }
+        }
     }
 
     public void reviveGame()

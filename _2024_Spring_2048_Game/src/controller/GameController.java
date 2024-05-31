@@ -4,11 +4,11 @@ import model.GridNumber;
 import view.*;
 import util.Filer;
 
-import javax.sound.sampled.*;
 import javax.swing.*;
-import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * This class is used for interactive with JButton in GameFrame.
@@ -51,10 +51,15 @@ public class GameController{
             gameFrame.getAudioClip().close();
             gameFrame.setIsplay(true);
         }
-        if (gameFrame.getTimer() != null)
+        try
         {
-            gameFrame.getTimer().cancel();
-        }
+            gameFrame.getLimitTimer().cancel();
+        }catch (NullPointerException ignored)
+        {}
+        try {
+            gameFrame.getSaveTimer().cancel();
+        }catch (NullPointerException ignored)
+        {}
         System.out.println("Game Over!");
         model.setisMove(false);
         view.setifOver(true);
@@ -64,7 +69,15 @@ public class GameController{
         if (!view.getisOver())
         {
             Filer.SaveNumber(model.getNumbers(),view.getSteps(),view.getTarget(),view.getPoints(),view.getCOUNT());
-            JOptionPane.showMessageDialog(null, "保存成功！");
+            Timer timer = new Timer();
+            gameFrame.getSaveLabel().setVisible(true);
+            TimerTask twinkle = new TimerTask() {
+                @Override
+                public void run() {
+                    gameFrame.getSaveLabel().setVisible(false);
+                }
+            };
+            timer.schedule(twinkle,1500);
         }
         else
         {

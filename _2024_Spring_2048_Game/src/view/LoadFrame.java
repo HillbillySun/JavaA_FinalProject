@@ -18,8 +18,6 @@ public class LoadFrame extends JFrame {
     private JLabel welcomeLabel;
     private JLabel designerLabel;
     private JLabel hintLabel;
-
-
     protected boolean isTour;
 
     private JPanel backgroundPanel;
@@ -50,7 +48,7 @@ public class LoadFrame extends JFrame {
         registerButton.setFont(buttonfont);
         welcomeLabel = createLabel("Welcome to 2048", util.Font.creatFont("ttfFont/Jersey10-Regular.ttf",125f),new Point(75,70),800,100);
         designerLabel = createLabel("Designed by BillSun and lv05327", util.Font.creatFont("ttfFont/DancingScript-VariableFont_wght.ttf",35f),new Point(220,200),500,50);
-        hintLabel = createLabel("Hint: Only 'Log in' and 'Sign up' can enter the game!", util.Font.creatFont("ttfFont/DancingScript-VariableFont_wght.ttf",25f),new Point(210,580),500,40);
+        hintLabel = createLabel("Hint: Only 'Log in' and 'Tourist' can enter the game!", util.Font.creatFont("ttfFont/DancingScript-VariableFont_wght.ttf",25f),new Point(210,580),500,40);
         hintLabel.setForeground(Color.RED);
         JPanel bkgPanel = new JPanel();
         bkgPanel.setBackground(new Color(255, 237, 211));
@@ -98,7 +96,7 @@ public class LoadFrame extends JFrame {
                         if (controller.isLogin()) {
                             isTour = false;
                             JOptionPane.showMessageDialog(LoadFrame.this, "登录成功！");
-                            InitiaFrame initiaFrame = new InitiaFrame(600, 500);
+                            InitiaFrame initiaFrame = new InitiaFrame(600, 800);
                             initiaFrame.setLoadFrame(this);
                             User.CurrentUser = name;
                             InitiaFrame.OpenInitial(initiaFrame);

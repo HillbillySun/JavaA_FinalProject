@@ -26,13 +26,14 @@ public class GridComponent extends JComponent {
     }
 
     @Override
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
+    public void paintComponent(Graphics g1) {
+        Graphics2D g = (Graphics2D) g1;
+        super.paintComponents(g);
         if (number > 0) {
             g.setColor(ColorMap.getColor(number));
             g.fillRect(0, 0, getWidth(), getHeight());
-            ((Graphics2D) g).setStroke(new BasicStroke(5));
-             g.setColor(Color.GRAY);
+            g.setStroke(new BasicStroke(5));
+            g.setColor(Color.GRAY);
             g.drawRect(0, 0, getWidth(), getHeight());
             if (number > 4) {
                 g.setColor(Color.WHITE);

@@ -1,6 +1,7 @@
 package view;
 
 import controller.GameController;
+import model.User;
 import util.Filer;
 import javax.swing.*;
 import java.awt.*;
@@ -15,15 +16,23 @@ public class InitiaFrame extends JFrame {
     private ModeFrame modeFrame;
     private GameFrame gameFrame;
     private RankFrame rankFrame;
+    private JLabel welcomeLabel;
+    private java.awt.Font font;
     public InitiaFrame(int width,int height) {
+        font = util.Font.creatFont("ttfFont/Jersey10-Regular.ttf",50);
         controller = new GameController();
         this.setTitle("2048 Game");
         this.setLayout(null);
         this.setSize(width, height);
         this.setLocationRelativeTo(null);
-        NewGameBtn = createButton("New Game", new Point(150, 35), 300, 90);
-        LoadGameBtn=createButton("Load Game",new Point(150,155),300,90);
-        RankGameBtn=createButton("Rank",new Point(150,275),300,90);
+        welcomeLabel = createLabel("2048", util.Font.creatFont("ttfFont/Jersey10-Regular.ttf",100),new Point(220,100),400,100);
+        welcomeLabel.setForeground(new Color(128, 102, 74));
+        NewGameBtn = createButton("New Game", new Point(150, 235), 300, 90);
+        LoadGameBtn=createButton("Load Game",new Point(150,365),300,90);
+        RankGameBtn=createButton("Rank",new Point(150,495),300,90);
+        NewGameBtn.setFont(font);
+        LoadGameBtn.setFont(font);
+        RankGameBtn.setFont(font);
         JPanel bkgPanel = new JPanel();
         bkgPanel.setBackground(new Color(255, 237, 211));
         this.backgroundPanel = bkgPanel;
@@ -32,6 +41,7 @@ public class InitiaFrame extends JFrame {
         backgroundPanel.add(NewGameBtn);
         backgroundPanel.add(LoadGameBtn);
         backgroundPanel.add(RankGameBtn);
+        backgroundPanel.add(welcomeLabel);
         this.NewGameBtn.addActionListener(e->
         {
             this.dispose();
@@ -59,6 +69,7 @@ public class InitiaFrame extends JFrame {
                 controller.setView(gameFrame.getGamePanel());
                 controller.setGameFrame(gameFrame);
                 GameFrame.StartGame(gameFrame);
+                gameFrame.autoSave(10000);
             }
             else{
                 JOptionPane.showMessageDialog(InitiaFrame.this, "您无存档可读！");
@@ -85,7 +96,7 @@ public class InitiaFrame extends JFrame {
     {
         SwingUtilities.invokeLater(() ->
         {
-            InitiaFrame initiaFrame=new InitiaFrame(600,500);
+            InitiaFrame initiaFrame=new InitiaFrame(600,800);
             initiaFrame.setVisible(true);
         });
     }
@@ -103,5 +114,13 @@ public class InitiaFrame extends JFrame {
     public LoadFrame getLoadFrame()
     {
         return loadFrame;
+    }
+    private JLabel createLabel(String name, java.awt.Font font, Point location, int width, int height) {
+        JLabel label = new JLabel(name);
+        label.setFont(font);
+        label.setLocation(location);
+        label.setSize(width, height);
+        this.add(label);
+        return label;
     }
 }

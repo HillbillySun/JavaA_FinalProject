@@ -1,9 +1,7 @@
 package view;
 
 import controller.GameController;
-import model.User;
 import util.ColorMap;
-import util.Filer;
 
 import javax.sound.sampled.*;
 import javax.swing.*;
@@ -47,11 +45,13 @@ public class GameFrame extends JFrame {
     private boolean isTimelimit;
     private int TimeLimit;
     private int tempTime;
-    private Timer timer;
+    private Timer LimitTimer;
     private Clip audioClip;
     private boolean isplay;
+    protected boolean isTour;
 
     public GameFrame(int width, int height, int COUNT, int Target, int Point, int step,String path, boolean isTimelimit, int timeLimit) {
+        isTour = false;
         isplay = true;
         this.TimeLimit = timeLimit;
         this.isTimelimit = isTimelimit;
@@ -77,6 +77,7 @@ public class GameFrame extends JFrame {
         this.pointLabel = createLabel("Point: " + Point, new Font("Arial", Font.PLAIN, 22), new Point(700, 55), 180, 50);
         this.TimeLabel = createLabel("Time: No Limit", new Font("Arial", Font.PLAIN, 22), new Point(700, 80), 180, 50);
         this.saveLabel = createLabel("save successfully!", new Font("Arial", Font.PLAIN, 15), new Point(50, 10), 180, 50);
+        saveLabel.setForeground(new Color(37, 111, 197));
         saveLabel.setVisible(false);
         this.setBck = createButton("Theme", new Point(700, 345), 110, 50);
         restartBtn.setFont(buttonfont);
@@ -104,6 +105,7 @@ public class GameFrame extends JFrame {
             }
             gamePanel.getModel().playAction("Music/Win.wav");
             ModeFrame.OpenMode(this.modeFrame);
+            this.controller.endGame();
             this.dispose();
         });
         this.musicBtn.addActionListener(e -> {
@@ -187,6 +189,7 @@ public class GameFrame extends JFrame {
     }
 
     public GameFrame(int width, int height, int COUNT, int Target, String path, String tourist, boolean isTimelimit, int timeLimit) {
+        isTour = true;
         isplay = true;
         this.TimeLimit = timeLimit;
         this.isTimelimit = isTimelimit;
@@ -223,7 +226,7 @@ public class GameFrame extends JFrame {
         gamePanel.setTimeLabel(TimeLabel);
         gamePanel.getModel().setTarget(Target);
         if (isTimelimit) {
-            timer = new Timer();
+            LimitTimer = new Timer();
             limitMode();
         }
         this.restartBtn.addActionListener(e -> {
@@ -236,11 +239,12 @@ public class GameFrame extends JFrame {
                 audioClip.stop();
                 audioClip.close();
             }
-            if (timer != null) {
-                timer.cancel();
+            if (LimitTimer != null) {
+                LimitTimer.cancel();
             }
             gamePanel.getModel().playAction("Music/Win.wav");
             ModeFrame.OpenMode(this.modeFrame);
+            this.controller.endGame();
             this.dispose();
         });
         this.RightBtn.addActionListener(e ->
@@ -430,8 +434,8 @@ public class GameFrame extends JFrame {
     }
 
     public void resetTimer() {
-        timer.cancel();
-        timer = new Timer();
+        LimitTimer.cancel();
+        LimitTimer = new Timer();
     }
 
     public Clip getAudioClip() {
@@ -481,8 +485,8 @@ public class GameFrame extends JFrame {
         }).start();
     }
 
-    public Timer getTimer() {
-        return timer;
+    public Timer getLimitTimer() {
+        return LimitTimer;
     }
 
     public void limitMode() {
@@ -512,6 +516,27 @@ public class GameFrame extends JFrame {
                 }
             }
         };
-        timer.scheduleAtFixedRate(countTime, 0, 1000);
+        LimitTimer.scheduleAtFixedRate(countTime, 0, 1000);
     }
+    private Timer SaveTimer;
+    public void autoSave(int time)
+    {
+        SaveTimer = new Timer();
+        TimerTask autoSave = new TimerTask() {
+            @Override
+            public void run() {
+                try {
+                    controller.saveGame();
+                }catch (NullPointerException e)
+                {
+                    System.out.println(e);
+                }
+            }
+        };
+        SaveTimer.scheduleAtFixedRate(autoSave,1000,time);
+    }
+    public Timer getSaveTimer()
+    {return SaveTimer;}
+    public JLabel getSaveLabel()
+    {return saveLabel;}
 }

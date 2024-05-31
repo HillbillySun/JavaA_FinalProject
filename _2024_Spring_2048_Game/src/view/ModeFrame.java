@@ -65,6 +65,7 @@ public class ModeFrame extends JFrame {
             GameFrame.StartGame(gameFrame);
             JOptionPane.showMessageDialog(gameFrame,"经典4*4，合成2048!");
             ifDispole=true;
+            gameFrame.autoSave(10000);
         });
         this.EasyBtn.addActionListener(e->
         {
@@ -85,6 +86,7 @@ public class ModeFrame extends JFrame {
             GameFrame.StartGame(gameFrame);
             JOptionPane.showMessageDialog(gameFrame,"简单4*4，合成1024即可!");
             ifDispole=true;
+            gameFrame.autoSave(10000);
         });
         this.HardBtn.addActionListener(e->
         {
@@ -105,6 +107,7 @@ public class ModeFrame extends JFrame {
             GameFrame.StartGame(gameFrame);
             JOptionPane.showMessageDialog(gameFrame,"使用3*3，合成2048!");
             ifDispole=true;
+            gameFrame.autoSave(10000);
         });
         this.EttBtn.addActionListener(e->
         {
