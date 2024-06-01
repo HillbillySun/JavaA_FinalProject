@@ -24,6 +24,7 @@ public class GameController{
     private boolean login=false;
     private boolean exsit=false;
     private boolean read=false;
+    private boolean safe=true;
     public GameController(GamePanel view, GridNumber model, GameFrame gameFrame,ModeFrame modeFrame,InitiaFrame initiaFrame) {
         this.view = view;
         this.model = model;
@@ -135,6 +136,23 @@ public class GameController{
              System.out.println("读取失败！");
          }
     }
+    public void CheckSafety(){
+        if(Filer.ReadTarget()!=1024&&Filer.ReadTarget()!=2048){
+            safe=false;
+        }
+        if (Filer.ReadPoint()%2==1){
+            safe=false;
+        }
+        int[][] a =Filer.ReadArray();
+        for(int i=0;i<Filer.ReadCount();i++){
+            for(int j=0;j<Filer.ReadCount();j++){
+                double logBase2 = Math.log(a[i][j]) / Math.log(2);
+                if(logBase2 != (int)logBase2||a[i][j]==1){
+                    safe=false;
+                }
+            }
+        }
+    }
     public void setLogin(boolean login) {
         this.login = login;
     }
@@ -162,6 +180,9 @@ public class GameController{
         this.read = read;
     }
 
+    public boolean isSafe() {
+        return safe;
+    }
     public boolean isRead() {
         return read;
     }

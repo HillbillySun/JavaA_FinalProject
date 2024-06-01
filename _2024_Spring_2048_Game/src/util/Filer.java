@@ -218,9 +218,6 @@ public static void Rank(){
 
     System.out.println("数据已经成功写入到文件 Rank 中。");
 }
-public static boolean CheckSafety(){
-        return false;
-}
 }
 
 

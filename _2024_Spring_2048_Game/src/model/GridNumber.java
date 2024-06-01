@@ -321,7 +321,6 @@ public class GridNumber {
         this.isMove = b;
     }
 
-
     public void playAction(String path) {
         new Thread(() -> {
             try {

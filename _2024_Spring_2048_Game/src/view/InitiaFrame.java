@@ -52,7 +52,9 @@ public class InitiaFrame extends JFrame {
         this.LoadGameBtn.addActionListener(e->
         {
             controller.CheckRead();
+            controller.CheckSafety();
             if(controller.isRead()){
+                if(controller.isSafe()){
                 this.dispose();
                 JOptionPane.showMessageDialog(InitiaFrame.this, "可以继续游戏啦！");
                 modeFrame=new ModeFrame(900,700,this);
@@ -69,7 +71,10 @@ public class InitiaFrame extends JFrame {
                 controller.setView(gameFrame.getGamePanel());
                 controller.setGameFrame(gameFrame);
                 GameFrame.StartGame(gameFrame);
-                gameFrame.autoSave(10000);
+                gameFrame.autoSave(10000);}
+                else {
+                    JOptionPane.showMessageDialog(InitiaFrame.this, "存档文件损坏，无法读取！");
+                }
             }
             else{
                 JOptionPane.showMessageDialog(InitiaFrame.this, "您无存档可读！");
@@ -78,7 +83,7 @@ public class InitiaFrame extends JFrame {
         this.RankGameBtn.addActionListener(e->
         {
             Filer.Rank();
-            rankFrame=new RankFrame();
+            rankFrame=new RankFrame(800,800);
             rankFrame.setVisible(true);
         });
 
