@@ -67,6 +67,7 @@ public class GameController{
     }
     public void saveGame()
     {
+        System.out.println("isOver = "+view.getisOver());
         if (!view.getisOver())
         {
             Filer.SaveNumber(model.getNumbers(),view.getSteps(),view.getTarget(),view.getPoints(),view.getCOUNT());
@@ -146,10 +147,12 @@ public class GameController{
         int[][] a =Filer.ReadArray();
         for(int i=0;i<Filer.ReadCount();i++){
             for(int j=0;j<Filer.ReadCount();j++){
+                if(a[i][j]!=0){
                 double logBase2 = Math.log(a[i][j]) / Math.log(2);
                 if(logBase2 != (int)logBase2||a[i][j]==1){
                     safe=false;
                 }
+            }
             }
         }
     }

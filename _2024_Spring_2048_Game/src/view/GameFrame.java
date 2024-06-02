@@ -1,5 +1,6 @@
 package view;
 
+import com.sun.source.tree.NewClassTree;
 import controller.GameController;
 import util.ColorMap;
 
@@ -27,7 +28,8 @@ public class GameFrame extends JFrame {
     private JButton RightBtn;
 
     protected JButton setBck;
-
+    private JMenuBar menuBar;
+    private JMenu menu;
     protected ActionListener actionListener;
     private JPanel backgroundPanel;
 
@@ -89,6 +91,7 @@ public class GameFrame extends JFrame {
         RightBtn.setFont(buttonfont);
         SaveBtn.setFont(buttonfont);
         setBck.setFont(buttonfont);
+        CreateMenu();
         gamePanel.setStepLabel(stepLabel);
         gamePanel.setPointLabel(pointLabel);
         gamePanel.setTimeLabel(TimeLabel);
@@ -213,6 +216,7 @@ public class GameFrame extends JFrame {
         this.TimeLabel = createLabel("Time: No Limit", new Font("Arial", Font.PLAIN, 22), new Point(700, 80), 180, 50);
         this.setBck = createButton("Theme", new Point(700, 275), 110, 50);
         this.musicBtn = createButton("Music", new Point(700, 345), 110, 50);
+        CreateMenu();
         restartBtn.setFont(buttonfont);
         mode.setFont(buttonfont);
         UpBtn.setFont(buttonfont);
@@ -385,6 +389,7 @@ public class GameFrame extends JFrame {
             backgroundPanel.add(setBck);
             backgroundPanel.add(TimeLabel);
             backgroundPanel.add(musicBtn);
+            backgroundPanel.add(menuBar);
             if (!isTour) {
                 backgroundPanel.add(saveLabel);
                 backgroundPanel.add(SaveBtn);
@@ -407,6 +412,7 @@ public class GameFrame extends JFrame {
             backgroundPanel.add(setBck);
             backgroundPanel.add(TimeLabel);
             backgroundPanel.add(musicBtn);
+            backgroundPanel.add(menuBar);
             if (!isTour) {
                 backgroundPanel.add(saveLabel);
                 backgroundPanel.add(SaveBtn);
@@ -539,4 +545,33 @@ public class GameFrame extends JFrame {
     {return SaveTimer;}
     public JLabel getSaveLabel()
     {return saveLabel;}
+    private void CreateMenu()
+    {
+        this.menuBar = new JMenuBar();
+        this.menu = new JMenu("Menu");
+        JMenuItem undoItem = new JMenuItem("Undo");
+        JMenuItem backItem = new JMenuItem("Back to Home");
+        menu.add(undoItem);
+        menu.add(backItem);
+        menuBar.add(menu);
+        this.setJMenuBar(menuBar);
+        backItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!isTour)
+                {
+                    controller.saveGame();
+                }
+                controller.endGame();
+                dispose();
+                LoadFrame.OpenLoad();
+            }
+        });
+        undoItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                gamePanel.undo();
+            }
+        });
+    }
 }

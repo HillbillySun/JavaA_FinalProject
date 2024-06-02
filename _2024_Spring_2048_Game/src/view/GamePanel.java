@@ -11,6 +11,8 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowStateListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -31,7 +33,9 @@ public class GamePanel extends ListenerPanel {
     private final int GRID_SIZE;
     private GameController controller;
     private GameFrame gameFrame;
-
+    private ArrayList<int[][]> History = new ArrayList<>();
+    private int[][] historyNumbers;
+    private ArrayList<Integer> Marks = new ArrayList<>();
     public GamePanel(int size,int COUNT,int target) {
         this.setTarget(target);
         this.setCOUNT(COUNT);
@@ -79,6 +83,7 @@ public class GamePanel extends ListenerPanel {
         if(!isOver1||!isOver2)
         {
             System.out.println("Click VK_RIGHT");
+            createHistory();
             this.model.moveRight();
             this.updateGridsNumber();
             this.afterMove();
@@ -90,6 +95,7 @@ public class GamePanel extends ListenerPanel {
         if(!isOver1||!isOver2)
         {
             System.out.println("Click VK_Left");
+            createHistory();
             this.model.moveLeft();
             this.updateGridsNumber();
             this.afterMove();
@@ -100,6 +106,7 @@ public class GamePanel extends ListenerPanel {
     public void doMoveUp() {
         if(!isOver1||!isOver2){
             System.out.println("Click VK_Up");
+            createHistory();
             this.model.moveUp();
             this.updateGridsNumber();
             this.afterMove();
@@ -110,6 +117,7 @@ public class GamePanel extends ListenerPanel {
     public void doMoveDown() {
         if(!isOver1||!isOver2){
             System.out.println("Click VK_Down");
+            createHistory();
             this.model.moveDown();
             this.updateGridsNumber();
             this.afterMove();
@@ -120,7 +128,12 @@ public class GamePanel extends ListenerPanel {
         if (model.getIfGenerate())
         {
             this.steps++;
+            History.add(historyNumbers);
+            Marks.add(model.getMarkPoint());
         }
+        System.out.println("History length = "+History.size());
+        System.out.println("Steps = "+steps);
+        System.out.println("Marks length = "+Marks.size());
         this.stepLabel.setText(String.format("Step: %d", this.steps));
         points+=model.getMarkPoint();
         this.pointLabel.setText(String.format("Points: %d",this.points));
@@ -384,6 +397,64 @@ public class GamePanel extends ListenerPanel {
             timer.cancel();
         } catch (UnsupportedAudioFileException | LineUnavailableException | IOException ex) {
             ex.printStackTrace();
+        }
+    }
+    public GridComponent[][] getGrids()
+    {
+        return grids;
+    }
+
+    public void undo()
+    {
+        try {
+            for (int i = 0; i < model.getNumbers().length; i++) {
+                for (int j = 0; j < model.getNumbers()[0].length; j++) {
+                    model.getNumbers()[i][j] = History.get(steps-1)[i][j];
+                }
+            }
+            History.remove(steps-1);
+            points -= Marks.get(steps-1);
+            Marks.remove(steps-1);
+            this.steps--;
+            stepLabel.setText(String.format("Step: %d", this.steps));
+            pointLabel.setText(String.format("Points: %d",this.points));
+            updateGridsNumber();
+        }catch (IndexOutOfBoundsException e)
+        {
+            System.out.println(e);
+            JFrame SQframe =new JFrame();
+            SQframe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            SQframe.setResizable(false);
+            SQframe.setLayout(new BorderLayout());
+            SQframe.setSize(600,600);
+            SQframe.setLocationRelativeTo(null);
+            ImageIcon SQwatching = new ImageIcon("Pictures/Watching.jpg");
+            JPanel SQPanel = new JPanel() {
+                @Override
+                protected void paintComponent(Graphics g) {
+                    super.paintComponent(g);
+                    Graphics2D g2d = (Graphics2D) g.create();
+                    g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,1.0f));
+                    g2d.drawImage(SQwatching.getImage(), 0, 0, getWidth(), getHeight(), this);
+                    g2d.dispose();
+                }
+            };
+            SQframe.add(SQPanel, BorderLayout.CENTER);
+            SQframe.setVisible(true);
+        }
+    }
+
+    public void createHistory()
+    {
+        historyNumbers = new int[COUNT][COUNT];
+        for (int i = 0; i < COUNT; i++) {
+            for (int j = 0; j < COUNT; j++) {
+                historyNumbers[i][j] = this.getModel().getNumber(i,j);
+            }
+        }
+        System.out.println("记录历史");
+        for (int[] line : historyNumbers) {
+            System.out.println(Arrays.toString(line));
         }
     }
 }
