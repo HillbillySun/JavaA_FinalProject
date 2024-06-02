@@ -364,23 +364,12 @@ public class GamePanel extends ListenerPanel {
     {return (isOver2||isOver1);}
     private void playAudio(String filePath,int time) {
         try {
-            // 打开音频文件
             File audioFile = new File(filePath);
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
-
-            // 获取音频格式
             AudioFormat format = audioStream.getFormat();
-
-            // 获取音频数据行信息
             DataLine.Info info = new DataLine.Info(Clip.class, format);
-
-            // 获取音频数据行
             Clip audioClip = (Clip) AudioSystem.getLine(info);
-
-            // 打开音频剪辑并加载样本
             audioClip.open(audioStream);
-
-            // 播放音频
             audioClip.start();
             Timer timer = new Timer();
             TimerTask stopMusic=new TimerTask() {
@@ -421,6 +410,7 @@ public class GamePanel extends ListenerPanel {
             updateGridsNumber();
         }catch (IndexOutOfBoundsException e)
         {
+            playAudio("Music/siuuu.wav",2500);
             System.out.println(e);
             JFrame SQframe =new JFrame();
             SQframe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -442,6 +432,17 @@ public class GamePanel extends ListenerPanel {
             SQframe.add(SQPanel, BorderLayout.CENTER);
             SQframe.setVisible(true);
         }
+    }
+
+    @Override
+    public void BackHome() {
+        if (!gameFrame.getisTour())
+        {
+            controller.saveGame();
+        }
+        controller.endGame();
+        gameFrame.dispose();
+        LoadFrame.OpenLoad();
     }
 
     public void createHistory()

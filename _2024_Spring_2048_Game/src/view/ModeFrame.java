@@ -184,8 +184,7 @@ public class ModeFrame extends JFrame {
     public void setLoadFrame(LoadFrame loadFrame)
     {this.loadFrame = loadFrame;}
 
-    public LoadFrame getloadframe()
-    {
+    public LoadFrame getloadframe() {
         return loadFrame;
     }
 }
