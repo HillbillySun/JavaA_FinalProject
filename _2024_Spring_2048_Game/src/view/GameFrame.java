@@ -558,11 +558,11 @@ public class GameFrame extends JFrame {
         backItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controller.endGame();
                 if (!isTour)
                 {
                     controller.saveGame();
                 }
+                controller.endGame();
                 dispose();
                 LoadFrame.OpenLoad();
             }

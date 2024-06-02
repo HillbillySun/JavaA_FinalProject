@@ -67,6 +67,7 @@ public class GameController{
     }
     public void saveGame()
     {
+        System.out.println("isOver = "+view.getisOver());
         if (!view.getisOver())
         {
             Filer.SaveNumber(model.getNumbers(),view.getSteps(),view.getTarget(),view.getPoints(),view.getCOUNT());
