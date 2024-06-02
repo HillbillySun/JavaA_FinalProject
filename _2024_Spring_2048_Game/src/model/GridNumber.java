@@ -4,6 +4,7 @@ import javax.sound.sampled.*;
 import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -15,7 +16,6 @@ public class GridNumber {
     private int[][] numbers;
     private boolean ifGenerate = false;
     static Random random = new Random();
-
     private int target;
 
     public GridNumber(int xCount, int yCount) {
