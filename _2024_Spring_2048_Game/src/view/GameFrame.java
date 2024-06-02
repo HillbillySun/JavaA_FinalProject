@@ -389,7 +389,6 @@ public class GameFrame extends JFrame {
             backgroundPanel.add(setBck);
             backgroundPanel.add(TimeLabel);
             backgroundPanel.add(musicBtn);
-            backgroundPanel.add(menuBar);
             if (!isTour) {
                 backgroundPanel.add(saveLabel);
                 backgroundPanel.add(SaveBtn);
