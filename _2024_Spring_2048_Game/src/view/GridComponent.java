@@ -28,13 +28,16 @@ public class GridComponent extends JComponent {
     @Override
     public void paintComponent(Graphics g1) {
         Graphics2D g = (Graphics2D) g1;
-        super.paintComponents(g);
+        super.paintComponent(g);
+        int arcWidth = getWidth()/5;  // 圆角的宽度
+        int arcHeight = getHeight()/5; // 圆角的高度
+
         if (number > 0) {
             g.setColor(ColorMap.getColor(number));
-            g.fillRect(0, 0, getWidth(), getHeight());
+            g.fillRoundRect(0, 0, getWidth(), getHeight(), arcWidth, arcHeight);
             g.setStroke(new BasicStroke(5));
             g.setColor(Color.GRAY);
-            g.drawRect(0, 0, getWidth(), getHeight());
+            g.drawRoundRect(0, 0, getWidth(), getHeight(), arcWidth, arcHeight);
             if (number > 4) {
                 g.setColor(Color.WHITE);
             } else {
@@ -48,10 +51,10 @@ public class GridComponent extends JComponent {
             g.drawString(String.valueOf(number), x, y);
         } else {
             g.setColor(Color.LIGHT_GRAY);
-            g.fillRect(0, 0, getWidth(), getHeight());
-            ((Graphics2D) g).setStroke(new BasicStroke(5));
+            g.fillRoundRect(0, 0, getWidth(), getHeight(), arcWidth, arcHeight);
+            g.setStroke(new BasicStroke(5));
             g.setColor(Color.GRAY);
-            g.drawRect(0, 0, getWidth(), getHeight());
+            g.drawRoundRect(0, 0, getWidth(), getHeight(), arcWidth, arcHeight);
         }
     }
 

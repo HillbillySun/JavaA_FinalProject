@@ -44,6 +44,7 @@ public class GameController {
             gameFrame.setIsplay(true);
         }
         System.out.println("Do restart game here");
+        view.removeHistory();
         view.refreshGame();
         view.setifOver(false);
     }
@@ -65,6 +66,7 @@ public class GameController {
         System.out.println("Game Over!");
         model.setisMove(false);
         view.setifOver(true);
+        view.removeHistory();
     }
 
     public void saveGame() {

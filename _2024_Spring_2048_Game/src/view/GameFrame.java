@@ -62,6 +62,7 @@ public class GameFrame extends JFrame {
         this.setSize(width, height);
         ColorMap.InitialColorMap();
         gamePanel = new GamePanel((int) (this.getHeight() * 0.8), COUNT, Target);
+        gamePanel.setBackground(Color.GRAY);
         gamePanel.setGameFrame(this);
         gamePanel.setPoints(Point);
         gamePanel.setLocation(this.getHeight() / 15, this.getWidth() / 15);
@@ -201,6 +202,7 @@ public class GameFrame extends JFrame {
         this.setSize(width, height);
         ColorMap.InitialColorMap();
         gamePanel = new GamePanel((int) (this.getHeight() * 0.8), COUNT, Target);
+        gamePanel.setBackground(Color.GRAY);
         gamePanel.setGameFrame(this);
         gamePanel.setLocation(this.getHeight() / 15, this.getWidth() / 15);
         this.add(gamePanel);
@@ -530,6 +532,7 @@ public class GameFrame extends JFrame {
             @Override
             public void run() {
                 try {
+                    System.out.println(SaveTimer);
                     controller.saveGame();
                 }catch (NullPointerException e)
                 {
