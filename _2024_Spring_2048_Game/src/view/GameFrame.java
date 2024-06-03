@@ -389,7 +389,6 @@ public class GameFrame extends JFrame {
             backgroundPanel.add(setBck);
             backgroundPanel.add(TimeLabel);
             backgroundPanel.add(musicBtn);
-            backgroundPanel.add(menuBar);
             if (!isTour) {
                 backgroundPanel.add(saveLabel);
                 backgroundPanel.add(SaveBtn);
@@ -412,7 +411,6 @@ public class GameFrame extends JFrame {
             backgroundPanel.add(setBck);
             backgroundPanel.add(TimeLabel);
             backgroundPanel.add(musicBtn);
-            backgroundPanel.add(menuBar);
             if (!isTour) {
                 backgroundPanel.add(saveLabel);
                 backgroundPanel.add(SaveBtn);
@@ -551,6 +549,8 @@ public class GameFrame extends JFrame {
         this.menu = new JMenu("Menu");
         JMenuItem undoItem = new JMenuItem("Undo");
         JMenuItem backItem = new JMenuItem("Back to Home");
+        undoItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, KeyEvent.CTRL_DOWN_MASK));
+        backItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H, KeyEvent.CTRL_DOWN_MASK));
         menu.add(undoItem);
         menu.add(backItem);
         menuBar.add(menu);
@@ -558,13 +558,7 @@ public class GameFrame extends JFrame {
         backItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!isTour)
-                {
-                    controller.saveGame();
-                }
-                controller.endGame();
-                dispose();
-                LoadFrame.OpenLoad();
+                gamePanel.BackHome();
             }
         });
         undoItem.addActionListener(new ActionListener() {
@@ -573,5 +567,9 @@ public class GameFrame extends JFrame {
                 gamePanel.undo();
             }
         });
+    }
+    public boolean getisTour()
+    {
+        return isTour;
     }
 }

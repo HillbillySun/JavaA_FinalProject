@@ -36,6 +36,7 @@ public class GamePanel extends ListenerPanel {
     private ArrayList<int[][]> History = new ArrayList<>();
     private int[][] historyNumbers;
     private ArrayList<Integer> Marks = new ArrayList<>();
+    private int HistoryCount = 0;
     public GamePanel(int size,int COUNT,int target) {
         this.setTarget(target);
         this.setCOUNT(COUNT);
@@ -130,8 +131,10 @@ public class GamePanel extends ListenerPanel {
             this.steps++;
             History.add(historyNumbers);
             Marks.add(model.getMarkPoint());
+            HistoryCount++;
         }
         System.out.println("History length = "+History.size());
+        System.out.println("HistoryCount = "+HistoryCount);
         System.out.println("Steps = "+steps);
         System.out.println("Marks length = "+Marks.size());
         this.stepLabel.setText(String.format("Step: %d", this.steps));
@@ -187,7 +190,9 @@ public class GamePanel extends ListenerPanel {
             controller.endGame();
             this.getModel().playAction("Music/Win.wav");
             JOptionPane.showMessageDialog(this,"You Win!");
+            if(!gameFrame.getisTour()){
             Filer.RecordPoint(String.valueOf(this.points));
+            }
         }
         else if (isOver2)
         {
@@ -364,23 +369,12 @@ public class GamePanel extends ListenerPanel {
     {return (isOver2||isOver1);}
     private void playAudio(String filePath,int time) {
         try {
-            // 打开音频文件
             File audioFile = new File(filePath);
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
-
-            // 获取音频格式
             AudioFormat format = audioStream.getFormat();
-
-            // 获取音频数据行信息
             DataLine.Info info = new DataLine.Info(Clip.class, format);
-
-            // 获取音频数据行
             Clip audioClip = (Clip) AudioSystem.getLine(info);
-
-            // 打开音频剪辑并加载样本
             audioClip.open(audioStream);
-
-            // 播放音频
             audioClip.start();
             Timer timer = new Timer();
             TimerTask stopMusic=new TimerTask() {
@@ -409,18 +403,20 @@ public class GamePanel extends ListenerPanel {
         try {
             for (int i = 0; i < model.getNumbers().length; i++) {
                 for (int j = 0; j < model.getNumbers()[0].length; j++) {
-                    model.getNumbers()[i][j] = History.get(steps-1)[i][j];
+                    model.getNumbers()[i][j] = History.get(HistoryCount-1)[i][j];
                 }
             }
-            History.remove(steps-1);
-            points -= Marks.get(steps-1);
-            Marks.remove(steps-1);
+            History.remove(HistoryCount-1);
+            points -= Marks.get(HistoryCount-1);
+            Marks.remove(HistoryCount-1);
             this.steps--;
+            this.HistoryCount--;
             stepLabel.setText(String.format("Step: %d", this.steps));
             pointLabel.setText(String.format("Points: %d",this.points));
             updateGridsNumber();
         }catch (IndexOutOfBoundsException e)
         {
+            playAudio("Music/siuuu.wav",2500);
             System.out.println(e);
             JFrame SQframe =new JFrame();
             SQframe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -442,6 +438,17 @@ public class GamePanel extends ListenerPanel {
             SQframe.add(SQPanel, BorderLayout.CENTER);
             SQframe.setVisible(true);
         }
+    }
+
+    @Override
+    public void BackHome() {
+        if (!gameFrame.getisTour())
+        {
+            controller.saveGame();
+        }
+        controller.endGame();
+        gameFrame.dispose();
+        LoadFrame.OpenLoad();
     }
 
     public void createHistory()

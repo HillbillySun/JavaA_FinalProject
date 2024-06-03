@@ -3,7 +3,6 @@ package view;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
 
 /**
  * This class is to enable key events.
@@ -34,5 +33,7 @@ public abstract class ListenerPanel extends JPanel {
     public abstract void doMoveLeft();
     public abstract void doMoveUp();
     public abstract void doMoveDown();
+    public abstract void undo();
+    public abstract void BackHome();
 
 }

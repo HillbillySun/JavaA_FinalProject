@@ -54,7 +54,9 @@ public class InitiaFrame extends JFrame {
             controller.CheckRead();
             controller.CheckSafety();
             if(controller.isRead()){
+                System.out.println("isRead Successfully");
                 if(controller.isSafe()){
+                    System.out.println("isSafe Successfully");
                 this.dispose();
                 JOptionPane.showMessageDialog(InitiaFrame.this, "可以继续游戏啦！");
                 modeFrame=new ModeFrame(900,700,this);
