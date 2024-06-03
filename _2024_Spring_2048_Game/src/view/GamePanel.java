@@ -36,6 +36,7 @@ public class GamePanel extends ListenerPanel {
     private ArrayList<int[][]> History = new ArrayList<>();
     private int[][] historyNumbers;
     private ArrayList<Integer> Marks = new ArrayList<>();
+    private int HistoryCount = 0;
     public GamePanel(int size,int COUNT,int target) {
         this.setTarget(target);
         this.setCOUNT(COUNT);
@@ -130,8 +131,10 @@ public class GamePanel extends ListenerPanel {
             this.steps++;
             History.add(historyNumbers);
             Marks.add(model.getMarkPoint());
+            HistoryCount++;
         }
         System.out.println("History length = "+History.size());
+        System.out.println("HistoryCount = "+HistoryCount);
         System.out.println("Steps = "+steps);
         System.out.println("Marks length = "+Marks.size());
         this.stepLabel.setText(String.format("Step: %d", this.steps));
@@ -398,13 +401,14 @@ public class GamePanel extends ListenerPanel {
         try {
             for (int i = 0; i < model.getNumbers().length; i++) {
                 for (int j = 0; j < model.getNumbers()[0].length; j++) {
-                    model.getNumbers()[i][j] = History.get(steps-1)[i][j];
+                    model.getNumbers()[i][j] = History.get(HistoryCount-1)[i][j];
                 }
             }
-            History.remove(steps-1);
-            points -= Marks.get(steps-1);
-            Marks.remove(steps-1);
+            History.remove(HistoryCount-1);
+            points -= Marks.get(HistoryCount-1);
+            Marks.remove(HistoryCount-1);
             this.steps--;
+            this.HistoryCount--;
             stepLabel.setText(String.format("Step: %d", this.steps));
             pointLabel.setText(String.format("Points: %d",this.points));
             updateGridsNumber();
