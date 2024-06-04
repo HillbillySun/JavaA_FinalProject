@@ -144,7 +144,7 @@ public class GameController {
             safe = false;
         }
         System.out.println("fisrt safe = "+safe);
-        if (Filer.ReadPoint() % 2 != 0) {
+        if (Filer.ReadPoint() % 2 != 0 && Filer.ReadPoint() !=1 ) {
             safe = false;
         }
         System.out.println("second safe = "+safe);

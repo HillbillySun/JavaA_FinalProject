@@ -32,7 +32,7 @@ public class GridComponent extends JComponent {
         int arcWidth = getWidth()/5;  // 圆角的宽度
         int arcHeight = getHeight()/5; // 圆角的高度
 
-        if (number > 0) {
+        if (number %2 == 0 && number > 0) {
             g.setColor(ColorMap.getColor(number));
             g.fillRoundRect(0, 0, getWidth(), getHeight(), arcWidth, arcHeight);
             g.setStroke(new BasicStroke(5));
@@ -49,6 +49,12 @@ public class GridComponent extends JComponent {
             int x = (getWidth() - textWidth) / 2;
             int y = (getHeight() - metrics.getHeight()) / 2 + metrics.getAscent();
             g.drawString(String.valueOf(number), x, y);
+        } else if (number == 1) {
+            g.setColor(new Color(201, 178, 142));
+            g.fillRoundRect(0, 0, getWidth(), getHeight(), arcWidth, arcHeight);
+            g.setStroke(new BasicStroke(5));
+            g.setColor(Color.GRAY);
+            g.drawRoundRect(0, 0, getWidth(), getHeight(), arcWidth, arcHeight);
         } else {
             g.setColor(Color.LIGHT_GRAY);
             g.fillRoundRect(0, 0, getWidth(), getHeight(), arcWidth, arcHeight);

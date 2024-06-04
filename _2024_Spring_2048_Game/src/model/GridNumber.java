@@ -1,5 +1,7 @@
 package model;
 
+import view.GamePanel;
+
 import javax.sound.sampled.*;
 import javax.swing.*;
 import java.io.File;
@@ -17,6 +19,8 @@ public class GridNumber {
     private boolean ifGenerate = false;
     static Random random = new Random();
     private int target;
+    private boolean isHard = false;
+    private GamePanel gamePanel;
 
     public GridNumber(int xCount, int yCount) {
         this.X_COUNT = xCount;
@@ -114,6 +118,31 @@ public class GridNumber {
                 break;
             }
         }
+        try {
+            while (isHard && gamePanel.getSteps()%10 == 0 && gamePanel.getSteps() > 0 )
+            {
+                System.out.println(gamePanel.getSteps());
+                int count = 0;
+                for (int i = 0; i < numbers.length; i++) {
+                    for (int j = 0; j < numbers[0].length; j++) {
+                        if (numbers[i][j] != 0) {
+                            count++;
+                        }
+                    }
+                }
+                if (count == numbers.length*numbers[0].length) {
+                    System.out.println(count);
+                    break;
+                }
+                int row = random.nextInt(numbers.length);
+                int col = random.nextInt(numbers[0].length);
+                if (numbers[row][col] == 0) {
+                    numbers[row][col] = 1;
+                    break;
+                }
+            }
+        }catch (NullPointerException ignore)
+        {}
     }
 
     public void moveRight() {
@@ -371,4 +400,14 @@ public class GridNumber {
     }
     public void setTarget(int target)
     {this.target = target;}
+    public void setisHard(boolean b)
+    {
+        isHard = b;
+    }
+    public void setGamePanel(GamePanel gamePanel)
+    {
+        this.gamePanel = gamePanel;
+    }
+    public boolean getisHard()
+    {return isHard;}
 }

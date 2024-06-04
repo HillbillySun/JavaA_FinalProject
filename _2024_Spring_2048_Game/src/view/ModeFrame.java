@@ -28,6 +28,7 @@ public class ModeFrame extends JFrame {
         this.setLayout(null);
         this.setSize(width,height);
         this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.ClassicBtn=createButton("Classic",new Point(100,400),300,80);
         this.EasyBtn=createButton("Easy",new Point(100,510),300,80);
         this.HardBtn=createButton("Hard",new Point(500,400),300,80);
@@ -92,11 +93,11 @@ public class ModeFrame extends JFrame {
         {
             if (loadFrame.getisTour())
             {
-                gameFrame=new GameFrame(900,700,3,2048,null,"Tourist",false,0);
+                gameFrame=new GameFrame(900,700,4,2048,null,"Tourist",false,0);
             }
             else
             {
-                gameFrame=new GameFrame(900,700,3,2048,0,0,null,false,0);
+                gameFrame=new GameFrame(900,700,4,2048,0,0,null,false,0);
             }
             gameFrame.setModeFrame(this);
             gameFrame.getGamePanel().setModeFrame(this);
@@ -105,9 +106,10 @@ public class ModeFrame extends JFrame {
             gameFrame.getGamePanel().setController(this.controller);
             this.dispose();
             GameFrame.StartGame(gameFrame);
-            JOptionPane.showMessageDialog(gameFrame,"使用3*3，合成2048!");
+            JOptionPane.showMessageDialog(gameFrame,"4*4障碍赛，合成2048!");
             ifDispole=true;
             gameFrame.autoSave(10000);
+            gameFrame.getGamePanel().getModel().setisHard(true);
         });
         this.EttBtn.addActionListener(e->
         {

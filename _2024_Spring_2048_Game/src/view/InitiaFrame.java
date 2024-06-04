@@ -27,6 +27,7 @@ public class InitiaFrame extends JFrame {
         this.setLayout(null);
         this.setSize(width, height);
         this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         welcomeLabel = createLabel("2048", util.Font.creatFont("ttfFont/Jersey10-Regular.ttf", 100), new Point(220, 100), 400, 100);
         welcomeLabel.setForeground(new Color(128, 102, 74));
         NewGameBtn = createButton("New Game", new Point(150, 235), 300, 90);

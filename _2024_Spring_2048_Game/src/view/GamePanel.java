@@ -48,6 +48,7 @@ public class GamePanel extends ListenerPanel {
         this.GRID_SIZE = size / this.COUNT;
         this.grids = new GridComponent[this.COUNT][this.COUNT];
         this.model = new GridNumber(this.COUNT,this. COUNT);
+        model.setGamePanel(this);
         initialGame();
     }
 
