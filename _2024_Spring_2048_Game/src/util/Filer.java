@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 
 public class Filer {
@@ -36,7 +38,7 @@ public class Filer {
         }
         return Password;
     }
-    public static void SaveNumber(int[][]a,int step,int target,int point,int count){
+    public static void SaveNumber(int[][]a,int step,int target,int point,int count,int hard){
         String password = null;
         String TxtPath = "Users\\"+User.CurrentUser;
         try (BufferedReader reader = new BufferedReader(new FileReader(TxtPath))) {
@@ -57,6 +59,8 @@ public class Filer {
             writer.write(String.valueOf(point));
             writer.newLine();
             writer.write(String.valueOf(count));
+            writer.newLine();
+            writer.write(String.valueOf(hard));
             writer.newLine();
             for (int i = 0; i < a.length; i++) {
                 for (int j = 0; j < a[i].length; j++) {
@@ -82,13 +86,13 @@ public class Filer {
                             String line;
                             int row = 0;
                             while ((line = reader.readLine()) != null) {
-                                if (row >= 5) {
+                                if (row >= 6) {
                                     String[] values = line.split("\\s+");
                                     if (array == null) {
                                         array = new int[values.length][values.length];
                                     }
                                     for (int i = 0; i < values.length; i++) {
-                                        array[row-5][i] = Integer.parseInt(values[i]);
+                                        array[row-6][i] = Integer.parseInt(values[i]);
                                     }
                                 }
                                 row++;
@@ -124,6 +128,21 @@ public class Filer {
             reader.readLine();
             reader.readLine();
             String line = reader.readLine();
+            return Integer.parseInt(line.trim());
+        } catch (IOException | NumberFormatException e) {
+            e.printStackTrace();
+            return Integer.MIN_VALUE;
+        }
+    }
+    public static int ReadHard(){
+        String TxtPath = "Users\\"+User.CurrentUser;
+        try (BufferedReader reader = new BufferedReader(new FileReader(TxtPath))) {
+            String line = reader.readLine();
+            line = reader.readLine();
+            line = reader.readLine();
+            line = reader.readLine();
+            line = reader.readLine();
+            line = reader.readLine();
             return Integer.parseInt(line.trim());
         } catch (IOException | NumberFormatException e) {
             e.printStackTrace();
@@ -170,11 +189,33 @@ public static int ReadCount(){
 }
 public static void RecordPoint(String Point){
     String filePath = "Users\\RankMember";
-    try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath,true))) {
-        writer.write(User.CurrentUser);
-        writer.write("   ");
-        writer.write(Point);
-        writer.newLine();
+    List<String> lines = new ArrayList<>();
+    boolean updated = false;
+
+    try {
+        // Read all lines from the file
+        lines = Files.readAllLines(Paths.get(filePath));
+
+        // Iterate through the lines to find the matching user
+        for (int i = 0; i < lines.size(); i++) {
+            String[] parts = lines.get(i).split("\\s+");
+            if (parts.length >= 2 && parts[0].equals(User.CurrentUser)) {
+                int currentPoints = Integer.parseInt(parts[1]);
+                int newPoints = Integer.parseInt(Point);
+
+                // Compare points and update if necessary
+                if (newPoints > currentPoints) {
+                    lines.set(i, User.CurrentUser + "   " + Point);
+                    updated = true;
+                }
+                break;
+            }
+        }
+
+        // Write back to the file only if an update was made
+        if (updated) {
+            Files.write(Paths.get(filePath), lines);
+        }
     } catch (IOException | NumberFormatException e) {
         e.printStackTrace();
     }
@@ -196,17 +237,13 @@ public static void Rank(){
     } catch (IOException e) {
         e.printStackTrace();
     }
-
-    // 按值降序排序Map
     List<Map.Entry<String, Integer>> sortedList = new ArrayList<>(dataMap.entrySet());
     Collections.sort(sortedList, new Comparator<Map.Entry<String, Integer>>() {
         @Override
         public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
-            return o2.getValue().compareTo(o1.getValue()); // 降序排列
+            return o2.getValue().compareTo(o1.getValue());
         }
     });
-
-    // 将排序后的数据写入文件
     try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath2))) {
         for (Map.Entry<String, Integer> entry : sortedList) {
             writer.write(entry.getKey() + " " + entry.getValue());

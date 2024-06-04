@@ -70,9 +70,13 @@ public class GameController {
     }
 
     public void saveGame() {
+        int a=0;
+        if(model.getisHard()){
+            a=1;
+        }
         System.out.println("isOver = " + view.getisOver());
         if (!view.getisOver()) {
-            Filer.SaveNumber(model.getNumbers(), view.getSteps(), view.getTarget(), view.getPoints(), view.getCOUNT());
+            Filer.SaveNumber(model.getNumbers(), view.getSteps(), view.getTarget(), view.getPoints(), view.getCOUNT(),a);
             Timer timer = new Timer();
             gameFrame.getSaveLabel().setVisible(true);
             TimerTask twinkle = new TimerTask() {
@@ -140,6 +144,7 @@ public class GameController {
     }
 
     public void CheckSafety() {
+        if(Filer.ReadHard()==0){
         if (Filer.ReadTarget() != 1024 && Filer.ReadTarget() != 2048) {
             safe = false;
         }
@@ -160,6 +165,30 @@ public class GameController {
             }
         }
         System.out.println("third safe = "+safe);
+        }
+        if(Filer.ReadHard()==1){
+            if (Filer.ReadTarget() != 1024 && Filer.ReadTarget() != 2048) {
+                safe = false;
+            }
+            System.out.println("fisrt safe = "+safe);
+            if (Filer.ReadPoint() % 2 != 0 && Filer.ReadPoint() !=1 ) {
+                safe = false;
+            }
+            System.out.println("second safe = "+safe);
+            int[][] a = Filer.ReadArray();
+            for (int i = 0; i < Filer.ReadCount(); i++) {
+                for (int j = 0; j < Filer.ReadCount(); j++) {
+                    if (a[i][j] != 0) {
+                        double logBase2 = Math.log(a[i][j]) / Math.log(2);
+                        if (logBase2 != (int) logBase2) {
+                            safe = false;
+                        }
+                    }
+                }
+            }
+            System.out.println("third safe = "+safe);
+        }
+
     }
 
     public void setLogin(boolean login) {
