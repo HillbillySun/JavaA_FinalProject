@@ -119,7 +119,7 @@ public class GridNumber {
             }
         }
         try {
-            while (isHard && gamePanel.getSteps()%10 == 0 && gamePanel.getSteps() > 0 )
+            while (isHard && (gamePanel.getSteps() - 1)%10 == 0 && gamePanel.getSteps() > 0 )
             {
                 System.out.println(gamePanel.getSteps());
                 int count = 0;
