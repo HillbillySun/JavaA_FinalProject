@@ -64,6 +64,9 @@ public class InitiaFrame extends JFrame {
                     JOptionPane.showMessageDialog(InitiaFrame.this, "可以继续游戏啦！");
                     modeFrame = new ModeFrame(900, 700, this);
                     gameFrame = new GameFrame(900, 700, Filer.ReadCount(), Filer.ReadTarget(), Filer.ReadStep(), Filer.ReadPoint(), null, false, 0);
+                    if(Filer.ReadHard()==1){
+                        gameFrame.getGamePanel().getModel().setisHard(true);
+                    }
                     gameFrame.setModeFrame(this.modeFrame);
                     gameFrame.getGamePanel().setModeFrame(this.modeFrame);
                     modeFrame.setLoadFrame(this.loadFrame);
