@@ -1,5 +1,3 @@
-
-
 import view.LoadFrame;
 
 import view.InitiaFrame;
