@@ -84,7 +84,8 @@ public class InitiaFrame extends JFrame {
                 } else {
                     JOptionPane.showMessageDialog(InitiaFrame.this, "存档文件损坏，无法读取！");
                 }
-            } else {
+            }
+            else {
                 JOptionPane.showMessageDialog(InitiaFrame.this, "您无存档可读！");
             }
         });

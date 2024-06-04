@@ -5,6 +5,7 @@ import view.*;
 import util.Filer;
 
 import javax.swing.*;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Objects;
 import java.util.Timer;
@@ -144,12 +145,15 @@ public class GameController {
     }
 
     public void CheckSafety() {
+        if(!Filer.isTextFile()){
+            safe=false;
+        }
         if(Filer.ReadHard()==0){
         if (Filer.ReadTarget() != 1024 && Filer.ReadTarget() != 2048) {
             safe = false;
         }
         System.out.println("fisrt safe = "+safe);
-        if (Filer.ReadPoint() % 2 != 0 && Filer.ReadPoint() !=1 ) {
+        if (Filer.ReadPoint() % 2 == 1) {
             safe = false;
         }
         System.out.println("second safe = "+safe);
@@ -165,6 +169,7 @@ public class GameController {
             }
         }
         System.out.println("third safe = "+safe);
+        Filer.DeleteWrong(safe);
         }
         if(Filer.ReadHard()==1){
             if (Filer.ReadTarget() != 1024 && Filer.ReadTarget() != 2048) {
@@ -187,6 +192,7 @@ public class GameController {
                 }
             }
             System.out.println("third safe = "+safe);
+            Filer.DeleteWrong(safe);
         }
 
     }

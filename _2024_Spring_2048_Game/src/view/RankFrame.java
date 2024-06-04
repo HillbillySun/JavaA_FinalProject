@@ -51,7 +51,7 @@ public class RankFrame extends JFrame {
     private void loadDataFromFile() {
         names = new ArrayList<>();
         scores = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader("Users\\Rank"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("RankPackage\\Rank"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split("\\s+");
