@@ -110,16 +110,19 @@ public class GridNumber {
     //todo: finish the method of four direction moving.
 
     public void generateNumberRandomly() {
+        System.out.println(ifGenerate);
         while (ifGenerate) {
             int row = random.nextInt(numbers.length);
             int col = random.nextInt(numbers[0].length);
             if (numbers[row][col] == 0) {
                 numbers[row][col] = random.nextInt(2) == 0 ? 2 : 4;
+                System.out.println("Number generate");
+                printNumber();
                 break;
             }
         }
         try {
-            while (isHard && (gamePanel.getSteps() + 1)%10 == 0 && gamePanel.getSteps() > 0 )
+            while (ifGenerate && isHard && gamePanel.getSteps()%10 == 0 && gamePanel.getSteps() > 0 )
             {
                 System.out.println("steps = "+gamePanel.getSteps());
                 int count = 0;
@@ -138,6 +141,7 @@ public class GridNumber {
                 int col = random.nextInt(numbers[0].length);
                 if (numbers[row][col] == 0) {
                     numbers[row][col] = 1;
+                    System.out.printf("生成挡板, row = %d, col = %d",row,col);
                     break;
                 }
             }
@@ -163,7 +167,7 @@ public class GridNumber {
         boolean temp = ifGenerate;
         JustMoveRight();
         ifGenerate = temp;
-        generateNumberRandomly();
+//        generateNumberRandomly();
         if (isPlay) {
             playAction("Music/effect.wav");
         }
@@ -187,7 +191,7 @@ public class GridNumber {
         boolean temp = ifGenerate;
         JustMoveLeft();
         ifGenerate = temp;
-        generateNumberRandomly();
+//        generateNumberRandomly();
         if (isPlay) {
             playAction("Music/effect.wav");
         }
@@ -211,7 +215,7 @@ public class GridNumber {
         boolean temp = ifGenerate;
         JustMoveUp();
         ifGenerate = temp;
-        generateNumberRandomly();
+//        generateNumberRandomly();
         if (isPlay) {
             playAction("Music/effect.wav");
         }
@@ -235,7 +239,7 @@ public class GridNumber {
         boolean temp = ifGenerate;
         JustMoveDown();
         ifGenerate = temp;
-        generateNumberRandomly();
+//        generateNumberRandomly();
         if (isPlay) {
             playAction("Music/effect.wav");
         }

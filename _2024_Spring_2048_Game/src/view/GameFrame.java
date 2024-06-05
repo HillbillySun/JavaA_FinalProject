@@ -115,7 +115,7 @@ public class GameFrame extends JFrame {
         this.musicBtn.addActionListener(e -> {
             System.out.println(gamePanel.getisOver());
             if (!gamePanel.getisOver()) {
-                playmusic("Music/Yellow Magic Orchestra - ファイアークラッカー.wav");
+                playmusic("Music/Kenny G - The Joy of Life.wav");
             }
             gamePanel.requestFocusInWindow();
         });
@@ -274,7 +274,7 @@ public class GameFrame extends JFrame {
         });
         this.musicBtn.addActionListener(e -> {
             if (!gamePanel.getisOver()) {
-                playmusic("Music/Yellow Magic Orchestra - ファイアークラッカー.wav");
+                playmusic("Music/Kenny G - The Joy of Life.wav");
             }
             gamePanel.requestFocusInWindow();
         });

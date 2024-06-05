@@ -87,8 +87,8 @@ public class GamePanel extends ListenerPanel {
             System.out.println("Click VK_RIGHT");
             createHistory();
             this.model.moveRight();
-            this.updateGridsNumber();
             this.afterMove();
+//            this.updateGridsNumber();
         }
     }
 
@@ -99,8 +99,8 @@ public class GamePanel extends ListenerPanel {
             System.out.println("Click VK_Left");
             createHistory();
             this.model.moveLeft();
-            this.updateGridsNumber();
             this.afterMove();
+//            this.updateGridsNumber();
         }
     }
 
@@ -110,8 +110,8 @@ public class GamePanel extends ListenerPanel {
             System.out.println("Click VK_Up");
             createHistory();
             this.model.moveUp();
-            this.updateGridsNumber();
             this.afterMove();
+//            this.updateGridsNumber();
         }
     }
 
@@ -121,8 +121,8 @@ public class GamePanel extends ListenerPanel {
             System.out.println("Click VK_Down");
             createHistory();
             this.model.moveDown();
-            this.updateGridsNumber();
             this.afterMove();
+//            this.updateGridsNumber();
         }
     }
 
@@ -134,6 +134,8 @@ public class GamePanel extends ListenerPanel {
             Marks.add(model.getMarkPoint());
             HistoryCount++;
         }
+        model.generateNumberRandomly();
+        updateGridsNumber();
         System.out.println("History length = "+History.size());
         System.out.println("HistoryCount = "+HistoryCount);
         System.out.println("Steps = "+steps);
