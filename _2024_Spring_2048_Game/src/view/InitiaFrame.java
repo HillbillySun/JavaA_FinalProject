@@ -75,6 +75,7 @@ public class InitiaFrame extends JFrame {
                     gameFrame.getGamePanel().getModel().LoadNumbers(Filer.ReadArray());
                     gameFrame.getGamePanel().updateGridsNumber();
                     gameFrame.getGamePanel().setSteps(Filer.ReadStep());
+                    gameFrame.getGamePanel().setPoints(Filer.ReadPoint());
                     controller.setModel(gameFrame.getGamePanel().getModel());
                     controller.setView(gameFrame.getGamePanel());
                     controller.setGameFrame(gameFrame);
