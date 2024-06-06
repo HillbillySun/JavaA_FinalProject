@@ -1,5 +1,5 @@
-Read this in the "Code" mode can be better.\n
 在"Code"模式下阅读会更好
+Read this in the "Code" mode can be better.
 
 Project 功能列表
 一、游戏方面
