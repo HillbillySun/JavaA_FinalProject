@@ -24,7 +24,7 @@ public class LoadFrame extends JFrame {
 
 
     public LoadFrame(int width, int height) {
-        Font buttonfont = util.Font.creatFont("ttfFont/Jersey10-Regular.ttf",40f);
+        Font buttonfont = util.Font.creatFont("src/ttfFont/Jersey10-Regular.ttf",40f);
         JPanel panel = new JPanel();
         JLabel nameLabel = new JLabel("用户名:");
         JTextField nameField = new JTextField(18);
@@ -46,9 +46,9 @@ public class LoadFrame extends JFrame {
         loginButton.setFont(buttonfont);
         TouristBtn.setFont(buttonfont);
         registerButton.setFont(buttonfont);
-        welcomeLabel = createLabel("Welcome to 2048", util.Font.creatFont("ttfFont/Jersey10-Regular.ttf",125f),new Point(75,70),800,100);
-        designerLabel = createLabel("Designed by BillSun and lv05327", util.Font.creatFont("ttfFont/DancingScript-VariableFont_wght.ttf",35f),new Point(220,200),500,50);
-        hintLabel = createLabel("Hint: Only 'Log in' and 'Tourist' can enter the game!", util.Font.creatFont("ttfFont/DancingScript-VariableFont_wght.ttf",25f),new Point(210,580),500,40);
+        welcomeLabel = createLabel("Welcome to 2048", util.Font.creatFont("src/ttfFont/Jersey10-Regular.ttf",125f),new Point(75,70),800,100);
+        designerLabel = createLabel("Designed by BillSun and lv05327", util.Font.creatFont("src/ttfFont/DancingScript-VariableFont_wght.ttf",35f),new Point(220,200),500,50);
+        hintLabel = createLabel("Hint: Only 'Log in' and 'Tourist' can enter the game!", util.Font.creatFont("src/ttfFont/DancingScript-VariableFont_wght.ttf",25f),new Point(210,580),500,40);
         hintLabel.setForeground(Color.RED);
         JPanel bkgPanel = new JPanel();
         bkgPanel.setBackground(new Color(255, 237, 211));

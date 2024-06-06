@@ -22,8 +22,8 @@ public class RankFrame extends JFrame {
     }
 
     private void initComponents() {
-        Font labelFont = util.Font.creatFont("ttfFont/Jersey10-Regular.ttf", 30f);
-        Font titleFont = util.Font.creatFont("ttfFont/Jersey10-Regular.ttf", 100f);
+        Font labelFont = util.Font.creatFont("src/ttfFont/Jersey10-Regular.ttf", 30f);
+        Font titleFont = util.Font.creatFont("src/ttfFont/Jersey10-Regular.ttf", 100f);
 
         loadDataFromFile();
 

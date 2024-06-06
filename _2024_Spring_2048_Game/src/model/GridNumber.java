@@ -169,7 +169,7 @@ public class GridNumber {
         ifGenerate = temp;
 //        generateNumberRandomly();
         if (isPlay) {
-            playAction("Music/effect.wav");
+            playAction("src/Music/effect.wav");
         }
     }
 
@@ -193,7 +193,7 @@ public class GridNumber {
         ifGenerate = temp;
 //        generateNumberRandomly();
         if (isPlay) {
-            playAction("Music/effect.wav");
+            playAction("src/Music/effect.wav");
         }
     }
 
@@ -217,7 +217,7 @@ public class GridNumber {
         ifGenerate = temp;
 //        generateNumberRandomly();
         if (isPlay) {
-            playAction("Music/effect.wav");
+            playAction("src/Music/effect.wav");
         }
     }
 
@@ -241,7 +241,7 @@ public class GridNumber {
         ifGenerate = temp;
 //        generateNumberRandomly();
         if (isPlay) {
-            playAction("Music/effect.wav");
+            playAction("src/Music/effect.wav");
         }
     }
 

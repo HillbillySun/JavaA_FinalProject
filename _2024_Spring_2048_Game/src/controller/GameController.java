@@ -131,7 +131,7 @@ public class GameController {
         view.setifOver(false);
         if (!gameFrame.getsiplay()) {
             gameFrame.setIsplay(true);
-            gameFrame.playmusic("Music/Kenny G - The Joy of Life.wav");
+            gameFrame.playmusic("src/Music/Kenny G - The Joy of Life.wav");
         }
     }
 

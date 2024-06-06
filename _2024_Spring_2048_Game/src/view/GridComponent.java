@@ -9,7 +9,7 @@ public class GridComponent extends JComponent {
     private int row;
     private int col;
     private int number;
-    static Font font = util.Font.creatFont("ttfFont/BungeeInline-Regular.ttf",40f);
+    static Font font = util.Font.creatFont("src/ttfFont/BungeeInline-Regular.ttf",40f);
 
     public GridComponent(int row, int col, int gridSize) {
         this.setSize(gridSize, gridSize);

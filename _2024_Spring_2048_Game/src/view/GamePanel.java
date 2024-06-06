@@ -191,7 +191,7 @@ public class GamePanel extends ListenerPanel {
         if (isOver1)
         {
             controller.endGame();
-            this.getModel().playAction("Music/Win.wav");
+            this.getModel().playAction("src/Music/Win.wav");
             JOptionPane.showMessageDialog(this,"You Win!");
             if(!gameFrame.getisTour()){
             Filer.RecordPoint(String.valueOf(this.points));
@@ -199,7 +199,7 @@ public class GamePanel extends ListenerPanel {
         }
         else if (isOver2)
         {
-            getModel().playAction("Music/failEnd.wav");
+            getModel().playAction("src/Music/failEnd.wav");
             Object[] options = {"Restart", "Change Mode","Revive"};
             int result = JOptionPane.CLOSED_OPTION; // 初始值设为 CLOSED_OPTION，表示用户还没有做出选择
             controller.endGame();
@@ -217,7 +217,7 @@ public class GamePanel extends ListenerPanel {
                     gameFrame.getAudioClip().stop();
                     System.out.println("volume turn to 0");
                 }
-                playAudio("Music/adsBGM.wav",15000);
+                playAudio("src/Music/adsBGM.wav",15000);
                 JFrame adsframe=new JFrame();
                 adsframe.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
                 adsframe.setResizable(false);
@@ -233,7 +233,7 @@ public class GamePanel extends ListenerPanel {
                 adsframe.setLayout(new BorderLayout());
                 adsframe.setSize(300,300);
                 adsframe.setLocationRelativeTo(null);
-                ImageIcon gifIcon = new ImageIcon("Pictures/IMG_9298.gif");
+                ImageIcon gifIcon = new ImageIcon("src/Pictures/IMG_9298.gif");
                 JLabel gifLabel = new JLabel(gifIcon);
                 adsframe.add(gifLabel, BorderLayout.CENTER);
                 adsframe.setVisible(true);
@@ -421,7 +421,7 @@ public class GamePanel extends ListenerPanel {
                 updateGridsNumber();
             }catch (IndexOutOfBoundsException e)
             {
-                playAudio("Music/siuuu.wav",2500);
+                playAudio("src/Music/siuuu.wav",2500);
                 System.out.println(e);
                 JFrame SQframe =new JFrame();
                 SQframe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -429,7 +429,7 @@ public class GamePanel extends ListenerPanel {
                 SQframe.setLayout(new BorderLayout());
                 SQframe.setSize(600,600);
                 SQframe.setLocationRelativeTo(null);
-                ImageIcon SQwatching = new ImageIcon("Pictures/Watching.jpg");
+                ImageIcon SQwatching = new ImageIcon("src/Pictures/Watching.jpg");
                 JPanel SQPanel = new JPanel() {
                     @Override
                     protected void paintComponent(Graphics g) {

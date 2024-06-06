@@ -33,8 +33,8 @@ public class ModeFrame extends JFrame {
         this.EasyBtn=createButton("Easy",new Point(100,510),300,80);
         this.HardBtn=createButton("Hard",new Point(500,400),300,80);
         this.EttBtn =createButton("Entertaiment",new Point(500,510),300,80);
-        begingame = createLabel("Begin Your Game",util.Font.creatFont("ttfFont/Jersey10-Regular.ttf",100f),new Point(150,235),900,100);
-        ChooseMode = createLabel("Choose Your Mode", util.Font.creatFont("ttfFont/Jersey10-Regular.ttf",100f),new Point(125,100),900,100);
+        begingame = createLabel("Begin Your Game",util.Font.creatFont("src/ttfFont/Jersey10-Regular.ttf",100f),new Point(150,235),900,100);
+        ChooseMode = createLabel("Choose Your Mode", util.Font.creatFont("src/ttfFont/Jersey10-Regular.ttf",100f),new Point(125,100),900,100);
         ifDispole=false;
         JPanel bkgPanel = new JPanel();
         bkgPanel.setBackground(new Color(255, 237, 211));
@@ -165,7 +165,7 @@ public class ModeFrame extends JFrame {
         button.setBackground(new Color(175, 158, 137));
         button.setForeground(Color.WHITE);
         this.add(button);
-        button.setFont(Font.creatFont("ttfFont/Jersey10-Regular.ttf",30f));
+        button.setFont(Font.creatFont("src/ttfFont/Jersey10-Regular.ttf",30f));
         return button;
     }
     private JLabel createLabel(String name, java.awt.Font font, Point location, int width, int height) {

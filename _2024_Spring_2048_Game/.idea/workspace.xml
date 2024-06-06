@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="742fa1c3-71c0-4b0f-8126-b9f1f6de090e" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/_2024_Spring_2048_Game.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.idea/artifacts/_2024_Spring_2048_Game_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Store/8.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Store/9.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Store/SQ.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Store/null.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Users/SQ" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/GridNumber.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/GridNumber.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/Filer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/Filer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/EttGameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/EttGameFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/GameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/GameFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/GamePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/GridComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/GridComponent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/InitiaFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/InitiaFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/LoadFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/LoadFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/ModeFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ModeFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/RankFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/RankFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../out/production/JavaA_FinalProject/Pictures/天文台.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../out/production/JavaA_FinalProject/Pictures/曼哈顿.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../out/production/JavaA_FinalProject/Pictures/香港.jpg" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 6
+}]]></component>
+  <component name="ProjectId" id="2hUvTvZqqwJ1Fev9uZKXcBxgxwE" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Lenovo/Documents/GitHub/JavaA_FinalProject/_2024_Spring_2048_Game"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="_2024_Spring_2048_Game" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-17.0.10-corretto-17.0.10-4caba194b151-5cd809f4" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="742fa1c3-71c0-4b0f-8126-b9f1f6de090e" name="Changes" comment="" />
+      <created>1717661481868</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1717661481868</updated>
+    </task>
+    <servers />
+  </component>
+</project>

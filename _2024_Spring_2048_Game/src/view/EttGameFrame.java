@@ -51,7 +51,7 @@ public class EttGameFrame extends GameFrame {
     public void creatTool() {
         if (isTool) {
             Tool = createButton("Tool", new Point(700, 415), 110, 50);
-            Tool.setFont(Font.creatFont("ttfFont/Jersey10-Regular.ttf",20f));
+            Tool.setFont(Font.creatFont("src/ttfFont/Jersey10-Regular.ttf",20f));
             super.getBackgroundPanel().add(Tool);
             Tool.addActionListener(e -> {
                 if (!super.getGamePanel().getisOver())
@@ -71,7 +71,7 @@ public class EttGameFrame extends GameFrame {
                         if (super.getGamePanel().getModel().isBomb())
                         {
                             super.getGamePanel().getModel().ReviveNumbers();
-                            playaudio("Music/Bomb.wav");
+                            playaudio("src/Music/Bomb.wav");
                         }
                         else
                         {
@@ -82,7 +82,7 @@ public class EttGameFrame extends GameFrame {
                     {
                         if (super.getGamePanel().getModel().mutiNumbers())
                         {
-                            playaudio("Music/mutiaction.wav");
+                            playaudio("src/Music/mutiaction.wav");
                         }
                     }
                     super.getGamePanel().updateGridsNumber();

@@ -21,14 +21,14 @@ public class InitiaFrame extends JFrame {
     private java.awt.Font font;
 
     public InitiaFrame(int width, int height) {
-        font = util.Font.creatFont("ttfFont/Jersey10-Regular.ttf", 50);
+        font = util.Font.creatFont("src/ttfFont/Jersey10-Regular.ttf", 50);
         controller = new GameController();
         this.setTitle("2048 Game");
         this.setLayout(null);
         this.setSize(width, height);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        welcomeLabel = createLabel("2048", util.Font.creatFont("ttfFont/Jersey10-Regular.ttf", 100), new Point(220, 100), 400, 100);
+        welcomeLabel = createLabel("2048", util.Font.creatFont("src/ttfFont/Jersey10-Regular.ttf", 100), new Point(220, 100), 400, 100);
         welcomeLabel.setForeground(new Color(128, 102, 74));
         NewGameBtn = createButton("New Game", new Point(150, 235), 300, 90);
         LoadGameBtn = createButton("Load Game", new Point(150, 365), 300, 90);

@@ -13,7 +13,7 @@ import java.nio.file.Path;
 
 public class Filer {
     public static void WriteUsersInitial(String username,String password)throws IOException {
-        String BasePath="Users";
+        String BasePath="src/Users";
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(BasePath + "/" + username,true));
             writer.write(password);
@@ -23,12 +23,12 @@ public class Filer {
         }
     }
     public static boolean CheckDirectory(String username){
-        String TxtPath= String.format("Users/%s",username);
+        String TxtPath= String.format("src/Users/%s",username);
         File file=new File(TxtPath);
         return file.exists()&&file.isFile();
     }
     public static String ReadPassword(String username) {
-        String TxtPath = "Users/" + username;
+        String TxtPath = "src/Users/" + username;
         String Password;
         try {
             BufferedReader reader = new BufferedReader(new FileReader(TxtPath));
@@ -40,7 +40,7 @@ public class Filer {
     }
     public static void SaveNumber(int[][]a,int step,int target,int point,int count,int hard){
         String password = null;
-        String TxtPath = "Store\\"+User.CurrentUser+".txt";
+        String TxtPath = "src\\Store\\"+User.CurrentUser+".txt";
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(TxtPath));
             writer.write(String.valueOf(target));
@@ -70,7 +70,7 @@ public class Filer {
         }
     }
     public static int[][] ReadArray(){
-        String TxtPath =  "Store\\"+User.CurrentUser+".txt";
+        String TxtPath =  "src\\store\\"+User.CurrentUser+".txt";
         File file = new File(TxtPath);
         int[][] array = null;
                         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
@@ -103,7 +103,7 @@ public class Filer {
         return array;
     }
     public static int ReadTarget(){
-        String filePath = "Store\\"+User.CurrentUser+".txt";
+        String filePath = "src\\store\\"+User.CurrentUser+".txt";
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line = reader.readLine();
             return Integer.parseInt(line.trim());
@@ -113,7 +113,7 @@ public class Filer {
         }
     }
     public static int ReadStep(){
-        String TxtPath = "Store\\"+User.CurrentUser+".txt";
+        String TxtPath = "src\\store\\"+User.CurrentUser+".txt";
        try (BufferedReader reader = new BufferedReader(new FileReader(TxtPath))) {
             reader.readLine();
             String line = reader.readLine();
@@ -124,7 +124,7 @@ public class Filer {
         }
     }
     public static int ReadHard(){
-        String TxtPath =  "Store\\"+User.CurrentUser+".txt";
+        String TxtPath =  "src\\store\\"+User.CurrentUser+".txt";
         try (BufferedReader reader = new BufferedReader(new FileReader(TxtPath))) {
             String line = reader.readLine();
             line = reader.readLine();
@@ -138,7 +138,7 @@ public class Filer {
         }
     }
         public static boolean CheckRead(){
-            String TxtPath = "Store\\"+User.CurrentUser+".txt";
+            String TxtPath = "src\\store\\"+User.CurrentUser+".txt";
             try (BufferedReader reader = new BufferedReader(new FileReader(TxtPath))) {
                 String line = reader.readLine();
                 return !(line == null || line.trim().isEmpty());
@@ -148,7 +148,7 @@ public class Filer {
             }
         }
     public static int ReadPoint(){
-        String filePath =  "Store\\"+User.CurrentUser+".txt";
+        String filePath =  "src\\store\\"+User.CurrentUser+".txt";
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line = reader.readLine();
             line = reader.readLine();
@@ -160,7 +160,7 @@ public class Filer {
         }
     }
 public static int ReadCount(){
-    String filePath = "Store\\"+User.CurrentUser+".txt";
+    String filePath = "src\\store\\"+User.CurrentUser+".txt";
     try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
         String line = reader.readLine();
         line = reader.readLine();
@@ -242,7 +242,7 @@ public static void Rank(){
     System.out.println("数据已经成功写入到文件 Rank 中。");
 }
 public static void DeleteWrong(boolean safe){
-        String filePath= "Store\\"+User.CurrentUser+".txt";
+        String filePath= "src\\store\\"+User.CurrentUser+".txt";
     if (!safe) {
         try {
             Files.deleteIfExists(Paths.get(filePath));
@@ -253,7 +253,7 @@ public static void DeleteWrong(boolean safe){
     }
     }
     public static boolean isTextFile() {
-        String filePath= "Store\\"+User.CurrentUser+".txt";
+        String filePath= "src\\store\\"+User.CurrentUser+".txt";
         Path path = Paths.get(filePath);
         String fileName = path.getFileName().toString();
         return fileName.toLowerCase().endsWith(".txt");

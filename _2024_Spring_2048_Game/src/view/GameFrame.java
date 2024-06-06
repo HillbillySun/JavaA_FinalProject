@@ -67,7 +67,7 @@ public class GameFrame extends JFrame {
         gamePanel.setPoints(Point);
         gamePanel.setLocation(this.getHeight() / 15, this.getWidth() / 15);
         this.add(gamePanel);
-        Font buttonfont = util.Font.creatFont("ttfFont/Jersey10-Regular.ttf", 20f);
+        Font buttonfont = util.Font.creatFont("src/ttfFont/Jersey10-Regular.ttf", 20f);
         this.restartBtn = createButton("Restart", new Point(700, 135), 110, 50);
         this.mode = createButton("Mode", new Point(700, 275), 110, 50);
         this.musicBtn = createButton("Music", new Point(700, 205), 110, 50);
@@ -107,7 +107,7 @@ public class GameFrame extends JFrame {
                 audioClip.stop();
                 audioClip.close();
             }
-            gamePanel.getModel().playAction("Music/Win.wav");
+            gamePanel.getModel().playAction("src/Music/Win.wav");
             ModeFrame.OpenMode(this.modeFrame);
             this.controller.endGame();
             this.dispose();
@@ -115,7 +115,7 @@ public class GameFrame extends JFrame {
         this.musicBtn.addActionListener(e -> {
             System.out.println(gamePanel.getisOver());
             if (!gamePanel.getisOver()) {
-                playmusic("Music/Kenny G - The Joy of Life.wav");
+                playmusic("src/Music/Kenny G - The Joy of Life.wav");
             }
             gamePanel.requestFocusInWindow();
         });
@@ -206,7 +206,7 @@ public class GameFrame extends JFrame {
         gamePanel.setGameFrame(this);
         gamePanel.setLocation(this.getHeight() / 15, this.getWidth() / 15);
         this.add(gamePanel);
-        Font buttonfont = util.Font.creatFont("ttfFont/Jersey10-Regular.ttf", 20f);
+        Font buttonfont = util.Font.creatFont("src/ttfFont/Jersey10-Regular.ttf", 20f);
         this.restartBtn = createButton("Restart", new Point(700, 135), 110, 50);
         this.mode = createButton("Mode", new Point(700, 205), 110, 50);
         this.UpBtn = createButton("W", new Point(725, 480), 60, 60);
@@ -248,7 +248,7 @@ public class GameFrame extends JFrame {
             if (LimitTimer != null) {
                 LimitTimer.cancel();
             }
-            gamePanel.getModel().playAction("Music/Win.wav");
+            gamePanel.getModel().playAction("src/Music/Win.wav");
             ModeFrame.OpenMode(this.modeFrame);
             this.controller.endGame();
             this.dispose();
@@ -274,7 +274,7 @@ public class GameFrame extends JFrame {
         });
         this.musicBtn.addActionListener(e -> {
             if (!gamePanel.getisOver()) {
-                playmusic("Music/Kenny G - The Joy of Life.wav");
+                playmusic("src/Music/Kenny G - The Joy of Life.wav");
             }
             gamePanel.requestFocusInWindow();
         });
