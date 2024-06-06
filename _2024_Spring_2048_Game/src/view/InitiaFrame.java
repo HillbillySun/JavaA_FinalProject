@@ -80,7 +80,7 @@ public class InitiaFrame extends JFrame {
                     controller.setView(gameFrame.getGamePanel());
                     controller.setGameFrame(gameFrame);
                     GameFrame.StartGame(gameFrame);
-                    gameFrame.autoSave(10000);
+                    gameFrame.autoSave(60000);
                     gameFrame.getGamePanel().afterMove();
                 } else {
                     JOptionPane.showMessageDialog(InitiaFrame.this, "存档文件损坏，无法读取！");

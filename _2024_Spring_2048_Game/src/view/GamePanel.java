@@ -276,7 +276,7 @@ public class GamePanel extends ListenerPanel {
             try {
                 gameFrame.getSaveTimer().cancel();
                 System.out.println( "cancel Timer Successfully" );
-                gameFrame.autoSave(10000);
+                gameFrame.autoSave(60000);
                 System.out.println("Begin Save automatically");
             }catch (Exception e) {
                 System.out.println(e);

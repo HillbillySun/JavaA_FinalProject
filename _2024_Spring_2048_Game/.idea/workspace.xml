@@ -4,40 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="742fa1c3-71c0-4b0f-8126-b9f1f6de090e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/_2024_Spring_2048_Game.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/.idea/artifacts/_2024_Spring_2048_Game_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Store/8.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Store/9.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Store/SQ.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Store/null.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Users/SQ" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/GridNumber.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/GridNumber.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/Filer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/Filer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/EttGameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/EttGameFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/GameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/GameFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/GamePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/GridComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/GridComponent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/InitiaFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/InitiaFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/LoadFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/LoadFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/ModeFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ModeFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/RankFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/RankFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../out/production/JavaA_FinalProject/Pictures/天文台.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../out/production/JavaA_FinalProject/Pictures/曼哈顿.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../out/production/JavaA_FinalProject/Pictures/香港.jpg" beforeDir="false" />
-    </list>
+    <list default="true" id="742fa1c3-71c0-4b0f-8126-b9f1f6de090e" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -46,9 +13,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 6
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
   <component name="ProjectId" id="2hUvTvZqqwJ1Fev9uZKXcBxgxwE" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -60,6 +27,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/Lenovo/Documents/GitHub/JavaA_FinalProject/_2024_Spring_2048_Game"
   }
