@@ -20,7 +20,7 @@ Project 功能列表
     2.退出弹窗询问是否存档。
 
 如何使用
-  下载“src”。
+  下载“_2024_Spring_2048_Game”。
   在 IDEA 中打开它。
   运行类“Main”。
 
@@ -45,6 +45,6 @@ I. Gameplay
 
      
   How to use
-    Download the "src". 
+    Download the "_2024_Spring_2048_Game". 
     Open it in the IDEA.
     Run the Class "Main".
