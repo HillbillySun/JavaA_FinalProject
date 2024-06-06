@@ -511,7 +511,7 @@ public class GameFrame extends JFrame {
                             audioClip.close();
                             isplay = true;
                         }
-                        gamePanel.getModel().playAction("Music/failEnd.wav");
+                        gamePanel.getModel().playAction("src/Music/failEnd.wav");
                         System.out.println("Game Over!");
                         controller.endGame();
                         JOptionPane.showMessageDialog(null, "Times Out");
@@ -540,7 +540,7 @@ public class GameFrame extends JFrame {
                 }
             }
         };
-        SaveTimer.scheduleAtFixedRate(autoSave,1000,time);
+        SaveTimer.scheduleAtFixedRate(autoSave,10000,time);
     }
     public Timer getSaveTimer()
     {return SaveTimer;}
