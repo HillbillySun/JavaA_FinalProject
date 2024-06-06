@@ -1,3 +1,6 @@
+Read this in the "Code" mode can be better.
+在"Code"模式下阅读会更好
+
 Project 功能列表
 一、游戏方面
   1.玩法
@@ -13,5 +16,35 @@ Project 功能列表
     d.自由控制音乐播放。
     e.多种奇特音效待你触发。
 二、存读档方面
-    1.自动存读档
-    2.退出弹窗询问是否存档
+    1.自动存读档。
+    2.退出弹窗询问是否存档。
+
+如何使用
+  下载“src”。
+  在 IDEA 中打开它。
+  运行类“Main”。
+
+  
+Project Function List
+I. Gameplay
+  1. Gameplay
+    a. Four modes, Hard and Ett as features (Hard is an obstacle course, Ett can be freely customized, and has props, limited time).
+    b. You can undo your move during the game, and undo it all the time. If you can't undo it, but you still want to undo, you will trigger a small easter egg.
+    c. Shortcut keys (Ctrl + H to go home, Ctrl + Z to regret).
+    d. Lock the board when the game fails and succeeds.
+    e. Watch ads to revive.
+  2. Appearance
+    a. Default self-made solid color background, and you can also switch between three color backgrounds.
+    b. Special fonts.
+    c. WindowsXP retro pop-up window.
+    d. Freely control music playback.
+    e. A variety of unique sound effects are waiting for you to trigger.
+  II. Save and read files
+    1. Automatic save and read files.
+    2. Exit pop-up window to ask whether to save files.
+
+     
+  How to use
+    Download the "src". 
+    Open it in the IDEA.
+    Run the Class "Main".
