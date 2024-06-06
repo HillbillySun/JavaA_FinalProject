@@ -1,4 +1,5 @@
 Read this in the "Code" mode can be better.
+在"Code"模式下阅读会更好
 
 Project 功能列表
 一、游戏方面
