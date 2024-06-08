@@ -1,4 +1,4 @@
-SUSTech CS101 Final Project, which is a classical game 2048
+SUSTech CS109 Final Project, which is a classical game 2048
 
 在"Code"模式下阅读会更好
 Read this in the "Code" mode can be better.
